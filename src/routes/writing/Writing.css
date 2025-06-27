@@ -1,0 +1,32 @@
+.progress-box {
+	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.progress-box textarea {
+	width: 100%;
+	height: 100px;
+	padding: 0.5rem;
+	font-size: 1rem;
+	resize: vertical;
+}
+
+.progress-box button {
+	width: fit-content;
+	padding: 0.4rem 1rem;
+	background-color: #0077cc;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.progress-box button:hover {
+	background-color: #005fa3;
+}
+
+.saved-message {
+	color: green;
+}
