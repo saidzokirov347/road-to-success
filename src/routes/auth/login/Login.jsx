@@ -2,7 +2,7 @@ import { FaGithub, FaGoogle } from 'react-icons/fa'
 import './Login.css'
 
 import { useState } from 'react'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { useAuth } from '../../../context/authContext'
 import {
 	doSignInWithEmailAndPassword,
@@ -16,11 +16,17 @@ function Login() {
 	const [password, setPassword] = useState('')
 	const [isSigninIn, setIsSigninIn] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
+
 	const handleLogin = async e => {
 		e.preventDefault()
 		if (!isSigninIn) {
 			setIsSigninIn(true)
-			await doSignInWithEmailAndPassword(email, password)
+			try {
+				await doSignInWithEmailAndPassword(email, password)
+			} catch (error) {
+				setErrorMessage(error.message)
+				setIsSigninIn(false)
+			}
 		}
 	}
 
@@ -38,22 +44,22 @@ function Login() {
 		<div className='login-page'>
 			{userLoggedIn && <Navigate to={'/'} replace={true} />}
 			<div className='login-container'>
-				<h2 className='login-title'>Login Page</h2>
+				<h2 className='login-title'>Sign in</h2>
 				<div className='form-social'>
 					<button className='form-social-button' onClick={onGoogleSignIn}>
 						<FaGoogle />
-						<span>Login with Google</span>
+						<span>Sign in with Google</span>
 					</button>
 					<button className='form-social-button'>
 						<FaGithub />
-						<span>Login with GitHub</span>
+						<span>Sign in with GitHub</span>
 					</button>
 				</div>
 				<hr />
 				<form className='login-form' onSubmit={handleLogin}>
 					<input
 						type='email'
-						placeholder='Enter email'
+						placeholder='Email'
 						required
 						className='login-form-input'
 						value={email}
@@ -61,7 +67,7 @@ function Login() {
 					/>
 					<input
 						type='password'
-						placeholder='Enter password'
+						placeholder='Password'
 						required
 						className='login-form-input'
 						value={password}
@@ -71,9 +77,13 @@ function Login() {
 						<span className='error-message'>{errorMessage}</span>
 					)}
 					<button type='submit' className='login-form-button'>
-						Login
+						Sign in
 					</button>
 				</form>
+				<hr />
+				<span>
+					Don't have an account? <Link to={'/register'}>Sign up</Link>
+				</span>
 			</div>
 		</div>
 	)

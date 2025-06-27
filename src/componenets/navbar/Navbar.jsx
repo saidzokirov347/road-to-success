@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FaRegUser } from 'react-icons/fa'
 import { GiPineTree } from 'react-icons/gi'
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
@@ -11,11 +11,8 @@ export function Navbar() {
 	const { currentUser } = useAuth()
 	useRedirectToLogin(!currentUser)
 
-	const [dropdownOpen, setDropdownOpen] = useState(false)
-
 	if (!currentUser) return null
 
-	const toggleDropdown = () => setDropdownOpen(prev => !prev)
 	const handleLogout = async () => {
 		await doSignOut()
 	}
@@ -25,13 +22,13 @@ export function Navbar() {
 			<header className='navbar-header'>
 				<Link to={'/'} className='container navbar-header-logo'>
 					<GiPineTree size={50} />
-
 					<p>
 						<em>IELTS Tips & Strategy Hub</em>
 					</p>
 				</Link>
+
 				<div className='container navbar-header-profile'>
-					<div className='profile-info' onClick={toggleDropdown}>
+					<div className='profile-info'>
 						<span className='profile-name'>
 							{currentUser.displayName || currentUser.email}
 						</span>
@@ -41,11 +38,21 @@ export function Navbar() {
 							className='profile-avatar'
 						/>
 					</div>
-					<div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-						<button onClick={handleLogout}>Log out</button>
+
+					<div className='dropdown-menu'>
+						<div className='dropdown-menu-wrapper'>
+							<Link to={'/profile'} className='dropdown-menu-link'>
+								<FaRegUser />
+								<span>Profile</span>
+							</Link>
+							<button onClick={handleLogout} className='dropdown-menu-button'>
+								Log out
+							</button>
+						</div>
 					</div>
 				</div>
 			</header>
+
 			<nav className='navbar-nav'>
 				<Link
 					to='/reading'

@@ -3,8 +3,10 @@ import { Footer } from './componenets/footer/Footer'
 import { Navbar } from './componenets/navbar/Navbar'
 import Login from './routes/auth/login/Login'
 import ProtectedRoute from './routes/auth/protectedRoute'
+import Register from './routes/auth/register/Register'
 import { Home } from './routes/home/Home'
 import { Listening } from './routes/listening/Listening'
+import { Profile } from './routes/profile/Profile'
 import { Reading } from './routes/reading/Reading'
 import { Speaking } from './routes/speaking/Speaking'
 import { Writing } from './routes/writing/Writing'
@@ -32,12 +34,23 @@ function App() {
 					path='/writing'
 					element={<ProtectedRoute element={<Writing />} />}
 				/>
+				<Route
+					path='/profile'
+					element={<ProtectedRoute element={<Profile />} />}
+				/>
 
 				<Route
 					path='/login'
 					element={<ProtectedRoute element={<Login />} requireAuth={false} />}
 				/>
+				<Route
+					path='/register'
+					element={
+						<ProtectedRoute element={<Register />} requireAuth={false} />
+					}
+				/>
 			</Routes>
+
 			<Footer />
 		</div>
 	)

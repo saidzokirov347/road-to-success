@@ -21,14 +21,6 @@ export function Home() {
 					<li>🗣 Speaking Practice and Common Question Types</li>
 				</ul>
 			</section>
-
-			<section>
-				<p>
-					👉 Ready to begin? Start with the <a href='#'>Reading section</a> or
-					explore the <a href='#'>Listening strategy path</a> to begin your
-					IELTS journey.
-				</p>
-			</section>
 		</div>
 	)
 }
