@@ -58,4 +58,4 @@ function App() {
 
 export default App
 
-// I changed the code to ensure that the Navbar is not displayed on the login page. The Navbar will only be shown on other pages, such as Home, Reading, Listening, Speaking, Writing, and Profile. The ProtectedRoute component is used to handle authentication for these routes, ensuring that users must be logged in to access them.
+// I changed the code to ensure that the Navbar is not displayed on the login page. The Navbar will only be shown on other pages, such as Home, Reading, Listening, Speaking, Writing, and Profile. The ProtectedRoute component is used to handle authentication for these routes, ensuring that users must be logged in to access them. Just checking
