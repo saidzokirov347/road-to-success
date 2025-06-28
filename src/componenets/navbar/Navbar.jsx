@@ -28,14 +28,14 @@ export function Navbar() {
 				</Link>
 
 				<div className='container navbar-header-profile'>
-					<div className='profile-info'>
-						<span className='profile-name'>
+					<div className='navbar-profile-info'>
+						<span className='navbar-profile-name'>
 							{currentUser.displayName || currentUser.email}
 						</span>
 						<img
 							src={currentUser.photoURL || '/default-avatar.png'}
 							alt='Profile'
-							className='profile-avatar'
+							className='navbar-profile-avatar'
 						/>
 					</div>
 

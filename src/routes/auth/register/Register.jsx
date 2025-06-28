@@ -16,11 +16,19 @@ function Register() {
 	const [error, setError] = useState(null)
 	const { userLoggedIn } = useAuth()
 	const [isSigninIn, setIsSigninIn] = useState(false)
+	const [name, setName] = useState('')
+	const [bio, setBio] = useState('')
+	const [profileImage, setProfileImage] = useState('')
 
 	const handleRegister = async e => {
 		e.preventDefault()
 		try {
-			await doCreateUserWithEmailAndPassword(email, password)
+			await doCreateUserWithEmailAndPassword(email, password, {
+				username,
+				name,
+				bio,
+				profileImage,
+			})
 			navigate('/')
 		} catch (err) {
 			setError(err.message)
@@ -28,16 +36,20 @@ function Register() {
 		}
 	}
 
-	const onGoogleSignUp = e => {
+	const onGoogleSignUp = async e => {
 		e.preventDefault()
 		if (!isSigninIn) {
 			setIsSigninIn(true)
-			doSignUpWithGoogle().catch(error => {
-				setErrorMessage(error.message)
+			try {
+				await doSignUpWithGoogle(bio) // ✅ pass bio here
+				navigate('/')
+			} catch (error) {
+				setError(error.message)
 				setIsSigninIn(false)
-			})
+			}
 		}
 	}
+
 	return (
 		<div className='register-page'>
 			<div className='register-container'>
@@ -63,6 +75,13 @@ function Register() {
 						className='register-form-input'
 					/>
 					<input
+						type='text'
+						placeholder='Full name'
+						value={name}
+						onChange={e => setName(e.target.value)}
+						className='register-form-input'
+					/>
+					<input
 						type='email'
 						placeholder='Enter email'
 						required
@@ -77,6 +96,13 @@ function Register() {
 						value={password}
 						onChange={e => setPassword(e.target.value)}
 						className='register-form-input'
+					/>
+					<textarea
+						placeholder='Write a short bio...'
+						value={bio}
+						onChange={e => setBio(e.target.value)}
+						className='register-form-input'
+						rows={4}
 					/>
 					{error && <p style={{ color: 'red' }}>{error}</p>}
 					<button type='submit' className='register-form-button'>

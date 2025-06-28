@@ -75,18 +75,6 @@
 	gap: 15px;
 }
 
-.register-form-input {
-	width: 100%;
-	padding: 12px;
-	font-size: 15px;
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	background-color: #fafafa;
-	color: #111;
-	transition: border-color 0.2s, background-color 0.2s;
-	font-family: inherit;
-}
-
 .register-form-input:focus {
 	outline: none;
 	border-color: #0057a0;
@@ -106,4 +94,14 @@
 
 .register-form-button:hover {
 	background-color: #003f7d;
+}
+
+.register-form-input {
+	width: 100%;
+	padding: 10px;
+	margin: 8px 0;
+	font-size: 16px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+	resize: vertical;
 }
