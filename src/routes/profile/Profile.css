@@ -32,7 +32,7 @@
 .profile-email {
 	font-size: 16px;
 	color: #444;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	word-break: break-all;
 }
 
@@ -46,6 +46,13 @@
 	font-size: 16px;
 	margin-bottom: 20px;
 	resize: none;
+}
+
+.button-row {
+	display: flex;
+	justify-content: flex-start;
+	gap: 12px;
+	margin-top: 10px;
 }
 
 .save-button {

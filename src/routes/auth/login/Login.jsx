@@ -42,7 +42,7 @@ function Login() {
 	}
 	return (
 		<div className='login-page'>
-			{userLoggedIn && <Navigate to={'/'} replace={true} />}
+			{userLoggedIn && <Navigate to={'/profile'} replace={true} />}
 			<div className='login-container'>
 				<h2 className='login-title'>Sign in</h2>
 				<div className='form-social'>

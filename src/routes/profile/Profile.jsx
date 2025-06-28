@@ -1,5 +1,6 @@
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import { ProfileSkeleton } from '../../componenets/profile-skeleton/ProfileSkeleton'
 import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
 import './Profile.css'
@@ -12,12 +13,14 @@ export function Profile() {
 	const [profileImage, setProfileImage] = useState('')
 	const [email, setEmail] = useState('')
 	const [isEditing, setIsEditing] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchProfile = async () => {
 			if (!currentUser?.uid) return
 			const userRef = doc(db, 'users', currentUser.uid)
 			const snap = await getDoc(userRef)
+
 			if (snap.exists()) {
 				const data = snap.data()
 				setBio(data.bio || '')
@@ -25,7 +28,22 @@ export function Profile() {
 				setUsername(data.username || '')
 				setProfileImage(data.profileImage || '')
 				setEmail(data.email || '')
+			} else {
+				const defaultData = {
+					bio: '',
+					name: currentUser.displayName || '',
+					username: '',
+					profileImage: currentUser.photoURL || '',
+					email: currentUser.email || '',
+				}
+				await setDoc(userRef, defaultData)
+				setBio(defaultData.bio)
+				setName(defaultData.name)
+				setUsername(defaultData.username)
+				setProfileImage(defaultData.profileImage)
+				setEmail(defaultData.email)
 			}
+			setLoading(false)
 		}
 		fetchProfile()
 	}, [currentUser])
@@ -34,13 +52,26 @@ export function Profile() {
 		e.preventDefault()
 		try {
 			const userRef = doc(db, 'users', currentUser.uid)
-			await updateDoc(userRef, {
-				bio,
-				name,
-				username,
-				email,
-				profileImage,
-			})
+			const docSnap = await getDoc(userRef)
+
+			if (docSnap.exists()) {
+				await updateDoc(doc(db, 'users', currentUser.uid), {
+					name,
+					username,
+					email,
+					bio,
+					profileImage,
+				})
+			} else {
+				await setDoc(userRef, {
+					bio,
+					name,
+					username,
+					email,
+					profileImage,
+				})
+			}
+
 			alert('Profile updated successfully!')
 			setIsEditing(false)
 		} catch (err) {
@@ -48,23 +79,15 @@ export function Profile() {
 		}
 	}
 
+	if (loading) return <ProfileSkeleton />
 	return (
 		<div className='profile'>
 			<div className='profile-wrapper'>
 				<img
-					src={profileImage || currentUser.photoURL || '/men-avatar.jpg'}
+					src={profileImage || '/men-avatar.jpg'}
 					alt='Profile'
 					className='profile-image'
 				/>
-				{isEditing && (
-					<input
-						type='text'
-						value={profileImage}
-						onChange={e => setProfileImage(e.target.value)}
-						className='profile-bio'
-						placeholder='Profile Image URL'
-					/>
-				)}
 
 				<h2 className='profile-name'>
 					{isEditing ? (
@@ -120,18 +143,27 @@ export function Profile() {
 					<p className='profile-email'>{bio}</p>
 				)}
 
-				<button
-					className='save-button'
-					onClick={() => setIsEditing(prev => !prev)}
-					style={{ marginBottom: '20px' }}
-				>
-					{isEditing ? 'Cancel' : 'Change Info'}
-				</button>
+				{isEditing ? (
+					<></>
+				) : (
+					<button
+						className='save-button'
+						onClick={() => setIsEditing(prev => !prev)}
+						style={{ marginBottom: '20px' }}
+					>
+						Change Info
+					</button>
+				)}
 
 				{isEditing && (
-					<button className='save-button' onClick={handleSave}>
-						Save Changes
-					</button>
+					<div className='button-row'>
+						<button className='save-button' onClick={handleSave}>
+							Save Changes
+						</button>
+						<button className='save-button' onClick={() => setIsEditing(false)}>
+							Cancel
+						</button>
+					</div>
 				)}
 			</div>
 		</div>

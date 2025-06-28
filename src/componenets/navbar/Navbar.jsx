@@ -54,6 +54,9 @@ export function Navbar() {
 			</header>
 
 			<nav className='navbar-nav'>
+				<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
+					Home
+				</Link>
 				<Link
 					to='/reading'
 					className={location.pathname === '/reading' ? 'active' : ''}

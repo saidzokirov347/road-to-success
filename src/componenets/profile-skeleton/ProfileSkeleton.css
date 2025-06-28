@@ -1,0 +1,65 @@
+.profile-skeleton {
+	align-items: flex-start;
+}
+
+.profile-wrapper {
+	width: 40%;
+}
+
+.skeleton {
+	background-color: #e0e0e0;
+	border-radius: 10px;
+	animation: pulse 1.5s infinite;
+}
+
+/* Image */
+.skeleton-image {
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	margin-bottom: 20px;
+	border: 4px solid #fff;
+	box-shadow: 0 0 0 4px #aaa;
+}
+
+/* Name */
+.skeleton-name {
+	width: 150px;
+	height: 26px;
+	margin-bottom: 6px;
+}
+
+/* Email & Username */
+.skeleton-email {
+	width: 60%;
+	height: 16px;
+	margin-bottom: 20px;
+}
+
+.skeleton-username {
+	width: 50%;
+	height: 16px;
+	margin-bottom: 20px;
+}
+
+/* Bio */
+.skeleton-bio {
+	width: 90%;
+	max-width: 600px;
+	height: 100px;
+	margin-bottom: 20px;
+	border-radius: 10px;
+}
+
+/* Animation */
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
