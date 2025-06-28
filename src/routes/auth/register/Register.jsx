@@ -29,10 +29,11 @@ function Register() {
 				bio,
 				profileImage,
 			})
+			showToast.successAuth()
 			navigate('/')
 		} catch (err) {
 			setError(err.message)
-			console.error('Register failed:', err)
+			showToast.errorAuth(err.message)
 		}
 	}
 
@@ -41,10 +42,12 @@ function Register() {
 		if (!isSigninIn) {
 			setIsSigninIn(true)
 			try {
-				await doSignUpWithGoogle(bio) // ✅ pass bio here
+				await doSignUpWithGoogle(bio)
+				showToast.successAuth()
 				navigate('/')
 			} catch (error) {
 				setError(error.message)
+				showToast.errorAuth(error.message)
 				setIsSigninIn(false)
 			}
 		}

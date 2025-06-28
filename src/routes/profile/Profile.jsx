@@ -1,8 +1,10 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import { LuPencil, LuSave } from 'react-icons/lu'
 import { ProfileSkeleton } from '../../componenets/profile-skeleton/ProfileSkeleton'
 import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
+import { showToast } from '../../utils/toastHelper'
 import './Profile.css'
 
 export function Profile() {
@@ -48,123 +50,98 @@ export function Profile() {
 		fetchProfile()
 	}, [currentUser])
 
-	const handleSave = async e => {
-		e.preventDefault()
-		try {
-			const userRef = doc(db, 'users', currentUser.uid)
-			const docSnap = await getDoc(userRef)
-
-			if (docSnap.exists()) {
-				await updateDoc(doc(db, 'users', currentUser.uid), {
+	const handleToggleEdit = async () => {
+		if (isEditing) {
+			// Save changes
+			try {
+				const userRef = doc(db, 'users', currentUser.uid)
+				await updateDoc(userRef, {
 					name,
 					username,
 					email,
 					bio,
 					profileImage,
 				})
-			} else {
-				await setDoc(userRef, {
-					bio,
-					name,
-					username,
-					email,
-					profileImage,
-				})
+				showToast.successProfileUpdate()
+			} catch (err) {
+				console.error('Error saving profile:', err)
+				showToast.errorProfileUpdate()
 			}
-
-			alert('Profile updated successfully!')
-			setIsEditing(false)
-		} catch (err) {
-			console.error('Failed to update profile:', err)
 		}
+		setIsEditing(prev => !prev)
 	}
 
+	console.log(currentUser)
+
 	if (loading) return <ProfileSkeleton />
+
 	return (
 		<div className='profile'>
 			<div className='profile-wrapper'>
-				<img
-					src={profileImage || '/men-avatar.jpg'}
-					alt='Profile'
-					className='profile-image'
-				/>
-
-				<h2 className='profile-name'>
-					{isEditing ? (
-						<input
-							type='text'
-							value={name}
-							onChange={e => setName(e.target.value)}
-							className='profile-bio'
-							placeholder='Name'
+				<div className='profile-header'>
+					<div className='avatar-bg'>
+						<img
+							src={profileImage || '/men-avatar.jpg'}
+							alt='Profile'
+							className='profile-image'
 						/>
-					) : (
-						name
-					)}
-				</h2>
+					</div>
+				</div>
 
-				<p className='profile-email'>
-					{isEditing ? (
-						<input
-							type='text'
-							value={email}
-							onChange={e => setEmail(e.target.value)}
-							className='profile-bio'
-							placeholder='Email'
-						/>
-					) : (
-						email
-					)}
-				</p>
+				<div className='profile-info'>
+					<label>Full Name</label>
+					<input
+						className='profile-input'
+						value={name}
+						onChange={e => setName(e.target.value)}
+						placeholder='Full Name'
+						disabled={!isEditing}
+					/>
 
-				<p className='profile-email'>
-					{isEditing ? (
-						<input
-							type='text'
-							value={username}
-							onChange={e => setUsername(e.target.value)}
-							className='profile-bio'
-							placeholder='Username'
-						/>
-					) : (
-						`@${username}`
-					)}
-				</p>
+					<label>Email address</label>
+					<input
+						className='profile-input'
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						placeholder='Email'
+						disabled={!isEditing}
+					/>
 
-				{isEditing ? (
+					<label>Username</label>
+					<input
+						className='profile-input'
+						value={username}
+						onChange={e => setUsername(e.target.value)}
+						placeholder='Username'
+						disabled={!isEditing}
+					/>
+
+					<label>Bio</label>
 					<textarea
 						className='profile-bio'
-						rows='5'
+						rows='3'
 						placeholder='Write your bio...'
 						value={bio}
 						onChange={e => setBio(e.target.value)}
-					></textarea>
-				) : (
-					<p className='profile-email'>{bio}</p>
-				)}
+						disabled={!isEditing}
+					/>
+				</div>
 
-				{isEditing ? (
-					<></>
-				) : (
-					<button
-						className='save-button'
-						onClick={() => setIsEditing(prev => !prev)}
-						style={{ marginBottom: '20px' }}
-					>
-						Change Info
+				<div className='button-row'>
+					<button className='save-button' onClick={handleToggleEdit}>
+						{isEditing ? (
+							<>
+								<span>Save</span>
+								<LuSave />
+							</>
+						) : (
+							<>
+								<span>Edit</span>
+								<LuPencil />
+							</>
+						)}
 					</button>
-				)}
-
-				{isEditing && (
-					<div className='button-row'>
-						<button className='save-button' onClick={handleSave}>
-							Save Changes
-						</button>
-						<button className='save-button' onClick={() => setIsEditing(false)}>
-							Cancel
-						</button>
-					</div>
-				)}
+				</div>
 			</div>
 		</div>
 	)

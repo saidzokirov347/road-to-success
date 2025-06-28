@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import { Footer } from './componenets/footer/Footer'
 import { Navbar } from './componenets/navbar/Navbar'
 import Login from './routes/auth/login/Login'
@@ -52,10 +53,19 @@ function App() {
 			</Routes>
 
 			<Footer />
+			<ToastContainer
+				position='top-right'
+				autoClose={2500}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='light'
+			/>
 		</div>
 	)
 }
 
 export default App
-
-// I changed the code to ensure that the Navbar is not displayed on the login page. The Navbar will only be shown on other pages, such as Home, Reading, Listening, Speaking, Writing, and Profile. The ProtectedRoute component is used to handle authentication for these routes, ensuring that users must be logged in to access them. Just checking

@@ -33,7 +33,7 @@ export function Navbar() {
 							{currentUser.displayName || currentUser.email}
 						</span>
 						<img
-							src={currentUser.photoURL || '/default-avatar.png'}
+							src={currentUser.photoURL || '/men-avatar.jpg'}
 							alt='Profile'
 							className='navbar-profile-avatar'
 						/>

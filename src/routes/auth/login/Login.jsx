@@ -1,5 +1,4 @@
 import { FaGithub, FaGoogle } from 'react-icons/fa'
-import './Login.css'
 
 import { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
@@ -8,6 +7,8 @@ import {
 	doSignInWithEmailAndPassword,
 	doSignInWithGoogle,
 } from '../../../firebase/auth'
+import { showToast } from '../../../utils/toastHelper'
+import './Login.css'
 
 function Login() {
 	const { userLoggedIn } = useAuth()
@@ -23,8 +24,9 @@ function Login() {
 			setIsSigninIn(true)
 			try {
 				await doSignInWithEmailAndPassword(email, password)
+				showToast.successAuth()
 			} catch (error) {
-				setErrorMessage(error.message)
+				showToast.errorAuth(error.message)
 				setIsSigninIn(false)
 			}
 		}
@@ -34,12 +36,15 @@ function Login() {
 		e.preventDefault()
 		if (!isSigninIn) {
 			setIsSigninIn(true)
-			doSignInWithGoogle().catch(error => {
-				setErrorMessage(error.message)
-				setIsSigninIn(false)
-			})
+			doSignInWithGoogle()
+				.then(() => showToast.successAuth())
+				.catch(error => {
+					showToast.errorAuth(error.message)
+					setIsSigninIn(false)
+				})
 		}
 	}
+
 	return (
 		<div className='login-page'>
 			{userLoggedIn && <Navigate to={'/profile'} replace={true} />}
