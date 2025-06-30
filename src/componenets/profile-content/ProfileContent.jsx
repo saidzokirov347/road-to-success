@@ -112,6 +112,29 @@ export function ProfileContent() {
 
 	if (loading) return <ProfileSkeleton />
 
+	const getMaxExpForLevel = level => {
+		if (level === 1) return 1000
+		if (level === 2) return 2000
+		if (level === 3) return 3000
+		if (level === 4) return 4000
+		return 5000 // level 5+
+	}
+
+	const getMinExpForLevel = level => {
+		if (level === 1) return 0
+		if (level === 2) return 1000
+		if (level === 3) return 2000
+		if (level === 4) return 3000
+		return 4000
+	}
+
+	const minExp = getMinExpForLevel(level)
+	const maxExp = getMaxExpForLevel(level)
+	const expInCurrentLevel = exp - minExp
+	const expRange = maxExp - minExp
+	const progress = Math.min((expInCurrentLevel / expRange) * 100, 100)
+	const levelClass = `level-${Math.min(level, 5)}`
+
 	return (
 		<div className='profile'>
 			<div className='profile-wrapper'>
@@ -128,11 +151,13 @@ export function ProfileContent() {
 						<div className='level-text'>Level {level}</div>
 						<div className='progress-bar'>
 							<div
-								className='progress-fill'
-								style={{ width: `${(exp % 1000) / 10}%` }}
+								className={`progress-fill level-${Math.min(level, 5)}`}
+								style={{ width: `${progress}%` }}
 							></div>
 						</div>
-						<small>{exp % 1000} / 1000 EXP</small>
+						<small>
+							{exp} / {maxExp} EXP
+						</small>
 					</div>
 				</div>
 

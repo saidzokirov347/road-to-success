@@ -74,7 +74,6 @@ export const doCreateUserWithEmailAndPassword = async (
 
 	await updateProfile(result.user, {
 		displayName: additionalData.name,
-		photoURL: additionalData.profileImage,
 	})
 
 	await setDoc(doc(db, 'users', result.user.uid), {
@@ -82,7 +81,6 @@ export const doCreateUserWithEmailAndPassword = async (
 		name: additionalData.name,
 		username: additionalData.username,
 		email: result.user.email,
-		profileImage: additionalData.profileImage,
 		bio: additionalData.bio || '',
 		createdAt: new Date().toISOString(),
 		exp: 0,

@@ -13,7 +13,8 @@ export function Navbar() {
 	useRedirectToLogin(!currentUser)
 	if (!currentUser) return null
 
-	const isUserProfile = location.pathname.startsWith('/user/')
+	const isUserProfile =
+		location.pathname.startsWith('/user/') || location.pathname === '/profile'
 
 	const handleLogout = async () => {
 		await doSignOut()
