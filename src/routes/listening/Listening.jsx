@@ -1,6 +1,156 @@
+import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../../context/authContext'
+import { addExpToUser } from '../../firebase/exp'
+import { db } from '../../firebase/firebase'
 import './Listening.css'
 
 export function Listening() {
+	const { currentUser } = useAuth()
+	const [marks, setMarks] = useState({})
+	const [today, setToday] = useState(new Date())
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		const fetchData = async () => {
+			if (!currentUser) return
+
+			const userRef = doc(db, 'users', currentUser.uid)
+			const snap = await getDoc(userRef)
+
+			if (snap.exists()) {
+				const data = snap.data()
+				setMarks(data.listeningMarks || {})
+			}
+
+			setLoading(false)
+		}
+
+		fetchData()
+	}, [currentUser])
+
+	const handleMark = async mark => {
+		if (!currentUser) return
+
+		const dateKey = today.toLocaleDateString('en-CA')
+		if (marks[dateKey]) return // Already marked, prevent duplicate marking
+
+		const updatedMarks = { ...marks, [dateKey]: mark }
+		setMarks(updatedMarks) // update UI immediately
+
+		await updateDoc(doc(db, 'users', currentUser.uid), {
+			listeningMarks: updatedMarks,
+		})
+
+		if (mark === '✅') {
+			await addExpToUser(currentUser.uid, 25)
+		}
+	}
+
+	const getDaysInMonth = (year, month) => {
+		const date = new Date(year, month, 1)
+		const days = []
+		while (date.getMonth() === month) {
+			days.push(new Date(date))
+			date.setDate(date.getDate() + 1)
+		}
+		return days
+	}
+
+	const renderCalendar = () => {
+		const year = today.getFullYear()
+		const month = today.getMonth()
+		const days = getDaysInMonth(year, month)
+
+		const firstDay = new Date(year, month, 1).getDay()
+		const rows = []
+		let row = []
+
+		for (let i = 0; i < firstDay; i++) row.push(null)
+
+		days.forEach(day => {
+			row.push(day)
+			if (row.length === 7) {
+				rows.push(row)
+				row = []
+			}
+		})
+		if (row.length) {
+			while (row.length < 7) row.push(null)
+			rows.push(row)
+		}
+
+		const todayKey = new Date().toLocaleDateString('en-CA')
+
+		return (
+			<table className='calendar-table'>
+				<thead>
+					<tr>
+						<th>Sun</th>
+						<th>Mon</th>
+						<th>Tue</th>
+						<th>Wed</th>
+						<th>Thu</th>
+						<th>Fri</th>
+						<th>Sat</th>
+					</tr>
+				</thead>
+				<tbody>
+					{rows.map((week, i) => (
+						<tr key={i}>
+							{week.map((day, idx) => {
+								if (!day) return <td key={idx} className='empty'></td>
+
+								const dayKey = day.toLocaleDateString('en-CA')
+								const mark = marks[dayKey]
+								const isToday = dayKey === todayKey
+
+								const handleClick = () => {
+									if (isToday && !mark) {
+										const confirm = window.confirm('✅ for Yes, ❌ for No?')
+										handleMark(confirm ? '✅' : '❌')
+									}
+								}
+
+								return (
+									<td
+										key={idx}
+										className={`day-cell ${isToday ? 'today' : ''} ${
+											mark ? 'marked' : ''
+										}`}
+									>
+										<span className='date-num'>{day.getDate()}</span>
+
+										{mark ? (
+											<div className='mark'>{mark}</div>
+										) : isToday ? (
+											<div className='mark-buttons'>
+												<button
+													onClick={() => handleMark('✅')}
+													className='mark-btn success'
+													disabled={!!marks[dayKey]}
+												>
+													✅
+												</button>
+												<button
+													onClick={() => handleMark('❌')}
+													className='mark-btn fail'
+													disabled={!!marks[dayKey]}
+												>
+													❌
+												</button>
+											</div>
+										) : null}
+									</td>
+								)
+							})}
+						</tr>
+					))}
+				</tbody>
+			</table>
+		)
+	}
+
 	return (
 		<div className='container'>
 			<section id='listening'>
@@ -9,78 +159,11 @@ export function Listening() {
 					<em>A journey from chaos to clarity — one playback at a time.</em>
 				</p>
 
-				<div className='stage-block'>
-					<h3>
-						➊ The Trial — <em>“First Encounter”</em>
-					</h3>
-					<p>
-						The recording plays at its natural pace (1.0×).
-						<br />
-						No tricks, no second chances. Students dive in, grappling with
-						questions as they come, learning to dance with unpredictability —
-						the rawest form of understanding.
-					</p>
+				<div className='calendar-section'>
+					<h3>📅 Practice Calendar</h3>
+
+					{loading ? <div className='loader'></div> : renderCalendar()}
 				</div>
-
-				<div className='stage-block'>
-					<h3>
-						➋ The Reckoning — <em>“Mistakes Revisited”</em>
-					</h3>
-					<p>
-						Now at 1.2× speed, the game changes.
-						<br />
-						They return to their errors — not to fear them, but to
-						<strong>interrogate</strong> them.
-						<br />
-						What slipped? Why? It’s not just about right or wrong — it’s about
-						catching what your ears let slip.
-					</p>
-				</div>
-
-				<div className='stage-block'>
-					<h3>
-						➌ The Inscription — <em>“Precision Under Pressure”</em>
-					</h3>
-					<p>
-						At 1.2× or even 1.5× speed, they now
-						<strong> transcribe</strong>.<br />
-						Not guesses. Not rephrased ideas. <strong>Exact words</strong> —
-						word by word.
-						<br />
-						This is the sculptor’s phase: shaping accuracy through discipline.
-						They write what was said, not what they wish had been said.
-					</p>
-				</div>
-
-				<div className='stage-block'>
-					<h3>
-						➍ The Flow — <em>“Effortless Absorption”</em>
-					</h3>
-					<p>
-						The booklet closes. The pressure fades. Playback at 1.5×.
-						<br />
-						No pens. No answers. No chasing. Just pure
-						<strong> comprehension</strong>.<br />
-						They let the language flood in — following each sentence, even with
-						two or three speakers weaving in and out. It’s not solving anymore —
-						it’s owning the sound.
-					</p>
-				</div>
-
-				<p className='conclusion-text'>
-					<em>This is not mere practice.</em>
-					<br />
-					It’s training the ear like a musician, the mind like a fighter, and
-					the intuition like a storyteller.
-				</p>
-
-				<a
-					href='https://mini-ielts.com/listening'
-					className='button listening-link'
-					target='_blank'
-				>
-					🎧 Practice Listening on Mini IELTS
-				</a>
 			</section>
 		</div>
 	)

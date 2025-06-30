@@ -26,16 +26,17 @@ export const doSignUpWithGoogle = async (bio = '') => {
 	const userSnap = await getDoc(userDoc)
 
 	if (!userSnap.exists()) {
-		await setDoc(userDoc, {
+		await setDoc(doc(db, 'users', result.user.uid), {
 			uid: result.user.uid,
-			name: result.user.displayName,
+			name: additionalData.name,
+			username: additionalData.username.toLowerCase(),
 			email: result.user.email,
-			username: result.user.displayName?.toLowerCase().replace(/\s+/g, '_'),
-			profileImage: result.user.photoURL,
-			bio: bio || '',
+			bio: additionalData.bio || '',
 			createdAt: new Date().toISOString(),
 			exp: 0,
 			level: 1,
+			listeningMarks: {},
+			readingMarks: {},
 		})
 	}
 
@@ -87,31 +88,9 @@ export const doCreateUserWithEmailAndPassword = async (
 		createdAt: new Date().toISOString(),
 		exp: 0,
 		level: 1,
+		listeningMarks: {},
+		readingMarks: {},
 	})
 
 	return result
-}
-
-export const addExpToUser = async (userId, expToAdd) => {
-	const userRef = doc(db, 'users', userId)
-	const snap = await getDoc(userRef)
-
-	if (!snap.exists()) return
-
-	const user = snap.data()
-	const currentExp = user.exp || 0
-	const newExp = currentExp + expToAdd
-
-	let newLevel = 1
-	for (let i = 1; i < levelThresholds.length; i++) {
-		if (newExp >= levelThresholds[i]) {
-			newLevel = i + 1
-		}
-	}
-	newLevel = Math.min(newLevel, 5)
-
-	await updateDoc(userRef, {
-		exp: newExp,
-		level: newLevel,
-	})
 }
