@@ -8,6 +8,7 @@ import Register from './routes/auth/register/Register'
 import { Home } from './routes/home/Home'
 import { Listening } from './routes/listening/Listening'
 import { Profile } from './routes/profile/Profile'
+import PublicProfile from './routes/public-profile/PublicProfile'
 import { Reading } from './routes/reading/Reading'
 import { Speaking } from './routes/speaking/Speaking'
 import { Writing } from './routes/writing/Writing'
@@ -38,6 +39,10 @@ function App() {
 				<Route
 					path='/profile'
 					element={<ProtectedRoute element={<Profile />} />}
+				/>
+				<Route
+					path='/user/:id'
+					element={<ProtectedRoute element={<PublicProfile />} />}
 				/>
 
 				<Route

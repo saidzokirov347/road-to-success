@@ -2,13 +2,27 @@ import './ProfileSkeleton.css'
 
 export function ProfileSkeleton() {
 	return (
-		<div className='profile profile-skeleton'>
+		<div className='profile'>
 			<div className='profile-wrapper'>
-				<div className='skeleton skeleton-image'></div>
-				<div className='skeleton skeleton-name'></div>
-				<div className='skeleton skeleton-email'></div>
-				<div className='skeleton skeleton-username'></div>
-				<div className='skeleton skeleton-bio'></div>
+				<div className='profile-header'>
+					<div className='avatar-bg'>
+						<div className='skeleton skeleton-image'></div>
+					</div>
+				</div>
+
+				<div className='profile-info'>
+					<div className='skeleton-label'></div>
+					<div className='skeleton skeleton-input'></div>
+
+					<div className='skeleton-label'></div>
+					<div className='skeleton skeleton-input'></div>
+
+					<div className='skeleton-label'></div>
+					<div className='skeleton skeleton-input'></div>
+
+					<div className='skeleton-label'></div>
+					<div className='skeleton skeleton-textarea'></div>
+				</div>
 			</div>
 		</div>
 	)
