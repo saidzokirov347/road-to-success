@@ -15,6 +15,8 @@ export function ProfileContent() {
 	const [username, setUsername] = useState('')
 	const [profileImage, setProfileImage] = useState('')
 	const [email, setEmail] = useState('')
+	const [exp, setExp] = useState(0)
+	const [level, setLevel] = useState(1)
 	const [isEditing, setIsEditing] = useState(false)
 	const [usernameIsNew, setUsernameIsNew] = useState(false)
 	const [usernameError, setUsernameError] = useState(false)
@@ -36,6 +38,8 @@ export function ProfileContent() {
 				setUsername(data.username || '')
 				setProfileImage(data.profileImage || '')
 				setEmail(data.email || '')
+				setExp(data.exp || 0)
+				setLevel(data.level || 1)
 
 				if (!data.username) {
 					setUsernameIsNew(true)
@@ -47,6 +51,8 @@ export function ProfileContent() {
 					username: '',
 					profileImage: currentUser.photoURL || '',
 					email: currentUser.email || '',
+					exp: 0,
+					level: 1,
 				}
 				await setDoc(userRef, defaultData)
 				setBio(defaultData.bio)
@@ -54,6 +60,8 @@ export function ProfileContent() {
 				setUsername(defaultData.username)
 				setProfileImage(defaultData.profileImage)
 				setEmail(defaultData.email)
+				setExp(defaultData.exp)
+				setLevel(defaultData.level)
 				setUsernameIsNew(true)
 			}
 
@@ -110,10 +118,21 @@ export function ProfileContent() {
 				<div className='profile-header'>
 					<div className='avatar-bg'>
 						<img
-							src={currentUser.photoURL || '/men-avatar.jpg'}
+							src={profileImage || currentUser.photoURL || '/men-avatar.jpg'}
 							alt='Profile'
 							className='profile-image'
 						/>
+					</div>
+
+					<div className='rank-info'>
+						<div className='level-text'>Level {level}</div>
+						<div className='progress-bar'>
+							<div
+								className='progress-fill'
+								style={{ width: `${(exp % 1000) / 10}%` }}
+							></div>
+						</div>
+						<small>{exp % 1000} / 1000 EXP</small>
 					</div>
 				</div>
 
@@ -174,13 +193,9 @@ export function ProfileContent() {
 						{isSaving ? (
 							<span className='loader'></span>
 						) : isEditing ? (
-							<>
-								<span>Okay</span>
-							</>
+							<span>Okay</span>
 						) : (
-							<>
-								<span>Edit</span>
-							</>
+							<span>Edit</span>
 						)}
 					</button>
 				</div>

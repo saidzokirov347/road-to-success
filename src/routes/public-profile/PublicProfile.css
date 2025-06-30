@@ -59,3 +59,35 @@
 	margin: 0;
 	white-space: pre-line;
 }
+
+.public-rank-info {
+	margin-top: 16px;
+	text-align: center;
+}
+
+.public-level {
+	font-weight: 600;
+	color: #1f2937;
+	margin-bottom: 6px;
+}
+
+.public-progress-bar {
+	height: 10px;
+	width: 80%;
+	max-width: 200px;
+	background-color: #e5e7eb;
+	border-radius: 6px;
+	margin: 0 auto 6px;
+	overflow: hidden;
+}
+
+.public-progress-fill {
+	height: 100%;
+	background-color: #34d399;
+	transition: width 0.3s ease;
+}
+
+.public-exp-text {
+	font-size: 13px;
+	color: #374151;
+}

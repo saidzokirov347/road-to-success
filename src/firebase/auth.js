@@ -30,8 +30,10 @@ export const doSignUpWithGoogle = async (bio = '') => {
 			email: result.user.email,
 			username: result.user.displayName?.toLowerCase().replace(/\s+/g, '_'),
 			profileImage: result.user.photoURL,
-			bio: bio || '', // empty at first
+			bio: bio || '',
 			createdAt: new Date().toISOString(),
+			exp: 0,
+			level: 1,
 		})
 	}
 
@@ -83,7 +85,25 @@ export const doCreateUserWithEmailAndPassword = async (
 		profileImage: additionalData.profileImage,
 		bio: additionalData.bio || '',
 		createdAt: new Date().toISOString(),
+		exp: 0,
+		level: 1,
 	})
 
 	return result
+}
+
+export const addExpToUser = async (userId, expToAdd) => {
+	const userRef = doc(db, 'users', userId)
+	const snap = await getDoc(userRef)
+
+	if (snap.exists()) {
+		const user = snap.data()
+		const newExp = (user.exp || 0) + expToAdd
+		const newLevel = Math.min(5, Math.floor(newExp / 1000) + 1)
+
+		await updateDoc(userRef, {
+			exp: newExp,
+			level: newLevel,
+		})
+	}
 }

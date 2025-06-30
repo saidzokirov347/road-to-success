@@ -135,6 +135,33 @@ label {
 	animation: rotation 1s linear infinite;
 }
 
+.rank-info {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.level-text {
+	font-weight: 600;
+	color: #1f2937;
+	margin-bottom: 4px;
+}
+
+.progress-bar {
+	height: 10px;
+	width: 100%;
+	max-width: 200px;
+	background-color: #e5e7eb;
+	border-radius: 6px;
+	margin: 0 auto 4px;
+	overflow: hidden;
+}
+
+.progress-fill {
+	height: 100%;
+	background-color: #34d399;
+	transition: width 0.3s ease;
+}
+
 @keyframes rotation {
 	0% {
 		transform: rotate(0deg);

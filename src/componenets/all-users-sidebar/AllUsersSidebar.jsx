@@ -46,7 +46,7 @@ export default function AllUsersSidebar() {
 			<ul className='user-list'>
 				{filteredUsers.map(user => (
 					<li key={user.uid}>
-						<Link to={`/user/${user.uid}`} className='user-link'>
+						<Link to={`/user/${user.username}`} className='user-link'>
 							<img
 								src={user.profileImage || '/men-avatar.jpg'}
 								alt={user.username || 'profile-image'}
