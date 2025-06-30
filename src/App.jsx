@@ -17,7 +17,7 @@ function App() {
 	const location = useLocation()
 	return (
 		<div>
-			{location.pathname !== '/login' && <Navbar />}
+			{location.pathname !== '/login' || ('/user/:id' && <Navbar />)}
 			<Routes>
 				<Route path='/' element={<ProtectedRoute element={<Home />} />} />
 				<Route
