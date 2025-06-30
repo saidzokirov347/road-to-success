@@ -33,10 +33,10 @@ export function Listening() {
 		if (!currentUser) return
 
 		const dateKey = today.toLocaleDateString('en-CA')
-		if (marks[dateKey]) return // Already marked, prevent duplicate marking
+		if (marks[dateKey]) return
 
 		const updatedMarks = { ...marks, [dateKey]: mark }
-		setMarks(updatedMarks) // update UI immediately
+		setMarks(updatedMarks)
 
 		await updateDoc(doc(db, 'users', currentUser.uid), {
 			listeningMarks: updatedMarks,
@@ -105,13 +105,6 @@ export function Listening() {
 								const mark = marks[dayKey]
 								const isToday = dayKey === todayKey
 
-								const handleClick = () => {
-									if (isToday && !mark) {
-										const confirm = window.confirm('✅ for Yes, ❌ for No?')
-										handleMark(confirm ? '✅' : '❌')
-									}
-								}
-
 								return (
 									<td
 										key={idx}
@@ -159,9 +152,59 @@ export function Listening() {
 					<em>A journey from chaos to clarity — one playback at a time.</em>
 				</p>
 
+				{/* Strategy blocks */}
+				<div className='stage-block'>
+					<h3>
+						➊ Stage One – <em>Straight Solve</em>
+					</h3>
+					<p>
+						<strong>What:</strong> Listen and answer all questions in order,
+						skipping only ones that are unclear.
+						<br />
+						<strong>Why:</strong> Builds flow and prevents freezing on difficult
+						parts.
+					</p>
+				</div>
+
+				<div className='stage-block'>
+					<h3>
+						➋ Stage Two – <em>Spot Patterns</em>
+					</h3>
+					<p>
+						<strong>What:</strong> Identify the type of each question and match
+						it with its usual trick (e.g., paraphrase, distractor, etc.).
+						<br />
+						<strong>Why:</strong> Trains your instincts to recognize traps.
+					</p>
+				</div>
+
+				<div className='stage-block'>
+					<h3>
+						➌ Stage Three – <em>Transcript Replay</em>
+					</h3>
+					<p>
+						<strong>What:</strong> Re-listen with transcript to spot what you
+						missed and how.
+						<br />
+						<strong>Why:</strong> Turns every mistake into a permanent gain.
+					</p>
+				</div>
+
+				<div className='stage-block'>
+					<h3>
+						➍ Stage Four – <em>Targeted Practice</em>
+					</h3>
+					<p>
+						<strong>What:</strong> Focus only on your weak question types (e.g.,
+						maps or summary).
+						<br />
+						<strong>Why:</strong> 80/20 practice: most gain from least effort.
+					</p>
+				</div>
+
+				{/* Calendar block */}
 				<div className='calendar-section'>
 					<h3>📅 Practice Calendar</h3>
-
 					{loading ? <div className='loader'></div> : renderCalendar()}
 				</div>
 			</section>
