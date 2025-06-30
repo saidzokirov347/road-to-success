@@ -14,7 +14,7 @@ function ProtectedRoute({
 		return <Navigate to={redirectTo} replace />
 	}
 	if (!requireAuth && currentUser) {
-		return <Navigate to='/' replace />
+		return <Navigate to='/profile' replace />
 	}
 
 	return element

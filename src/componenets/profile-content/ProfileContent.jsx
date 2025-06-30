@@ -1,6 +1,5 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useRef, useState } from 'react'
-import { LuPencil, LuSave } from 'react-icons/lu'
 
 import { ProfileSkeleton } from '../../componenets/profile-skeleton/ProfileSkeleton'
 import { useAuth } from '../../context/authContext'
@@ -163,13 +162,11 @@ export function ProfileContent() {
 							<span className='loader'></span>
 						) : isEditing ? (
 							<>
-								<span>Save</span>
-								<LuSave />
+								<span>Okay</span>
 							</>
 						) : (
 							<>
 								<span>Edit</span>
-								<LuPencil />
 							</>
 						)}
 					</button>
