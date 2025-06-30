@@ -1,6 +1,6 @@
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { PublicProfileSkeleton } from '../../componenets/public-profile-sketelon/PublicProfileSkeleton'
 import { db } from '../../firebase/firebase'
 import './PublicProfile.css'
@@ -8,22 +8,35 @@ import './PublicProfile.css'
 export default function PublicProfile() {
 	const { username } = useParams()
 	const [user, setUser] = useState(null)
+	const [notFound, setNotFound] = useState(false)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			const q = query(
-				collection(db, 'users'),
-				where('username', '==', username)
-			)
-			const snapshot = await getDocs(q)
-			if (!snapshot.empty) {
-				setUser(snapshot.docs[0].data())
+			try {
+				const q = query(
+					collection(db, 'users'),
+					where('username', '==', username)
+				)
+				const snapshot = await getDocs(q)
+
+				if (!snapshot.empty) {
+					setUser(snapshot.docs[0].data())
+				} else {
+					setNotFound(true)
+				}
+			} catch (err) {
+				console.error('Error fetching user:', err)
+				setNotFound(true)
+			} finally {
+				setLoading(false)
 			}
 		}
 		fetchUser()
 	}, [username])
 
-	if (!user) return <PublicProfileSkeleton />
+	if (loading) return <PublicProfileSkeleton />
+	if (notFound) return <Navigate to='/not-found' replace />
 
 	const exp = user.exp || 0
 	const level = user.level || Math.floor(exp / 1000) + 1
