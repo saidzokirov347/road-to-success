@@ -75,6 +75,7 @@
 	max-width: 150px;
 	overflow: hidden;
 	white-space: nowrap;
+	user-select: none;
 }
 
 /* Dropdown menu styles */

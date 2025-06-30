@@ -47,7 +47,7 @@ export default function AllUsersSidebar() {
 								src={user.profileImage || '/men-avatar.jpg'}
 								alt={user.username}
 							/>
-							<span>@{user.username}</span>
+							<span>{user.username}</span>
 						</Link>
 					</li>
 				))}
