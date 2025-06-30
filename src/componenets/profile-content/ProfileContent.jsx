@@ -1,13 +1,10 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
-
-import { useEffect, useState } from 'react'
-
+import { useEffect, useRef, useState } from 'react'
 import { LuPencil, LuSave } from 'react-icons/lu'
 
 import { ProfileSkeleton } from '../../componenets/profile-skeleton/ProfileSkeleton'
 import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
-
 import { showToast } from '../../utils/toastHelper'
 
 import './ProfileContent.css'
@@ -20,7 +17,11 @@ export function ProfileContent() {
 	const [profileImage, setProfileImage] = useState('')
 	const [email, setEmail] = useState('')
 	const [isEditing, setIsEditing] = useState(false)
+	const [usernameIsNew, setUsernameIsNew] = useState(false)
 	const [loading, setLoading] = useState(true)
+	const [isSaving, setIsSaving] = useState(false)
+
+	const usernameRef = useRef(null)
 
 	useEffect(() => {
 		const fetchProfile = async () => {
@@ -35,6 +36,10 @@ export function ProfileContent() {
 				setUsername(data.username || '')
 				setProfileImage(data.profileImage || '')
 				setEmail(data.email || '')
+
+				if (!data.username) {
+					setUsernameIsNew(true)
+				}
 			} else {
 				const defaultData = {
 					bio: '',
@@ -49,15 +54,24 @@ export function ProfileContent() {
 				setUsername(defaultData.username)
 				setProfileImage(defaultData.profileImage)
 				setEmail(defaultData.email)
+				setUsernameIsNew(true)
 			}
+
 			setLoading(false)
 		}
+
 		fetchProfile()
 	}, [currentUser])
 
+	useEffect(() => {
+		if (usernameIsNew && username === '') {
+			usernameRef.current?.focus()
+		}
+	}, [usernameIsNew, username])
+
 	const handleToggleEdit = async () => {
 		if (isEditing) {
-			// Save changes
+			setIsSaving(true)
 			try {
 				const userRef = doc(db, 'users', currentUser.uid)
 				await updateDoc(userRef, {
@@ -72,11 +86,12 @@ export function ProfileContent() {
 				console.error('Error saving profile:', err)
 				showToast.errorProfileUpdate()
 			}
+			setIsSaving(false)
+			setIsEditing(false)
+		} else {
+			setIsEditing(true)
 		}
-		setIsEditing(prev => !prev)
 	}
-
-	console.log(currentUser)
 
 	if (loading) return <ProfileSkeleton />
 
@@ -114,11 +129,17 @@ export function ProfileContent() {
 
 					<label>Username</label>
 					<input
+						ref={usernameRef}
 						className='profile-input'
 						value={username}
-						onChange={e => setUsername(e.target.value)}
+						onChange={e => {
+							setUsername(e.target.value)
+							if (e.target.value.trim() !== '') {
+								setUsernameIsNew(false)
+							}
+						}}
 						placeholder='Username'
-						disabled={!isEditing}
+						disabled={!isEditing && !usernameIsNew}
 					/>
 
 					<label>Bio</label>
@@ -133,8 +154,14 @@ export function ProfileContent() {
 				</div>
 
 				<div className='button-row'>
-					<button className='save-button' onClick={handleToggleEdit}>
-						{isEditing ? (
+					<button
+						className='save-button'
+						onClick={handleToggleEdit}
+						disabled={isSaving}
+					>
+						{isSaving ? (
+							<span className='loader'></span>
+						) : isEditing ? (
 							<>
 								<span>Save</span>
 								<LuSave />

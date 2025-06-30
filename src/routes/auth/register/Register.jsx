@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { FaGithub, FaGoogle } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/authContext'
 import {
 	doCreateUserWithEmailAndPassword,
 	doSignUpWithGoogle,
 } from '../../../firebase/auth'
+import { showToast } from '../../../utils/toastHelper'
 import './Register.css'
 
 function Register() {
@@ -30,7 +31,7 @@ function Register() {
 				profileImage,
 			})
 			showToast.successAuth()
-			navigate('/')
+			navigate('/profile')
 		} catch (err) {
 			setError(err.message)
 			showToast.errorAuth(err.message)
@@ -44,7 +45,7 @@ function Register() {
 			try {
 				await doSignUpWithGoogle(bio)
 				showToast.successAuth()
-				navigate('/')
+				navigate('/profile')
 			} catch (error) {
 				setError(error.message)
 				showToast.errorAuth(error.message)
@@ -112,6 +113,9 @@ function Register() {
 						Register
 					</button>
 				</form>
+				<span className='register-link'>
+					Already have an account? <Link to='/login'>Sign in</Link>
+				</span>
 			</div>
 		</div>
 	)

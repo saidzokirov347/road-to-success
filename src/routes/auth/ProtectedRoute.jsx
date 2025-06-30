@@ -8,8 +8,7 @@ function ProtectedRoute({
 }) {
 	const { currentUser, loading } = useAuth()
 
-	// Wait until Firebase has checked auth state
-	if (loading) return null // or a spinner like <div>Loading...</div>
+	if (loading) return null
 
 	if (requireAuth && !currentUser) {
 		return <Navigate to={redirectTo} replace />

@@ -1,12 +1,14 @@
 import { collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
 import './AllUsersSidebar.css'
 
 export default function AllUsersSidebar() {
 	const [users, setUsers] = useState([])
 	const [searchTerm, setSearchTerm] = useState('')
+	const { currentUser } = useAuth()
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -26,9 +28,11 @@ export default function AllUsersSidebar() {
 		fetchUsers()
 	}, [])
 
-	const filteredUsers = users.filter(user =>
-		user.username?.toLowerCase().includes(searchTerm.toLowerCase())
-	)
+	const filteredUsers = users
+		.filter(user => user.uid !== currentUser?.uid)
+		.filter(user =>
+			user.username?.toLowerCase().includes(searchTerm.toLowerCase())
+		)
 
 	return (
 		<div className='all-users-sidebar'>
@@ -45,7 +49,7 @@ export default function AllUsersSidebar() {
 						<Link to={`/user/${user.uid}`} className='user-link'>
 							<img
 								src={user.profileImage || '/men-avatar.jpg'}
-								alt={user.username}
+								alt={user.username || 'profile-image'}
 							/>
 							<span>{user.username}</span>
 						</Link>

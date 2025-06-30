@@ -108,3 +108,29 @@ label {
 	justify-content: flex-end;
 	margin-top: 24px;
 }
+
+.input-warning {
+	background-color: #fef2f2 !important;
+	border: 1px solid #ef4444 !important;
+	color: #991b1b;
+}
+
+.loader {
+	width: 20px;
+	height: 20px;
+	border: 3px solid #2563eb;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	display: inline-block;
+	box-sizing: border-box;
+	animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
