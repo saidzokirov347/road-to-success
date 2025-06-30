@@ -44,6 +44,23 @@ export function ProfileContent() {
 				if (!data.username) {
 					setUsernameIsNew(true)
 				}
+
+				// 🔥 Fix incorrect level based on EXP
+				const levelThresholds = [0, 1000, 2000, 3000, 4000, 5000]
+				let correctLevel = 1
+				for (let i = 1; i < levelThresholds.length; i++) {
+					if ((data.exp || 0) >= levelThresholds[i]) {
+						correctLevel = i + 1
+					}
+				}
+				correctLevel = Math.min(correctLevel, 5)
+
+				if (data.level !== correctLevel) {
+					await updateDoc(userRef, {
+						level: correctLevel,
+					})
+					setLevel(correctLevel)
+				}
 			} else {
 				const defaultData = {
 					bio: '',
@@ -151,7 +168,7 @@ export function ProfileContent() {
 						<div className='level-text'>Level {level}</div>
 						<div className='progress-bar'>
 							<div
-								className={`progress-fill level-${Math.min(level, 5)}`}
+								className={`progress-fill ${levelClass}`}
 								style={{ width: `${progress}%` }}
 							></div>
 						</div>

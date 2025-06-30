@@ -12,6 +12,8 @@ import {
 	updateProfile,
 } from 'firebase/auth'
 
+const levelThresholds = [0, 1000, 2000, 3000, 4000, 5000]
+
 export const doSignInWithEmailAndPassword = async (email, password) => {
 	return signInWithEmailAndPassword(auth, email, password)
 }
@@ -94,14 +96,22 @@ export const addExpToUser = async (userId, expToAdd) => {
 	const userRef = doc(db, 'users', userId)
 	const snap = await getDoc(userRef)
 
-	if (snap.exists()) {
-		const user = snap.data()
-		const newExp = (user.exp || 0) + expToAdd
-		const newLevel = Math.min(5, Math.floor(newExp / 1000) + 1)
+	if (!snap.exists()) return
 
-		await updateDoc(userRef, {
-			exp: newExp,
-			level: newLevel,
-		})
+	const user = snap.data()
+	const currentExp = user.exp || 0
+	const newExp = currentExp + expToAdd
+
+	let newLevel = 1
+	for (let i = 1; i < levelThresholds.length; i++) {
+		if (newExp >= levelThresholds[i]) {
+			newLevel = i + 1
+		}
 	}
+	newLevel = Math.min(newLevel, 5)
+
+	await updateDoc(userRef, {
+		exp: newExp,
+		level: newLevel,
+	})
 }
