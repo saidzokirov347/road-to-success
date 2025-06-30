@@ -15,9 +15,12 @@ import { Writing } from './routes/writing/Writing'
 
 function App() {
 	const location = useLocation()
+	const hideNavbarPaths = ['/login', '/register']
+	const shouldHideNavbar = hideNavbarPaths.includes(location.pathname)
+
 	return (
 		<div>
-			{location.pathname !== '/login' || ('/user/:id' && <Navbar />)}
+			{!shouldHideNavbar && <Navbar />}
 			<Routes>
 				<Route path='/' element={<ProtectedRoute element={<Home />} />} />
 				<Route

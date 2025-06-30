@@ -9,9 +9,11 @@ import './Navbar.css'
 export function Navbar() {
 	const location = useLocation()
 	const { currentUser } = useAuth()
-	useRedirectToLogin(!currentUser)
 
+	useRedirectToLogin(!currentUser)
 	if (!currentUser) return null
+
+	const isUserProfile = location.pathname.startsWith('/user/')
 
 	const handleLogout = async () => {
 		await doSignOut()
@@ -20,7 +22,7 @@ export function Navbar() {
 	return (
 		<div className='navbar'>
 			<header className='navbar-header'>
-				<Link to={'/'} className='container navbar-header-logo'>
+				<Link to='/' className='container navbar-header-logo'>
 					<GiPineTree size={50} />
 					<p>
 						<em>IELTS Tips & Strategy Hub</em>
@@ -41,7 +43,7 @@ export function Navbar() {
 
 					<div className='dropdown-menu'>
 						<div className='dropdown-menu-wrapper'>
-							<Link to={'/profile'} className='dropdown-menu-link'>
+							<Link to='/profile' className='dropdown-menu-link'>
 								<FaRegUser />
 								<span>Profile</span>
 							</Link>
@@ -53,35 +55,37 @@ export function Navbar() {
 				</div>
 			</header>
 
-			<nav className='navbar-nav'>
-				<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
-					Home
-				</Link>
-				<Link
-					to='/reading'
-					className={location.pathname === '/reading' ? 'active' : ''}
-				>
-					Reading
-				</Link>
-				<Link
-					to='/listening'
-					className={location.pathname === '/listening' ? 'active' : ''}
-				>
-					Listening
-				</Link>
-				<Link
-					to='/speaking'
-					className={location.pathname === '/speaking' ? 'active' : ''}
-				>
-					Speaking
-				</Link>
-				<Link
-					to='/writing'
-					className={location.pathname === '/writing' ? 'active' : ''}
-				>
-					Writing
-				</Link>
-			</nav>
+			{!isUserProfile && (
+				<nav className='navbar-nav'>
+					<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
+						Home
+					</Link>
+					<Link
+						to='/reading'
+						className={location.pathname === '/reading' ? 'active' : ''}
+					>
+						Reading
+					</Link>
+					<Link
+						to='/listening'
+						className={location.pathname === '/listening' ? 'active' : ''}
+					>
+						Listening
+					</Link>
+					<Link
+						to='/speaking'
+						className={location.pathname === '/speaking' ? 'active' : ''}
+					>
+						Speaking
+					</Link>
+					<Link
+						to='/writing'
+						className={location.pathname === '/writing' ? 'active' : ''}
+					>
+						Writing
+					</Link>
+				</nav>
+			)}
 		</div>
 	)
 }
