@@ -61,6 +61,18 @@ export function Navbar() {
 						Home
 					</Link>
 					<Link
+						to='/grammar'
+						className={location.pathname === '/writing' ? 'active' : ''}
+					>
+						Grammar
+					</Link>
+					<Link
+						to='/vocabulary'
+						className={location.pathname === '/writing' ? 'active' : ''}
+					>
+						Vocabulary
+					</Link>
+					<Link
 						to='/reading'
 						className={location.pathname === '/reading' ? 'active' : ''}
 					>

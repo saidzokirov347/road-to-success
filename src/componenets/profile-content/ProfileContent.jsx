@@ -17,6 +17,7 @@ export function ProfileContent() {
 	const [email, setEmail] = useState('')
 	const [isEditing, setIsEditing] = useState(false)
 	const [usernameIsNew, setUsernameIsNew] = useState(false)
+	const [usernameError, setUsernameError] = useState(false)
 	const [loading, setLoading] = useState(true)
 	const [isSaving, setIsSaving] = useState(false)
 
@@ -70,6 +71,13 @@ export function ProfileContent() {
 
 	const handleToggleEdit = async () => {
 		if (isEditing) {
+			if (!username.trim()) {
+				setUsernameError(true)
+				showToast.error('Username cannot be empty.')
+				usernameRef.current?.focus()
+				return
+			}
+
 			setIsSaving(true)
 			try {
 				const userRef = doc(db, 'users', currentUser.uid)
@@ -80,6 +88,7 @@ export function ProfileContent() {
 					bio,
 					profileImage,
 				})
+				setUsernameIsNew(false)
 				showToast.successProfileUpdate()
 			} catch (err) {
 				console.error('Error saving profile:', err)
@@ -87,6 +96,7 @@ export function ProfileContent() {
 			}
 			setIsSaving(false)
 			setIsEditing(false)
+			setUsernameError(false)
 		} else {
 			setIsEditing(true)
 		}
@@ -129,17 +139,20 @@ export function ProfileContent() {
 					<label>Username</label>
 					<input
 						ref={usernameRef}
-						className='profile-input'
+						className={`profile-input ${usernameError ? 'input-warning' : ''}`}
 						value={username}
 						onChange={e => {
 							setUsername(e.target.value)
 							if (e.target.value.trim() !== '') {
-								setUsernameIsNew(false)
+								setUsernameError(false)
 							}
 						}}
 						placeholder='Username'
 						disabled={!isEditing && !usernameIsNew}
 					/>
+					{usernameError && (
+						<span className='error-text'>Username must not be empty</span>
+					)}
 
 					<label>Bio</label>
 					<textarea
