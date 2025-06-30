@@ -75,7 +75,7 @@ function Register() {
 						placeholder='Enter username'
 						required
 						value={username}
-						onChange={e => setUsername(e.target.value)}
+						onChange={e => setUsername(e.target.value.toLowerCase())}
 						className='register-form-input'
 					/>
 					<input

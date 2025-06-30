@@ -108,7 +108,7 @@ export function ProfileContent() {
 				const userRef = doc(db, 'users', currentUser.uid)
 				await updateDoc(userRef, {
 					name,
-					username,
+					username: username.toLowerCase(),
 					email,
 					bio,
 					profileImage,
@@ -203,8 +203,9 @@ export function ProfileContent() {
 						className={`profile-input ${usernameError ? 'input-warning' : ''}`}
 						value={username}
 						onChange={e => {
-							setUsername(e.target.value)
-							if (e.target.value.trim() !== '') {
+							const value = e.target.value.toLowerCase()
+							setUsername(value)
+							if (value.trim() !== '') {
 								setUsernameError(false)
 							}
 						}}

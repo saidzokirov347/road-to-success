@@ -81,7 +81,7 @@ export const doCreateUserWithEmailAndPassword = async (
 	await setDoc(doc(db, 'users', result.user.uid), {
 		uid: result.user.uid,
 		name: additionalData.name,
-		username: additionalData.username,
+		username: additionalData.username.toLowerCase(),
 		email: result.user.email,
 		bio: additionalData.bio || '',
 		createdAt: new Date().toISOString(),
