@@ -2,6 +2,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
+import Calendar from '../../componenets/calendar/Calendar'
 import { PublicProfileSkeleton } from '../../componenets/public-profile-sketelon/PublicProfileSkeleton'
 import { db } from '../../firebase/firebase'
 
@@ -78,6 +79,9 @@ export default function PublicProfile() {
 	const expRange = maxExp - minExp
 	const progress = Math.min((expInLevel / expRange) * 100, 100)
 
+	const listeningMarks = user.listeningMarks || {}
+	const readingMarks = user.readingMarks || {}
+
 	return (
 		<div className='public-profile-wrapper'>
 			<div className='public-profile-card'>
@@ -109,6 +113,17 @@ export default function PublicProfile() {
 						</small>
 					</div>
 				</div>
+			</div>
+
+			<div className='public-profile-calendar-container'>
+				<Calendar
+					title='📅 Listening Practice History'
+					marks={listeningMarks}
+				/>
+			</div>
+
+			<div className='public-profile-calendar-container'>
+				<Calendar title='📅 Reading Practice History' marks={readingMarks} />
 			</div>
 		</div>
 	)

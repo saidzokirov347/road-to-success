@@ -1,5 +1,6 @@
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
+import Calendar from '../../componenets/calendar/Calendar'
 import { useAuth } from '../../context/authContext'
 import { addExpToUser } from '../../firebase/exp'
 import { db } from '../../firebase/firebase'
@@ -202,11 +203,15 @@ export function Listening() {
 					</p>
 				</div>
 
-				{/* Calendar block */}
-				<div className='calendar-section'>
-					<h3>📅 Practice Calendar</h3>
-					{loading ? <div className='loader'></div> : renderCalendar()}
-				</div>
+				{loading ? (
+					<div className='loader'></div>
+				) : (
+					<Calendar
+						marks={marks}
+						onMark={handleMark}
+						title='📅 Practice Calendar'
+					/>
+				)}
 			</section>
 		</div>
 	)

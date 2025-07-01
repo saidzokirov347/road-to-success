@@ -1,0 +1,83 @@
+.calendar-section.skeleton {
+	background-color: #fff;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	padding: 20px;
+	animation: fadeIn 0.5s ease;
+	width: 100%;
+	max-width: 600px;
+}
+
+.calendar-title {
+	margin-bottom: 1rem;
+	font-size: 18px;
+	color: #4b5563;
+}
+
+.calendar-table {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.calendar-table th {
+	color: #9ca3af;
+	font-weight: 500;
+	font-size: 14px;
+	padding-bottom: 8px;
+}
+
+.calendar-cell {
+	padding: 10px;
+	height: 80px;
+}
+
+.skeleton-box {
+	background-color: #f3f4f6;
+	border-radius: 8px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 6px;
+	animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeleton-date {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #e5e7eb;
+}
+
+.skeleton-mark {
+	width: 24px;
+	height: 24px;
+	background-color: #e5e7eb;
+	border-radius: 6px;
+	margin-top: 6px;
+}
+
+@keyframes pulse {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

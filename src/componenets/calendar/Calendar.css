@@ -1,0 +1,102 @@
+/* .calendar-section {
+} */
+
+.calendar-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 1rem;
+	font-size: 15px;
+	text-align: center;
+}
+
+.calendar-table th,
+.calendar-table td {
+	width: 14.28%;
+	border: 1px solid #d1d5db;
+	padding: 10px;
+	height: 80px;
+	vertical-align: top;
+	position: relative;
+}
+
+.calendar-table th {
+	background-color: #f3f4f6;
+	color: #1f2937;
+	font-weight: 600;
+}
+
+.day-cell .date-num {
+	display: block;
+	font-weight: 600;
+	color: #111827;
+}
+
+.mark {
+	margin-top: 6px;
+	font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+	.calendar-section {
+		overflow-x: auto;
+	}
+
+	.calendar-table {
+		font-size: 14px;
+		min-width: 600px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.calendar-table th,
+	.calendar-table td {
+		height: 50px;
+		padding: 6px;
+		font-size: 13px;
+	}
+
+	.day-cell .date-num {
+		font-size: 14px;
+	}
+
+	.mark {
+		font-size: 18px;
+	}
+
+	.mark-buttons .mark-btn {
+		font-size: 14px;
+		padding: 4px 6px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.calendar-table {
+		min-width: 500px;
+	}
+
+	.calendar-table th,
+	.calendar-table td {
+		padding: 4px;
+		height: 45px;
+		font-size: 12px;
+	}
+
+	.day-cell .date-num {
+		font-size: 13px;
+	}
+
+	.mark {
+		font-size: 16px;
+	}
+
+	.mark-buttons {
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.mark-buttons .mark-btn {
+		width: 100%;
+		font-size: 13px;
+		padding: 3px;
+	}
+}
