@@ -9,6 +9,8 @@ import { Home } from './routes/home/Home'
 import { Listening } from './routes/listening/Listening'
 import { Profile } from './routes/profile/Profile'
 import PublicProfile from './routes/public-profile/PublicProfile'
+import QuizPage from './routes/quiz-page/QuizPage'
+import Quizzes from './routes/quizzes/Quizzes'
 import { Reading } from './routes/reading/Reading'
 import { Speaking } from './routes/speaking/Speaking'
 import { Writing } from './routes/writing/Writing'
@@ -46,6 +48,14 @@ function App() {
 				<Route
 					path='/user/:username'
 					element={<ProtectedRoute element={<PublicProfile />} />}
+				/>
+				<Route
+					path='/quizzes'
+					element={<ProtectedRoute element={<Quizzes />} />}
+				/>
+				<Route
+					path='/quiz/:id'
+					element={<ProtectedRoute element={<QuizPage />} />}
 				/>
 
 				<Route
