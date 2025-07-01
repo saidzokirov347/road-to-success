@@ -62,8 +62,14 @@ export function Navbar() {
 						Home
 					</Link>
 					<Link
+						to='/quizzes'
+						className={location.pathname === '/quizzes' ? 'active' : ''}
+					>
+						Quizzes
+					</Link>
+					<Link
 						to='/vocabulary'
-						className={location.pathname === '/writing' ? 'active' : ''}
+						className={location.pathname === '/vocabulary' ? 'active' : ''}
 					>
 						Vocabulary
 					</Link>
