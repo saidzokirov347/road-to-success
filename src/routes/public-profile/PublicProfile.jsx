@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import Calendar from '../../componenets/calendar/Calendar'
-import { PublicProfileSkeleton } from '../../componenets/public-profile-sketelon/PublicProfileSkeleton'
 import { db } from '../../firebase/firebase'
 
 import './PublicProfile.css'
@@ -38,7 +37,13 @@ export default function PublicProfile() {
 		fetchUser()
 	}, [username])
 
-	if (loading) return <PublicProfileSkeleton />
+	if (loading) {
+		return (
+			<div className='public-profile-loader-container'>
+				<div className='public-profile-loader'></div>
+			</div>
+		)
+	}
 	if (notFound) return <Navigate to='/not-found' replace />
 
 	const levelThresholds = [0, 1000, 2000, 3000, 4000, 5000]

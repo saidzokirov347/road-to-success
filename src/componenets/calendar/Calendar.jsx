@@ -87,7 +87,7 @@ export default function Calendar({
 												<button
 													onClick={e => {
 														e.stopPropagation()
-														onMark('✅')
+														onMark('✅', dayKey)
 													}}
 													className='mark-btn success'
 													disabled={!!marks[dayKey]}
@@ -97,7 +97,7 @@ export default function Calendar({
 												<button
 													onClick={e => {
 														e.stopPropagation()
-														onMark('❌')
+														onMark('❌', dayKey)
 													}}
 													className='mark-btn fail'
 													disabled={!!marks[dayKey]}
