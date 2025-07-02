@@ -1,48 +1,9 @@
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
 import Calendar from '../../componenets/calendar/Calendar'
-import { useAuth } from '../../context/authContext'
-import { addExpToUser } from '../../firebase/exp'
-import { db } from '../../firebase/firebase'
+import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Listening.css'
 
 export function Listening() {
-	const { currentUser } = useAuth()
-	const [marks, setMarks] = useState({})
-	const [loading, setLoading] = useState(true)
-
-	useEffect(() => {
-		const fetchData = async () => {
-			if (!currentUser) return
-
-			const userRef = doc(db, 'users', currentUser.uid)
-			const snap = await getDoc(userRef)
-
-			if (snap.exists()) {
-				const data = snap.data()
-				setMarks(data.listeningMarks || {})
-			}
-
-			setLoading(false)
-		}
-
-		fetchData()
-	}, [currentUser])
-
-	const handleMark = async (mark, dayKey) => {
-		if (!currentUser || marks[dayKey]) return
-
-		const updatedMarks = { ...marks, [dayKey]: mark }
-		setMarks(updatedMarks)
-
-		await updateDoc(doc(db, 'users', currentUser.uid), {
-			listeningMarks: updatedMarks,
-		})
-
-		if (mark === '✅') {
-			await addExpToUser(currentUser.uid, 25)
-		}
-	}
+	const { marks, loading, handleMark } = usePracticeMarks('listening')
 
 	return (
 		<div className='container'>
@@ -52,7 +13,6 @@ export function Listening() {
 					<em>A journey from chaos to clarity — one playback at a time.</em>
 				</p>
 
-				{/* Strategy blocks */}
 				<div className='stage-block'>
 					<h3>
 						➊ Stage One – <em>Straight Solve</em>
@@ -102,7 +62,6 @@ export function Listening() {
 					</p>
 				</div>
 
-				{/* Calendar block */}
 				{loading ? (
 					<div className='loader'></div>
 				) : (
