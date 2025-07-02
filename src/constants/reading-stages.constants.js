@@ -1,4 +1,3 @@
-// readingStages.js
 export const stages = [
 	{
 		title: '➊ Stage One – Active Solve (Exam Mode)',

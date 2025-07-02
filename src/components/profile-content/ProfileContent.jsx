@@ -1,4 +1,4 @@
-import { ProfileSkeleton } from '../../componenets/profile-skeleton/ProfileSkeleton'
+import { ProfileSkeleton } from '../../components/profile-skeleton/ProfileSkeleton'
 import { useUserProfile } from '../../hooks/useUserProfile'
 import './ProfileContent.css'
 

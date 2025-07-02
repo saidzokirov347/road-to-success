@@ -1,6 +1,6 @@
-import Calendar from '../../componenets/calendar/Calendar'
+import Calendar from '../../components/calendar/Calendar'
+import { stages } from '../../constants/reading-stages.constants'
 import { usePracticeMarks } from '../../hooks/usePracticeMarks'
-import { stages } from '../../static/readingStages'
 import './Reading.css'
 
 export function Reading() {

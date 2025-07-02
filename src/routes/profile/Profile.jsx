@@ -1,5 +1,5 @@
-import AllUsersSidebar from '../../componenets/all-users-sidebar/AllUsersSidebar'
-import { ProfileContent } from '../../componenets/profile-content/ProfileContent'
+import AllUsersSidebar from '../../components/all-users-sidebar/AllUsersSidebar'
+import { ProfileContent } from '../../components/profile-content/ProfileContent'
 import './Profile.css'
 
 export function Profile() {

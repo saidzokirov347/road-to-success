@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
-import Calendar from '../../componenets/calendar/Calendar'
+import Calendar from '../../components/calendar/Calendar'
 import { getUserByUsername } from '../../firebase/user'
 import { getCorrectLevel, getExpRangeForLevel } from '../../utils/exp'
 

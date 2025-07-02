@@ -5,7 +5,7 @@ import {
 	LEVEL_THRESHOLDS,
 	MAX_LEVEL,
 	getDefaultProfileData,
-} from '../constants/user'
+} from '../constants/user.constants'
 import { useAuth } from '../context/authContext'
 import { db } from '../firebase/firebase'
 import { getExpRangeForLevel } from '../utils/exp'

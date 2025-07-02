@@ -1,4 +1,4 @@
-import { LEVEL_THRESHOLDS, MAX_LEVEL } from '../constants/user'
+import { LEVEL_THRESHOLDS, MAX_LEVEL } from '../constants/user.constants'
 
 export function getCorrectLevel(exp) {
 	let level = 1

@@ -1,4 +1,4 @@
-import Calendar from '../../componenets/calendar/Calendar'
+import Calendar from '../../components/calendar/Calendar'
 import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Listening.css'
 
