@@ -65,9 +65,9 @@ textarea {
 	font-size: 1rem;
 }
 
-footer {
+.footer {
 	max-width: 800px;
-	margin: auto;
+	margin: 20px auto;
 	padding: 1rem;
 	text-align: center;
 	font-size: 0.9rem;
@@ -86,7 +86,7 @@ footer {
 
 @media (max-width: 600px) {
 	main,
-	footer {
+	.footer {
 		padding: 0.75rem;
 	}
 

@@ -14,7 +14,9 @@ export function Navbar() {
 	if (!currentUser) return null
 
 	const isUserProfile =
-		location.pathname.startsWith('/user/') || location.pathname === '/profile'
+		location.pathname.startsWith('/user/') ||
+		location.pathname === '/profile' ||
+		location.pathname.includes('/quiz/')
 
 	const handleLogout = async () => {
 		await doSignOut()

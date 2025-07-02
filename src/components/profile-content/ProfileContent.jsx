@@ -105,7 +105,7 @@ export function ProfileContent() {
 						disabled={isSaving}
 					>
 						{isSaving ? (
-							<span className='loader'></span>
+							<span className='profile-loader'></span>
 						) : isEditing ? (
 							<span>Okay</span>
 						) : (

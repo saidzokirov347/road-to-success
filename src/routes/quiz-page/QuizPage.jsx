@@ -1,39 +1,31 @@
-import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
-import { db } from '../../firebase/firebase'
+import { updateUserExpByAmount } from '../../firebase/exp'
+import { useGetQuizByIdQuery } from '../../store/api/quiz-api/quiz.api'
 import './QuizPage.css'
 
 export default function QuizPage() {
 	const { id } = useParams()
 	const { currentUser } = useAuth()
-	const [quiz, setQuiz] = useState(null)
-	const [loading, setLoading] = useState(true)
+	const { data: quiz, isLoading } = useGetQuizByIdQuery(id)
+
+	const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
 	const [selectedAnswers, setSelectedAnswers] = useState({})
 	const [submitted, setSubmitted] = useState(false)
 	const [score, setScore] = useState(0)
 
-	useEffect(() => {
-		const fetchQuiz = async () => {
-			try {
-				const res = await fetch(
-					`https://road-to-success-backend.onrender.com/get-quiz/${id}`
-				)
-				const data = await res.json()
-				setQuiz(data.innerData)
-			} catch (err) {
-				console.error('Failed to fetch quiz:', err)
-			} finally {
-				setLoading(false)
-			}
-		}
-		fetchQuiz()
-	}, [id])
-
-	const handleSelect = (qIndex, option) => {
+	const handleSelect = option => {
 		if (!submitted) {
-			setSelectedAnswers(prev => ({ ...prev, [qIndex]: option }))
+			setSelectedAnswers(prev => ({ ...prev, [currentQuestionIndex]: option }))
+		}
+	}
+
+	const handleNext = () => {
+		if (currentQuestionIndex < quiz.questions.length - 1) {
+			setCurrentQuestionIndex(prev => prev + 1)
+		} else {
+			handleSubmit()
 		}
 	}
 
@@ -55,88 +47,102 @@ export default function QuizPage() {
 
 		const percent = (correct / total) * 100
 		const fullExp = quiz.expOfQuiz || 0
+
 		let earnedExp = 0
+		if (percent === 100) earnedExp = fullExp
+		else if (percent >= 50) earnedExp = Math.floor(fullExp * 0.5)
+		else earnedExp = -Math.floor(fullExp * 0.5)
 
-		if (percent === 100) {
-			earnedExp = fullExp
-		} else if (percent >= 50) {
-			earnedExp = Math.floor(fullExp * 0.5)
-		} else {
-			earnedExp = -Math.floor(fullExp * 0.5)
-		}
-
-		const userRef = doc(db, 'users', currentUser.uid)
-		const snap = await getDoc(userRef)
-
-		if (snap.exists()) {
-			const userData = snap.data()
-			const currentExp = userData.exp || 0
-			const updatedExp = Math.max(currentExp + earnedExp, 0) // never go negative
-
-			await updateDoc(userRef, { exp: updatedExp })
-		}
+		await updateUserExpByAmount(currentUser.uid, earnedExp)
 	}
 
-	if (loading) return <div className='loader'></div>
+	// ⌨️ ENTER KEY SUPPORT
+	useEffect(() => {
+		const handleKeyDown = e => {
+			if (
+				e.key === 'Enter' &&
+				selectedAnswers[currentQuestionIndex] !== undefined &&
+				!submitted
+			) {
+				handleNext()
+			}
+		}
+
+		window.addEventListener('keydown', handleKeyDown)
+		return () => window.removeEventListener('keydown', handleKeyDown)
+	}, [currentQuestionIndex, selectedAnswers, submitted])
+
+	if (isLoading) return <div className='loader'></div>
 	if (!quiz) return <p>Quiz not found.</p>
 
+	const currentQuestion = quiz.questions[currentQuestionIndex]
+	const totalQuestions = quiz.questions.length
+	const progressPercent = Math.floor(
+		(currentQuestionIndex / totalQuestions) * 100
+	)
+
 	return (
-		<div className='quiz-container'>
-			<h2>{quiz.name}</h2>
-			<p className='quiz-desc'>{quiz.description}</p>
+		<div className='quiz-bg'>
+			<div className='quiz-container'>
+				<div className='progress-bar'>
+					<div
+						className='progress-fill'
+						style={{ width: `${submitted ? 100 : progressPercent}%` }}
+					></div>
+				</div>
 
-			<ol className='quiz-questions'>
-				{quiz.questions.map((q, i) => (
-					<li key={i} className='quiz-question'>
-						<p>{q.questionText}</p>
+				<h2>{quiz.name}</h2>
+				<p className='quiz-page-desc'>{quiz.description}</p>
+
+				{!submitted && (
+					<div className='quiz-question'>
+						<p>
+							Question {currentQuestionIndex + 1} of {totalQuestions}
+						</p>
+						<p>{currentQuestion.questionText}</p>
 						<div className='quiz-options'>
-							{q.options.map((opt, j) => {
-								const isSelected = selectedAnswers[i] === j
-								const isCorrect = submitted && j === q.correctAnswer
-								const isWrong = submitted && isSelected && j !== q.correctAnswer
-
+							{currentQuestion.options.map((opt, j) => {
+								const isSelected = selectedAnswers[currentQuestionIndex] === j
 								return (
 									<button
 										key={j}
-										className={`option-btn ${
-											isCorrect
-												? 'correct'
-												: isWrong
-												? 'wrong'
-												: isSelected
-												? 'selected'
-												: ''
-										}`}
-										onClick={() => handleSelect(i, j)}
-										disabled={submitted}
+										className={`option-btn ${isSelected ? 'selected' : ''}`}
+										onClick={() => handleSelect(j)}
 									>
 										{opt}
 									</button>
 								)
 							})}
 						</div>
-					</li>
-				))}
-			</ol>
+						<button
+							className='submit-btn'
+							onClick={handleNext}
+							disabled={selectedAnswers[currentQuestionIndex] === undefined}
+						>
+							{currentQuestionIndex === totalQuestions - 1
+								? 'Submit Quiz'
+								: 'Next →'}
+						</button>
+					</div>
+				)}
 
-			{!submitted ? (
-				<button className='submit-btn' onClick={handleSubmit}>
-					Submit Quiz
-				</button>
-			) : (
-				<div className='result'>
-					<p>
-						✅ You got {score} out of {quiz.questions.length} correct.
-					</p>
-					<p>
-						{(score / quiz.questions.length) * 100 === 100
-							? `🎉 Full EXP earned: ${quiz.expOfQuiz}`
-							: (score / quiz.questions.length) * 100 >= 50
-							? `💡 Half EXP earned: ${Math.floor(quiz.expOfQuiz / 2)}`
-							: `⚠️ 50% of EXP lost: -${Math.floor(quiz.expOfQuiz / 2)}`}
-					</p>
-				</div>
-			)}
+				{submitted && (
+					<div className='result-card'>
+						<h2 className='result-title'>🎉 Quiz Completed!</h2>
+						<p className='result-score'>
+							✅ You got <strong>{score}</strong> out of{' '}
+							<strong>{quiz.questions.length}</strong> correct.
+						</p>
+						<p className='result-exp'>
+							{(score / quiz.questions.length) * 100 === 100
+								? `🏆 Full EXP earned: ${quiz.expOfQuiz}`
+								: (score / quiz.questions.length) * 100 >= 50
+								? `💡 Half EXP earned: ${Math.floor(quiz.expOfQuiz / 2)}`
+								: `⚠️ 50% of EXP lost: -${Math.floor(quiz.expOfQuiz / 2)}`}
+						</p>
+					</div>
+				)}
+			</div>
 		</div>
 	)
 }

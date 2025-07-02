@@ -1,25 +1,28 @@
+// src/firebase/exp.js
+
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
+import { LEVEL_THRESHOLDS } from '../constants/user.constants'
 import { db } from './firebase'
 
-const levelThresholds = [0, 1000, 2000, 3000, 4000, 5000]
-
-export const addExpToUser = async (userId, expToAdd) => {
-	const userRef = doc(db, 'users', userId)
-	const snap = await getDoc(userRef)
-
-	if (!snap.exists()) return
-
-	const user = snap.data()
-	const currentExp = user.exp || 0
-	const newExp = currentExp + expToAdd
-
-	let newLevel = 1
-	for (let i = 1; i < levelThresholds.length; i++) {
-		if (newExp >= levelThresholds[i]) {
-			newLevel = i + 1
+const calculateLevel = exp => {
+	let level = 1
+	for (let i = 1; i < LEVEL_THRESHOLDS.length; i++) {
+		if (exp >= LEVEL_THRESHOLDS[i]) {
+			level = i + 1
 		}
 	}
-	newLevel = Math.min(newLevel, 5)
+	return Math.min(level, 5)
+}
+
+export const updateUserExpByAmount = async (userId, changeAmount) => {
+	const userRef = doc(db, 'users', userId)
+	const snap = await getDoc(userRef)
+	if (!snap.exists()) return
+
+	const data = snap.data()
+	const currentExp = data.exp || 0
+	const newExp = Math.max(currentExp + changeAmount, 0)
+	const newLevel = calculateLevel(newExp)
 
 	await updateDoc(userRef, {
 		exp: newExp,
@@ -27,26 +30,6 @@ export const addExpToUser = async (userId, expToAdd) => {
 	})
 }
 
-export const removeExpFromUser = async (userId, expToRemove) => {
-	const userRef = doc(db, 'users', userId)
-	const snap = await getDoc(userRef)
-
-	if (!snap.exists()) return
-
-	const user = snap.data()
-	const currentExp = user.exp || 0
-	const newExp = Math.max(currentExp - expToRemove, 0)
-
-	let newLevel = 1
-	for (let i = 1; i < levelThresholds.length; i++) {
-		if (newExp >= levelThresholds[i]) {
-			newLevel = i + 1
-		}
-	}
-	newLevel = Math.min(newLevel, 5)
-
-	await updateDoc(userRef, {
-		exp: newExp,
-		level: newLevel,
-	})
-}
+export const addExpToUser = (userId, exp) => updateUserExpByAmount(userId, exp)
+export const removeExpFromUser = (userId, exp) =>
+	updateUserExpByAmount(userId, -exp)
