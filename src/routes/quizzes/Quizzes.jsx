@@ -11,7 +11,7 @@ export default function Quizzes() {
 
 	return (
 		<div className='quiz-page container'>
-			<h2>📚 Available Quizzes</h2>
+			<h2 className='quiz-page-title'>📚 Available Quizzes</h2>
 			<div className='quiz-grid'>
 				{quizzes.map((quiz, i) => {
 					const createdAt = new Date(quiz.createdAt)
@@ -25,7 +25,7 @@ export default function Quizzes() {
 							className='quiz-card'
 							key={quiz._id || i}
 						>
-							<div className='quiz-header'>
+							<div className='quizzes-header'>
 								<h3>{quiz.name}</h3>
 								<div className='badges'>
 									{isNew && <span className='badge new'>New</span>}

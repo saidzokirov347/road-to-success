@@ -16,11 +16,15 @@ export function Navbar() {
 	const isUserProfile =
 		location.pathname.startsWith('/user/') ||
 		location.pathname === '/profile' ||
-		location.pathname.includes('/quiz/')
+		location.pathname.includes('/quizzes/')
+
+	const isQuizPage = location.pathname.includes('/quiz/')
 
 	const handleLogout = async () => {
 		await doSignOut()
 	}
+
+	if (isQuizPage) return null
 
 	return (
 		<div className='navbar'>

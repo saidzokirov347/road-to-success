@@ -5,8 +5,8 @@
 	width: 100%;
 }
 
-.quizzes-page h2 {
-	font-size: 2.2rem;
+.quiz-page-title {
+	font-size: 2rem;
 	font-weight: 700;
 	margin-bottom: 2rem;
 	text-align: center;
@@ -40,7 +40,7 @@
 	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-.quiz-header {
+.quizzes-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -134,12 +134,11 @@
 @media (max-width: 768px) {
 	.quiz-card {
 		width: 100%;
-		max-width: 340px;
 	}
 }
 
 @media (max-width: 480px) {
-	.quizzes-page h2 {
+	.quiz-page-title {
 		font-size: 1.6rem;
 		margin-bottom: 1.2rem;
 	}
