@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Footer } from './components/footer/Footer'
 import { Navbar } from './components/navbar/Navbar'
@@ -16,9 +16,10 @@ import { Speaking } from './routes/speaking/Speaking'
 import { Writing } from './routes/writing/Writing'
 
 function App() {
-	const location = useLocation()
 	const hideNavbarPaths = ['/login', '/register']
-	const shouldHideNavbar = hideNavbarPaths.includes(location.pathname)
+	const isQuizPage = location.pathname.startsWith('/quiz/')
+	const shouldHideNavbar =
+		hideNavbarPaths.includes(location.pathname) || isQuizPage
 
 	return (
 		<div>

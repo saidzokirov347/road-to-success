@@ -1,0 +1,54 @@
+.skeleton {
+	background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+	border-radius: 8px;
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: 200% 0;
+	}
+	100% {
+		background-position: -200% 0;
+	}
+}
+
+.skeleton-bar {
+	width: 100%;
+	height: 6px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.skeleton-title {
+	width: 70%;
+	height: 24px;
+	margin: 1rem auto;
+}
+
+.skeleton-text {
+	width: 60%;
+	height: 16px;
+	margin: 0 auto 1.5rem;
+}
+
+.skeleton-question {
+	width: 80%;
+	height: 20px;
+	margin-bottom: 1.2rem;
+}
+
+.skeleton-option {
+	width: 100%;
+	height: 42px;
+	margin-bottom: 12px;
+	border-radius: 12px;
+}
+
+.skeleton-button {
+	width: 100%;
+	height: 48px;
+	border-radius: 12px;
+	margin-top: 16px;
+}

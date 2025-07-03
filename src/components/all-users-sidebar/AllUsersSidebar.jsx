@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
-import AllUsersSkeleton from '../all-users-skeleton/AllUsersSkeleton'
+import AllUsersSkeleton from '../skeleton/all-users-skeleton/AllUsersSkeleton'
 import './AllUsersSidebar.css'
 
 export default function AllUsersSidebar() {

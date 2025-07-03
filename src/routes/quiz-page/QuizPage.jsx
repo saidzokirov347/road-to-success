@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { FaArrowLeft } from 'react-icons/fa'
+import { useNavigate, useParams } from 'react-router-dom'
+import SkeletonQuizPage from '../../components/skeleton/quiz-page-skeleton/QuizPageSkeleton'
 import { useAuth } from '../../context/authContext'
 import { updateUserExpByAmount } from '../../firebase/exp'
 import { useGetQuizByIdQuery } from '../../store/api/quiz-api/quiz.api'
@@ -7,6 +9,7 @@ import './QuizPage.css'
 
 export default function QuizPage() {
 	const { id } = useParams()
+	const navigate = useNavigate()
 	const { currentUser } = useAuth()
 	const { data: quiz, isLoading } = useGetQuizByIdQuery(id)
 
@@ -35,9 +38,7 @@ export default function QuizPage() {
 		let correct = 0
 
 		quiz.questions.forEach((q, i) => {
-			if (selectedAnswers[i] === q.correctAnswer) {
-				correct++
-			}
+			if (selectedAnswers[i] === q.correctAnswer) correct++
 		})
 
 		setScore(correct)
@@ -56,7 +57,6 @@ export default function QuizPage() {
 		await updateUserExpByAmount(currentUser.uid, earnedExp)
 	}
 
-	// ⌨️ ENTER KEY SUPPORT
 	useEffect(() => {
 		const handleKeyDown = e => {
 			if (
@@ -67,12 +67,11 @@ export default function QuizPage() {
 				handleNext()
 			}
 		}
-
 		window.addEventListener('keydown', handleKeyDown)
 		return () => window.removeEventListener('keydown', handleKeyDown)
 	}, [currentQuestionIndex, selectedAnswers, submitted])
 
-	if (isLoading) return <div className='loader'></div>
+	if (isLoading) return <SkeletonQuizPage />
 	if (!quiz) return <p>Quiz not found.</p>
 
 	const currentQuestion = quiz.questions[currentQuestionIndex]
@@ -82,24 +81,31 @@ export default function QuizPage() {
 	)
 
 	return (
-		<div className='quiz-bg'>
-			<div className='quiz-container'>
-				<div className='progress-bar'>
-					<div
-						className='progress-fill'
-						style={{ width: `${submitted ? 100 : progressPercent}%` }}
-					></div>
+		<div className='quiz-page'>
+			<div className='quiz-header'>
+				<button className='home-btn' onClick={() => navigate('/quizzes')}>
+					<FaArrowLeft />
+				</button>
+				<div className='quiz-title-wrapper'>
+					<h2 className='quiz-title'>{quiz.name}</h2>
 				</div>
+			</div>
 
-				<h2>{quiz.name}</h2>
-				<p className='quiz-page-desc'>{quiz.description}</p>
+			<div className='progress-bar'>
+				<div
+					className='progress-fill'
+					style={{ width: `${submitted ? 100 : progressPercent}%` }}
+				></div>
+			</div>
 
-				{!submitted && (
-					<div className='quiz-question'>
-						<p>
+			<div className='quiz-content'>
+				{!submitted ? (
+					<>
+						<p className='question-count'>
 							Question {currentQuestionIndex + 1} of {totalQuestions}
 						</p>
-						<p>{currentQuestion.questionText}</p>
+						<p className='question-text'>{currentQuestion.questionText}</p>
+
 						<div className='quiz-options'>
 							{currentQuestion.options.map((opt, j) => {
 								const isSelected = selectedAnswers[currentQuestionIndex] === j
@@ -114,19 +120,14 @@ export default function QuizPage() {
 								)
 							})}
 						</div>
-						<button
-							className='submit-btn'
-							onClick={handleNext}
-							disabled={selectedAnswers[currentQuestionIndex] === undefined}
-						>
+
+						<button className='submit-btn' onClick={handleNext}>
 							{currentQuestionIndex === totalQuestions - 1
 								? 'Submit Quiz'
 								: 'Next →'}
 						</button>
-					</div>
-				)}
-
-				{submitted && (
+					</>
+				) : (
 					<div className='result-card'>
 						<h2 className='result-title'>🎉 Quiz Completed!</h2>
 						<p className='result-score'>
@@ -140,6 +141,10 @@ export default function QuizPage() {
 								? `💡 Half EXP earned: ${Math.floor(quiz.expOfQuiz / 2)}`
 								: `⚠️ 50% of EXP lost: -${Math.floor(quiz.expOfQuiz / 2)}`}
 						</p>
+
+						<button className='return-btn' onClick={() => navigate('/quizzes')}>
+							← Back to Quizzes
+						</button>
 					</div>
 				)}
 			</div>

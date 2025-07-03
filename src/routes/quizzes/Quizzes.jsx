@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
+import SkeletonQuizList from '../../components/skeleton/quiz-list-skeleton/SkeletonQuizList'
 import { useGetQuizzesQuery } from '../../store/api/api'
 import './Quizzes.css'
 
 export default function Quizzes() {
 	const { data: quizzes = [], isLoading, isError } = useGetQuizzesQuery()
 
-	if (isLoading) return <div className='loader'></div>
+	if (isLoading) return <SkeletonQuizList />
 	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
 
 	return (
@@ -15,8 +16,8 @@ export default function Quizzes() {
 				{quizzes.map((quiz, i) => {
 					const createdAt = new Date(quiz.createdAt)
 					const isNew =
-						Date.now() - createdAt.getTime() < 7 * 24 * 60 * 60 * 1000 // 7 days
-					const isCompleted = quiz?.isCompleted // This could come from user progress API
+						Date.now() - createdAt.getTime() < 7 * 24 * 60 * 60 * 1000
+					const isCompleted = quiz?.isCompleted
 
 					return (
 						<Link
