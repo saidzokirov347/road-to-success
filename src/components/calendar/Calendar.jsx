@@ -68,15 +68,12 @@ export default function Calendar({
 									>
 										<span className='date-num'>{day.getDate()}</span>
 
-										{/* Display mark */}
 										{mark?.emoji && <div className='mark'>{mark.emoji}</div>}
 
-										{/* Display IELTS score if available */}
 										{mark?.ielts && (
 											<div className='ielts-result'>🎯 {mark.ielts}</div>
 										)}
 
-										{/* Today's buttons if unmarked */}
 										{isToday && !mark && onMark && (
 											<div className='mark-buttons'>
 												<button
@@ -100,7 +97,6 @@ export default function Calendar({
 											</div>
 										)}
 
-										{/* IELTS dropdown if today, ✅ is marked, and no IELTS score yet */}
 										{isToday &&
 											mark?.emoji === '✅' &&
 											!mark?.ielts &&
