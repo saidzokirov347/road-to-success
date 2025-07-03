@@ -30,23 +30,6 @@ export const updateUserExpByAmount = async (userId, changeAmount) => {
 	})
 }
 
-// NEW FUNCTION — call this to sync level with EXP
-export const syncUserLevelWithExp = async userId => {
-	const userRef = doc(db, 'users', userId)
-	const snap = await getDoc(userRef)
-	if (!snap.exists()) return
-
-	const data = snap.data()
-	const exp = data.exp || 0
-	const correctLevel = calculateLevel(exp)
-
-	if (data.level !== correctLevel) {
-		await updateDoc(userRef, {
-			level: correctLevel,
-		})
-	}
-}
-
 export const addExpToUser = (userId, exp) => updateUserExpByAmount(userId, exp)
 export const removeExpFromUser = (userId, exp) =>
 	updateUserExpByAmount(userId, -exp)
