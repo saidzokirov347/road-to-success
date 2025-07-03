@@ -35,7 +35,7 @@ export function Reading() {
 						<Calendar
 							marks={marks}
 							onMark={handleMark}
-							title='📅 Listening Practice History'
+							title='📅 Reading Practice History'
 						/>
 					)}
 				</div>
