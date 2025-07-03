@@ -83,7 +83,7 @@ export default function QuizPage() {
 	return (
 		<div className='quiz-page'>
 			<div className='quiz-header'>
-				<button className='home-btn' onClick={() => navigate('/quizzes')}>
+				<button className='home-btn' onClick={() => navigate('/vocabulary')}>
 					<FaArrowLeft />
 				</button>
 				<div className='quiz-title-wrapper'>
@@ -142,7 +142,10 @@ export default function QuizPage() {
 								: `⚠️ 50% of EXP lost: -${Math.floor(quiz.expOfQuiz / 2)}`}
 						</p>
 
-						<button className='return-btn' onClick={() => navigate('/quizzes')}>
+						<button
+							className='return-btn'
+							onClick={() => navigate('/vocabulary')}
+						>
 							← Back to Quizzes
 						</button>
 					</div>

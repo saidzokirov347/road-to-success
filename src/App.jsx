@@ -51,7 +51,7 @@ function App() {
 					element={<ProtectedRoute element={<PublicProfile />} />}
 				/>
 				<Route
-					path='/quizzes'
+					path='/vocabulary'
 					element={<ProtectedRoute element={<Quizzes />} />}
 				/>
 				<Route

@@ -16,7 +16,7 @@ export function Navbar() {
 	const isUserProfile =
 		location.pathname.startsWith('/user/') ||
 		location.pathname === '/profile' ||
-		location.pathname.includes('/quizzes/')
+		location.pathname.includes('/vocabulary/')
 
 	const isQuizPage = location.pathname.includes('/quiz/')
 
@@ -66,12 +66,6 @@ export function Navbar() {
 				<nav className='navbar-nav'>
 					<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
 						Home
-					</Link>
-					<Link
-						to='/quizzes'
-						className={location.pathname === '/quizzes' ? 'active' : ''}
-					>
-						Quizzes
 					</Link>
 					<Link
 						to='/vocabulary'

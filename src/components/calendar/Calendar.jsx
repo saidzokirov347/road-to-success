@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useAuth } from '../../context/authContext'
+import { addExpToUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
 import './Calendar.css'
 
@@ -13,6 +15,7 @@ export default function Calendar({
 	const rows = getCalendarRows(year, month)
 	const todayKey = getTodayKey()
 
+	const { currentUser } = useAuth()
 	const [showIELTSSelect, setShowIELTSSelect] = useState(false)
 
 	const handleEmojiClick = (emoji, dayKey) => {
@@ -20,9 +23,29 @@ export default function Calendar({
 		if (emoji === '✅') setShowIELTSSelect(true)
 	}
 
-	const handleIELTSChange = (e, dayKey) => {
-		onMark({ ielts: e.target.value }, dayKey)
+	const handleIELTSChange = async (e, dayKey) => {
+		const score = parseFloat(e.target.value)
+
+		const getExpFromIELTS = score => {
+			if (score < 5.5) return 0
+			if (score === 5.5) return 25
+			if (score === 6.0) return 30
+			if (score === 6.5) return 40
+			if (score === 7.0) return 50
+			if (score === 7.5) return 60
+			if (score === 8.0) return 100
+			if (score === 8.5) return 150
+			if (score === 9.0) return 300
+			return 0
+		}
+
+		onMark({ ielts: score }, dayKey)
 		setShowIELTSSelect(false)
+
+		if (currentUser?.uid) {
+			const exp = getExpFromIELTS(score)
+			if (exp > 0) await addExpToUser(currentUser.uid, exp)
+		}
 	}
 
 	return (
