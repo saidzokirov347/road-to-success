@@ -24,6 +24,7 @@ export default function AllUsersSidebar() {
 						name: data.name,
 						username: data.username,
 						profileImage: data.profileImage,
+						level: data.level,
 					})
 				})
 				setUsers(usersList)
@@ -62,7 +63,12 @@ export default function AllUsersSidebar() {
 										src={user.profileImage || '/men-avatar.jpg'}
 										alt={user.username || 'profile-image'}
 									/>
-									<span>{user.username}</span>
+									<div className='user-link-content'>
+										<span className='user-link-username'>{user.username}</span>
+										<span className='user-link-level'>
+											Lv.{user.level ?? '?'}
+										</span>
+									</div>
 								</Link>
 							</li>
 					  ))}

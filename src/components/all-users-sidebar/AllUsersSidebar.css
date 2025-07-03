@@ -117,3 +117,22 @@
 		opacity: 1;
 	}
 }
+
+.user-link-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.user-link-username {
+	font-weight: 500;
+	color: #111827;
+}
+
+.user-link-level {
+	color: #888;
+	font-size: 0.95em;
+	margin-left: 16px;
+	white-space: nowrap;
+}
