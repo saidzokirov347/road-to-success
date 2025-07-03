@@ -1,7 +1,10 @@
+// src/pages/PublicProfile.jsx
+
 import { useEffect, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
 import Calendar from '../../components/calendar/Calendar'
+import { syncUserLevelWithExp } from '../../firebase/exp' // ← import this
 import { getUserByUsername } from '../../firebase/user'
 import { getCorrectLevel, getExpRangeForLevel } from '../../utils/exp'
 
@@ -18,6 +21,9 @@ export default function PublicProfile() {
 			const data = await getUserByUsername(username)
 			if (data) {
 				setUser(data)
+
+				// 🚨 Optional: Only run this if user is viewing their OWN profile
+				await syncUserLevelWithExp(data.id)
 			} else {
 				setNotFound(true)
 			}
@@ -78,6 +84,7 @@ export default function PublicProfile() {
 					</div>
 				</div>
 			</div>
+
 			<div className='public-profile-calendar-container'>
 				<Calendar
 					title='📅 Listening Practice History'
