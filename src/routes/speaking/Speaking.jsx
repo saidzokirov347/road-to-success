@@ -1,6 +1,9 @@
+import Calendar from '../../components/calendar/Calendar'
+import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Speaking.css'
 
 export function Speaking() {
+	const { marks, loading, handleMark } = usePracticeMarks('speaking')
 	return (
 		<div className='container'>
 			<section id='speaking'>
@@ -66,6 +69,16 @@ export function Speaking() {
 					</em>
 				</p>
 			</section>
+
+			{loading ? (
+				<div className='loader'></div>
+			) : (
+				<Calendar
+					marks={marks}
+					onMark={handleMark}
+					title='📅 Speaking Practice History'
+				/>
+			)}
 		</div>
 	)
 }

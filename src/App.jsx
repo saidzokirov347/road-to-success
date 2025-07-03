@@ -13,7 +13,7 @@ import QuizPage from './routes/quiz-page/QuizPage'
 import Quizzes from './routes/quizzes/Quizzes'
 import { Reading } from './routes/reading/Reading'
 import { Speaking } from './routes/speaking/Speaking'
-import { Writing } from './routes/writing/Writing'
+import Writing from './routes/writing/Writing'
 
 function App() {
 	const hideNavbarPaths = ['/login', '/register']

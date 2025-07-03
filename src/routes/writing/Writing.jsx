@@ -1,64 +1,115 @@
 import './Writing.css'
 
-export function Writing() {
+export default function Writing() {
 	return (
-		<div className='container'>
-			<section id='writing'>
-				<h2>✍️ Writing</h2>
-				<p>
-					<strong>Goal:</strong> Improve structure, clarity, and task
-					fulfillment.
-				</p>
+		<div className='writing-drill'>
+			<h1>🧱 The 4-Pillar Daily Drill</h1>
+			<h2>
+				Your 45-minute, every-day routine to write like a Band 9 candidate.
+			</h2>
 
+			<p className='drill-note'>
+				⏱ <strong>Total Time:</strong> 45 minutes
+				<br />
+				You can split this into two sessions (e.g., 25 min + 20 min).
+			</p>
+
+			<div className='pillar'>
+				<h3>📝 Pillar 1: Plan with Precision (10 min)</h3>
 				<ul>
+					<li>Choose your prompt (Task 1 or Task 2).</li>
 					<li>
-						Use the structure:
-						<strong> Intro → Overview → Body 1 → Body 2</strong>
+						Underline every part of the question: what exactly are you asked to
+						do?
 					</li>
 					<li>
-						Task 1: Summarize trends, not every number. Use formal vocabulary
-					</li>
-					<li>
-						Task 2: Express clear opinions with
-						<strong> logical paragraphing</strong>
-					</li>
-					<li>Use Pauline Cullen books to target band 7+ criteria</li>
-					<li>Review model answers, especially for grammar and cohesion</li>
-					<li>
-						<em>Strategy tip:</em> Track your page in the PDF & your own notes
-						below
+						Write a mini-plan:
+						<ul>
+							<li>
+								<strong>Task 1:</strong> Paraphrase the prompt + list two main
+								features to compare.
+							</li>
+							<li>
+								<strong>Task 2:</strong> Paraphrase the prompt + state your
+								opinion + jot down two topic sentences.
+							</li>
+						</ul>
 					</li>
 				</ul>
+				<blockquote>
+					Goal: Know exactly what to write—no surprises, no missing parts.
+				</blockquote>
+			</div>
 
+			<div className='pillar'>
+				<h3>✂️ Pillar 2: Build One Perfect Paragraph (10 min)</h3>
 				<ul>
+					<li>From your plan, write one body paragraph only.</li>
 					<li>
-						<a
-							href='pauline_cullen_the_key_to_ielts_academic_writing_task_1_book.pdf'
-							download
-						>
-							📄 Download Task 1 PDF
-						</a>
+						Structure it clearly:
+						<ul>
+							<li>Topic sentence (your main idea).</li>
+							<li>Explanation/example (proof).</li>
+							<li>Mini-conclusion (tie it back).</li>
+						</ul>
 					</li>
 					<li>
-						<a
-							href='pauline_cullen_the_key_to_ielts_writing_task_2.pdf'
-							download
-						>
-							📄 Download Task 2 PDF
-						</a>
+						Use 3 linking words naturally (e.g., however, moreover, for
+						example).
 					</li>
 				</ul>
+				<blockquote>
+					Goal: Nail paragraph unity and flow—this is your building block.
+				</blockquote>
+			</div>
 
-				<div className='progress-box'>
-					<label htmlFor='writingProgress'>Track your progress:</label>
-					<textarea
-						id='writingProgress'
-						placeholder='e.g., Page 20: Bar Chart done...'
-					></textarea>
-					<button onClick={() => saveProgress()}>💾 Save</button>
-					<p id='savedMsg' className='saved-message'></p>
-				</div>
-			</section>
+			<div className='pillar'>
+				<h3>🚀 Pillar 3: Level-Up Your Vocabulary (10 min)</h3>
+				<ul>
+					<li>Pick 5 strong words/phrases from a Band 9 model.</li>
+					<li>Re-write your paragraph using these new words naturally.</li>
+				</ul>
+				<blockquote>
+					Goal: Move beyond “big,” “good,” and “important” to precise, academic
+					language.
+				</blockquote>
+			</div>
+
+			<div className='pillar'>
+				<h3>🔧 Pillar 4: Master Your Grammar (15 min)</h3>
+				<ul>
+					<li>Rewrite the paragraph to make it your “perfect” version.</li>
+					<li>
+						Include:
+						<ul>
+							<li>1 passive construction (e.g., “...is shown...”)</li>
+							<li>1 complex sentence (with relative clause or conditional)</li>
+						</ul>
+					</li>
+					<li>Proofread for every article, verb tense, and punctuation.</li>
+				</ul>
+				<blockquote>
+					Goal: Seamlessly mix simple and complex structures without a single
+					mistake.
+				</blockquote>
+			</div>
+
+			<div className='checklist'>
+				<h4>✔️ Daily Quick-Check</h4>
+				<ul>
+					<li>[ ] Did I cover all parts of the task?</li>
+					<li>[ ] Is my paragraph focused and well-linked?</li>
+					<li>[ ] Have I used 5 new words correctly?</li>
+					<li>[ ] Did I add passive voice and a complex sentence?</li>
+					<li>[ ] Is my final paragraph error-free?</li>
+				</ul>
+			</div>
+
+			<p className='final-note'>
+				🔄 Repeat this drill every day for 60 days and you’ll train your brain
+				to think, plan, and write like a Band 9 candidate—one perfect paragraph
+				at a time.
+			</p>
 		</div>
 	)
 }

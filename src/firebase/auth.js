@@ -12,8 +12,6 @@ import {
 	updateProfile,
 } from 'firebase/auth'
 
-const levelThresholds = [0, 1000, 2000, 3000, 4000, 5000]
-
 export const doSignInWithEmailAndPassword = async (email, password) => {
 	return signInWithEmailAndPassword(auth, email, password)
 }
@@ -37,6 +35,7 @@ export const doSignUpWithGoogle = async (bio = '') => {
 			level: 1,
 			listeningMarks: {},
 			readingMarks: {},
+			speakingMarks: {},
 		})
 	}
 
@@ -90,6 +89,7 @@ export const doCreateUserWithEmailAndPassword = async (
 		level: 1,
 		listeningMarks: {},
 		readingMarks: {},
+		speakingMarks: {},
 	})
 
 	return result

@@ -42,9 +42,9 @@ export function ProfileContent() {
 
 					<div className='rank-info'>
 						<div className='level-text'>Level {level}</div>
-						<div className='progress-bar'>
+						<div className='rank-progress-bar'>
 							<div
-								className={`progress-fill ${levelClass}`}
+								className={`rank-progress-fill ${levelClass}`}
 								style={{ width: `${progress}%` }}
 							></div>
 						</div>

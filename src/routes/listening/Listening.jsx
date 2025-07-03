@@ -68,7 +68,7 @@ export function Listening() {
 					<Calendar
 						marks={marks}
 						onMark={handleMark}
-						title='📅 Practice Calendar'
+						title='📅 Listening Practice History'
 					/>
 				)}
 			</section>

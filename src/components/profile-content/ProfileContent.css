@@ -146,7 +146,7 @@ label {
 	margin-bottom: 4px;
 }
 
-.progress-bar {
+.rank-progress-bar {
 	height: 10px;
 	width: 100%;
 	max-width: 530px;
@@ -156,29 +156,29 @@ label {
 	overflow: hidden;
 }
 
-.progress-fill {
+.rank-progress-fill {
 	height: 100%;
 	background-color: #34d399;
 	transition: width 0.3s ease;
 }
 
-.progress-fill.level-1 {
+.rank-progress-fill.level-1 {
 	background-color: #34d399;
 }
 
-.progress-fill.level-2 {
+.rank-progress-fill.level-2 {
 	background-color: #10b981;
 }
 
-.progress-fill.level-3 {
+.rank-progress-fill.level-3 {
 	background-color: #facc15;
 }
 
-.progress-fill.level-4 {
+.rank-progress-fill.level-4 {
 	background-color: #fb923c;
 }
 
-.progress-fill.level-5 {
+.rank-progress-fill.level-5 {
 	background-color: #991b1b;
 }
 

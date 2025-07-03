@@ -32,7 +32,11 @@ export function Reading() {
 					{loading ? (
 						<div className='loader'></div>
 					) : (
-						<Calendar marks={marks} onMark={handleMark} />
+						<Calendar
+							marks={marks}
+							onMark={handleMark}
+							title='📅 Listening Practice History'
+						/>
 					)}
 				</div>
 

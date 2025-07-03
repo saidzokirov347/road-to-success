@@ -29,16 +29,21 @@ export function usePracticeMarks(category = 'listening') {
 	}, [currentUser, category])
 
 	const handleMark = async (mark, dayKey) => {
-		if (!currentUser || marks[dayKey]) return
+		if (!currentUser) return
 
-		const updatedMarks = { ...marks, [dayKey]: mark }
+		const existing = marks[dayKey]
+		if (existing && (existing.emoji === '❌' || existing.ielts)) return
+
+		const newMark = existing ? { ...existing, ...mark } : mark
+
+		const updatedMarks = { ...marks, [dayKey]: newMark }
 		setMarks(updatedMarks)
 
 		await updateDoc(doc(db, 'users', currentUser.uid), {
 			[`${category}Marks`]: updatedMarks,
 		})
 
-		if (mark === '✅') {
+		if (!existing && mark.emoji === '✅') {
 			await addExpToUser(currentUser.uid, 25)
 		}
 	}
