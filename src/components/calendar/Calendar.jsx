@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/authContext'
-import { addExpToUser } from '../../firebase/exp'
+import { addExpToUser, removeExpFromUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
 import './Calendar.css'
 
@@ -47,6 +47,24 @@ export default function Calendar({
 			if (exp > 0) await addExpToUser(currentUser.uid, exp)
 		}
 	}
+
+	// Penalty for not marking yesterday with '✅'
+	useEffect(() => {
+		if (!currentUser?.uid) return
+
+		const yesterday = new Date()
+		yesterday.setDate(yesterday.getDate() - 1)
+		const yesterdayKey = yesterday.toLocaleDateString('en-CA')
+		const mark = marks[yesterdayKey]
+
+		const penaltyKey = `exp-penalty-${currentUser.uid}-${yesterdayKey}`
+		const alreadyPenalized = localStorage.getItem(penaltyKey)
+
+		if (!alreadyPenalized && (!mark || mark.emoji !== '✅')) {
+			removeExpFromUser(currentUser.uid, 50)
+			localStorage.setItem(penaltyKey, '1')
+		}
+	}, [marks, currentUser])
 
 	return (
 		<div className='calendar-section'>

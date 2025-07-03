@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
-import SkeletonQuizList from '../../components/skeleton/quiz-list-skeleton/SkeletonQuizList'
+import QuizListSkeleton from '../../components/skeleton/quiz-list-skeleton/QuizListSkeleton'
 import { useGetQuizzesQuery } from '../../store/api/api'
 import './Quizzes.css'
 
 export default function Quizzes() {
 	const { data: quizzes = [], isLoading, isError } = useGetQuizzesQuery()
 
-	if (isLoading) return <SkeletonQuizList />
+	if (isLoading) return <QuizListSkeleton />
 	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
 
 	return (
