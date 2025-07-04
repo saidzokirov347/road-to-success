@@ -64,6 +64,45 @@ export function Speaking() {
 				transforms practice into performance.
 			</p>
 
+			<div className='recommended-channels'>
+				<h4>📺 Fluency Boost – Recommended Listening</h4>
+				<p>
+					These channels are carefully selected to help you improve fluency,
+					pronunciation, and confidence. Don’t just watch—
+					<strong>pause, repeat, and practice aloud</strong>. Your voice is your
+					strongest skill in IELTS. Train it daily.
+				</p>
+				<ul>
+					<li>
+						<a
+							href='https://youtube.com/@thediaryofaceo?si=52SjG8p2i6Cgixih'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							📌 The Diary of a CEO – Authentic, emotional English
+						</a>
+					</li>
+					<li>
+						<a
+							href='https://youtube.com/@chriswillx?si=hQk3aRKP_Su__HEh'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							📌 Chris Williamson – Thought-provoking, fluent discussion
+						</a>
+					</li>
+					<li>
+						<a
+							href='https://youtube.com/@jayshettypodcast.?si=fX_8KP1P81Y23GaT'
+							target='_blank'
+							rel='noopener noreferrer'
+						>
+							📌 Jay Shetty Podcast – Calm, clear, connected speech
+						</a>
+					</li>
+				</ul>
+			</div>
+
 			{loading ? (
 				<div className='loader'></div>
 			) : (
