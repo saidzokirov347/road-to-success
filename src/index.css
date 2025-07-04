@@ -114,3 +114,72 @@ textarea {
 		font-size: 1rem;
 	} */
 }
+
+/* Mobile (up to 600px) */
+@media screen and (max-width: 600px) {
+	.container {
+		padding: 20px;
+	}
+
+	.writing-drill,
+	.reading-drill,
+	.listening-drill,
+	.speaking-drill {
+		padding: 20px;
+	}
+
+	.writing-drill h1,
+	.reading-drill h1,
+	.listening-drill h1,
+	.speaking-drill h1 {
+		font-size: 24px;
+	}
+
+	.writing-drill h2,
+	.reading-drill h2,
+	.listening-drill h2,
+	.speaking-drill h2 {
+		font-size: 16px;
+	}
+
+	.pillar {
+		padding: 15px;
+	}
+
+	.pillar h3 {
+		font-size: 18px;
+	}
+
+	.final-note,
+	.drill-note {
+		font-size: 14px;
+	}
+}
+
+/* Tablet (601px to 900px) */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+	.container {
+		padding: 30px;
+	}
+
+	.writing-drill h1,
+	.reading-drill h1,
+	.listening-drill h1,
+	.speaking-drill h1 {
+		font-size: 28px;
+	}
+
+	.writing-drill h2,
+	.reading-drill h2,
+	.listening-drill h2,
+	.speaking-drill h2 {
+		font-size: 18px;
+	}
+}
+
+/* Large desktops (over 1200px) */
+@media screen and (min-width: 1200px) {
+	.container {
+		max-width: 1000px;
+	}
+}
