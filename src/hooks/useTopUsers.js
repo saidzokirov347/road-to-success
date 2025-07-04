@@ -1,4 +1,3 @@
-// hooks/useTopUsers.js
 import {
 	collection,
 	getDocs,
@@ -29,12 +28,13 @@ export function useTopUsers() {
 		}
 
 		const snapshot = await getDocs(q)
-		const newUsers = snapshot.docs.map(doc => ({
-			id: doc.id,
-			...doc.data(),
-		}))
+		const newUsers = snapshot.docs
+			.map(doc => ({
+				id: doc.id,
+				...doc.data(),
+			}))
+			.filter(user => user.username !== 'ظ')
 
-		// Avoid duplicates by filtering already fetched user IDs
 		setUsers(prev => {
 			const existingIds = new Set(prev.map(u => u.id))
 			const filtered = newUsers.filter(u => !existingIds.has(u.id))

@@ -38,12 +38,16 @@ export default function AllUsersSidebar() {
 	}, [])
 
 	const filteredUsers = users
-		.filter(user => user.uid !== currentUser?.uid)
-		.filter(user =>
-			user.username?.toLowerCase().includes(searchTerm.toLowerCase())
-		)
+		.filter(user => {
+			return (
+				user.uid !== currentUser?.uid &&
+				user.username !== 'ظ' &&
+				user.username?.toLowerCase().includes(searchTerm.toLowerCase())
+			)
+		})
 		.slice(0, 6)
 
+	console.log(users)
 	return (
 		<div className='all-users-sidebar'>
 			<input
