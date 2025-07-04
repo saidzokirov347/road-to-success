@@ -1,4 +1,4 @@
-import { FaGithub, FaGoogle } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 
 import { useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
@@ -54,10 +54,6 @@ function Login() {
 					<button className='form-social-button' onClick={onGoogleSignIn}>
 						<FaGoogle />
 						<span>Sign in with Google</span>
-					</button>
-					<button className='form-social-button'>
-						<FaGithub />
-						<span>Sign in with GitHub</span>
 					</button>
 				</div>
 				<hr />

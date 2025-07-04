@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaGithub, FaGoogle } from 'react-icons/fa'
+import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../context/authContext'
 import {
@@ -62,10 +62,6 @@ function Register() {
 					<button className='form-social-button' onClick={onGoogleSignUp}>
 						<FaGoogle />
 						<span>Register with Google</span>
-					</button>
-					<button className='form-social-button'>
-						<FaGithub />
-						<span>Register with GitHub</span>
 					</button>
 				</div>
 				<hr />
