@@ -179,7 +179,27 @@ label {
 }
 
 .rank-progress-fill.level-5 {
+	background-color: #ef4444;
+}
+
+.rank-progress-fill.level-6 {
 	background-color: #991b1b;
+}
+
+.rank-progress-fill.level-7 {
+	background-color: #8b5cf6;
+}
+
+.rank-progress-fill.level-8 {
+	background-color: #7c3aed;
+}
+
+.rank-progress-fill.level-9 {
+	background-color: #2563eb;
+}
+
+.rank-progress-fill.level-10 {
+	background-color: #fbbf24;
 }
 
 @keyframes rotation {
