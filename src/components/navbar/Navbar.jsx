@@ -117,12 +117,10 @@ export function Navbar() {
 				</div>
 			</div>
 
-			{/* Desktop nav */}
 			{!isUserProfile && (
 				<nav className='navbar-nav desktop-only'>{navLinks}</nav>
 			)}
 
-			{/* Mobile Drawer */}
 			<div
 				className={`navbar-overlay ${navOpen ? 'open' : ''}`}
 				onClick={() => setNavOpen(false)}

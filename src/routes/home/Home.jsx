@@ -1,15 +1,55 @@
+import { useAuth } from '../../context/authContext'
+import { useTopUsers } from '../../hooks/useTopUsers'
 import './Home.css'
 
 export function Home() {
+	const { currentUser } = useAuth()
+	const { users, hasMore, fetchUsers } = useTopUsers()
+
 	return (
 		<div className='container home'>
-			<section>
-				<h2>📘 Welcome to Your IELTS Strategy Center</h2>
-				<p>
-					Master each section of the IELTS exam with guided strategies, daily
-					practice, and expert tips. Whether you're just starting or aiming for
-					Band 8+, this is your home for success.
-				</p>
+			<section className='leaderboard-section'>
+				<h2>🏆 Top Learners</h2>
+				<div className='leaderboard-card'>
+					{users.map((user, index) => {
+						const isCurrentUser = currentUser?.uid === user.id
+
+						return (
+							<div key={user.id} className='leaderboard-user'>
+								<div className='leaderboard-left'>
+									<img
+										src={user.profileImage || '/men-avatar.jpg'}
+										alt={user.name}
+										className='leaderboard-avatar'
+									/>
+									<div className='leaderboard-name-container'>
+										<span className='leaderboard-name'>{user.name}</span>
+										{isCurrentUser && <span className='you-label'>(you)</span>}
+									</div>
+								</div>
+								<div
+									className={`leaderboard-exp ${
+										index === 0
+											? 'gold'
+											: index === 1
+											? 'silver'
+											: index === 2
+											? 'bronze'
+											: 'gray'
+									}`}
+								>
+									{user.exp || 0} EXP
+								</div>
+							</div>
+						)
+					})}
+
+					{hasMore && (
+						<button className='see-more-btn' onClick={() => fetchUsers(15)}>
+							See Others
+						</button>
+					)}
+				</div>
 			</section>
 
 			<section>
