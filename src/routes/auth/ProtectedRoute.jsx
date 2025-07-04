@@ -17,6 +17,10 @@ function ProtectedRoute({
 		return <Navigate to='/profile' replace />
 	}
 
+	if (currentUser && !userData?.username) {
+		return <Navigate to='/profile' />
+	}
+
 	return element
 }
 
