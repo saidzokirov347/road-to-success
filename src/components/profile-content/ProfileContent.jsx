@@ -77,7 +77,7 @@ export function ProfileContent() {
 						className={`profile-input ${usernameError ? 'input-warning' : ''}`}
 						value={username}
 						onChange={e => {
-							const value = e.target.value.toLowerCase()
+							const value = e.target.value.toLowerCase().replace(/\s+/g, '')
 							setUsername(value)
 						}}
 						placeholder='Username'
