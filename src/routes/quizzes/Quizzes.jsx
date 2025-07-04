@@ -8,6 +8,7 @@ export default function Quizzes() {
 
 	if (isLoading) return <QuizListSkeleton />
 	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
+	if (!quizzes.length) return <p className='error'>To Be Updated</p>
 
 	return (
 		<div className='quiz-page container'>

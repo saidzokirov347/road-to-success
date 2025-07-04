@@ -17,6 +17,19 @@ export default function Calendar({
 
 	const { currentUser } = useAuth()
 	const [showIELTSSelect, setShowIELTSSelect] = useState(false)
+	const [forceIELTSSelect, setForceIELTSSelect] = useState(false)
+
+	useEffect(() => {
+		if (!currentUser?.uid) return
+
+		const todayKey = getTodayKey()
+		const todayMark = marks[todayKey]
+		if (todayMark?.emoji === '✅' && !todayMark?.ielts) {
+			setForceIELTSSelect(true)
+		} else {
+			setForceIELTSSelect(false)
+		}
+	}, [marks, currentUser])
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		onMark({ emoji }, dayKey)
@@ -141,7 +154,7 @@ export default function Calendar({
 										{isToday &&
 											mark?.emoji === '✅' &&
 											!mark?.ielts &&
-											showIELTSSelect && (
+											(showIELTSSelect || forceIELTSSelect) && (
 												<select
 													className='ielts-select'
 													onChange={e => handleIELTSChange(e, dayKey)}

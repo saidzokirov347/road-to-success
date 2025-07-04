@@ -1,8 +1,11 @@
+import Calendar from '../../components/calendar/Calendar'
+import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Writing.css'
 
 export default function Writing() {
+	const { marks, loading, handleMark } = usePracticeMarks('writing')
 	return (
-		<div className='writing-drill'>
+		<div className='writing-drill container'>
 			<h1>🧱 The 4-Pillar Daily Drill</h1>
 			<h2>
 				Your 45-minute, every-day routine to write like a Band 9 candidate.
@@ -110,6 +113,16 @@ export default function Writing() {
 				to think, plan, and write like a Band 9 candidate—one perfect paragraph
 				at a time.
 			</p>
+
+			{loading ? (
+				<div className='loader'></div>
+			) : (
+				<Calendar
+					marks={marks}
+					onMark={handleMark}
+					title='📅 Writing Practice History'
+				/>
+			)}
 		</div>
 	)
 }
