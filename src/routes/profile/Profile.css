@@ -2,7 +2,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
-	gap: 40px;
 	padding: 60px 20px;
 	min-height: 100vh;
 	background-color: #f1f5f9;
@@ -13,27 +12,10 @@
 	max-width: 650px;
 }
 
-.sidebar {
-	width: 300px;
-}
-
 @media (max-width: 768px) {
 	.profile-page {
 		flex-direction: column;
 		align-items: stretch;
 		padding: 40px 16px;
-		gap: 24px;
-	}
-
-	.profile-content,
-	.sidebar {
-		width: 100%;
-		max-width: 100%;
-	}
-
-	.all-users-sidebar {
-		max-width: 100%;
-		width: 100%;
-		padding: 16px;
 	}
 }
