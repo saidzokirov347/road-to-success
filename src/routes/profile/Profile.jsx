@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { ProfileContent } from '../../components/profile-content/ProfileContent'
 import './Profile.css'
 
