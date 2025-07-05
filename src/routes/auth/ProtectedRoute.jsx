@@ -9,7 +9,7 @@ function ProtectedRoute({
 	redirectTo = '/login',
 	requireAuth = true,
 }) {
-	const { currentUser, loading: authLoading } = useAuth()
+	const { currentUser, loading: authLoading, usernameUpdatedAt } = useAuth()
 	const [profileLoading, setProfileLoading] = useState(true)
 	const [hasUsername, setHasUsername] = useState(true)
 	const location = useLocation()
@@ -29,7 +29,7 @@ function ProtectedRoute({
 
 		if (currentUser) checkUsername()
 		else setProfileLoading(false)
-	}, [currentUser])
+	}, [currentUser, usernameUpdatedAt]) // 👈 observe usernameUpdatedAt
 
 	if (authLoading || profileLoading) return null
 

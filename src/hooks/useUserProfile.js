@@ -1,4 +1,3 @@
-// hooks/useUserProfile.js
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useRef, useState } from 'react'
 import {
@@ -12,7 +11,7 @@ import { getExpRangeForLevel } from '../utils/exp'
 import { showToast } from '../utils/toastHelper'
 
 export function useUserProfile() {
-	const { currentUser } = useAuth()
+	const { currentUser, triggerUsernameUpdate } = useAuth()
 
 	const [bio, setBio] = useState('')
 	const [name, setName] = useState('')
@@ -105,6 +104,9 @@ export function useUserProfile() {
 				profileImage,
 			})
 			setUsernameIsNew(false)
+
+			triggerUsernameUpdate() // ✅ <-- Added here
+
 			showToast.successProfileUpdate()
 		} catch (err) {
 			console.error('Error saving profile:', err)

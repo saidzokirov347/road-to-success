@@ -13,11 +13,15 @@ export function AuthProvider({ children }) {
 	const [userLoggedIn, setUserLoggedIn] = useState(false)
 	const [loading, setLoading] = useState(true)
 
+	// 👇 ADD THIS
+	const [usernameUpdatedAt, setUsernameUpdatedAt] = useState(Date.now())
+	const triggerUsernameUpdate = () => setUsernameUpdatedAt(Date.now())
+
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, initializeUser)
-
 		return unsubscribe
 	}, [])
+
 	async function initializeUser(user) {
 		if (user) {
 			setCurrentUser({ ...user })
@@ -33,6 +37,8 @@ export function AuthProvider({ children }) {
 		currentUser,
 		userLoggedIn,
 		loading,
+		usernameUpdatedAt, // 👈 expose this
+		triggerUsernameUpdate, // 👈 expose this
 	}
 
 	return (
