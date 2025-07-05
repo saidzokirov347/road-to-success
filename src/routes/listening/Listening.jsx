@@ -98,6 +98,14 @@ export function Listening() {
 					title='📅 Listening Practice History'
 				/>
 			)}
+			<a
+				href='https://mini-ielts.com/listening'
+				className='button reading-link'
+				target='_blank'
+				rel='noopener noreferrer'
+			>
+				🌐 Practice on Mini IELTS
+			</a>
 		</div>
 	)
 }
