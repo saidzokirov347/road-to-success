@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
 import { useTopUsers } from '../../hooks/useTopUsers'
 import './Leaderboard.css'
@@ -14,7 +15,11 @@ export function Leaderboard() {
 					const isCurrentUser = currentUser?.uid === user.id
 
 					return (
-						<div key={user.id} className='leaderboard-user'>
+						<Link
+							to={`/user/${user.username}`}
+							key={user.id}
+							className='leaderboard-user'
+						>
 							<div className='leaderboard-left'>
 								<img
 									src={user.profileImage || '/men-avatar.jpg'}
@@ -41,7 +46,7 @@ export function Leaderboard() {
 									</div>
 								</div>
 							</div>
-						</div>
+						</Link>
 					)
 				})}
 

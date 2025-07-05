@@ -4,6 +4,10 @@ import './Speaking.css'
 
 export function Speaking() {
 	const { marks, loading, handleMark } = usePracticeMarks('speaking')
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
 	return (
 		<div className='speaking-drill container'>
 			<h1>🗣️ IELTS Speaking – The Dual-Voice Approach</h1>

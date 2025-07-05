@@ -5,6 +5,10 @@ import './Listening.css'
 export function Listening() {
 	const { marks, loading, handleMark } = usePracticeMarks('listening')
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	return (
 		<div className='listening-drill container'>
 			<h1>🎧 The Fourfold Path to Mastering IELTS Listening</h1>

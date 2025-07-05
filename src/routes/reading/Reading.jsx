@@ -6,6 +6,10 @@ import './Reading.css'
 export function Reading() {
 	const { marks, loading, handleMark } = usePracticeMarks('reading')
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	return (
 		<div className='reading-drill container'>
 			<h1>📘 The Fourfold Path to IELTS Reading Mastery</h1>

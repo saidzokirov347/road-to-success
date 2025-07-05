@@ -47,7 +47,6 @@ export default function AllUsersSidebar() {
 		})
 		.slice(0, 6)
 
-	console.log(users)
 	return (
 		<div className='all-users-sidebar'>
 			<input

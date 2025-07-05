@@ -4,6 +4,10 @@ import './Writing.css'
 
 export default function Writing() {
 	const { marks, loading, handleMark } = usePracticeMarks('writing')
+
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
 	return (
 		<div className='writing-drill container'>
 			<h1>🧱 The 4-Pillar Daily Drill</h1>

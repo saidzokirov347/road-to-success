@@ -10,6 +10,10 @@ export default function Quizzes() {
 	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
 	if (!quizzes.length) return <p className='error'>To Be Updated</p>
 
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
 	return (
 		<div className='quiz-page container'>
 			<h2 className='quiz-page-title'>📚 Available Quizzes</h2>

@@ -14,6 +14,10 @@ export default function PublicProfile() {
 	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [])
+
+	useEffect(() => {
 		const fetchUser = async () => {
 			const data = await getUserByUsername(username)
 			if (data) {
