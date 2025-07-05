@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import './CalendarEditModal.css'
 
 export default function CalendarEditModal({
@@ -7,13 +8,21 @@ export default function CalendarEditModal({
 	onMark,
 	handleIELTSChange,
 }) {
+	const [selectedEmoji, setSelectedEmoji] = useState(mark?.emoji || null)
+	const [showIELTSSelect, setShowIELTSSelect] = useState(false)
+	const [selectedScore, setSelectedScore] = useState(mark?.ielts || '')
+
 	const handleEmojiClick = emoji => {
-		onMark({ emoji, ielts: null }, dayKey)
-		if (emoji === '✅') {
-			// Keep modal open for IELTS selection
-		} else {
-			onClose()
-		}
+		setSelectedEmoji(emoji)
+		setShowIELTSSelect(true) // Always show select after any emoji
+	}
+
+	const handleSelectChange = e => {
+		const score = parseFloat(e.target.value)
+		setSelectedScore(score)
+		handleIELTSChange(e, dayKey)
+		onMark({ emoji: selectedEmoji, ielts: score }, dayKey)
+		onClose()
 	}
 
 	return (
@@ -37,14 +46,11 @@ export default function CalendarEditModal({
 					</button>
 				</div>
 
-				{mark?.emoji === '✅' && (
+				{showIELTSSelect && (
 					<select
 						className='ielts-select'
-						defaultValue={mark?.ielts || ''}
-						onChange={e => {
-							handleIELTSChange(e, dayKey)
-							onClose()
-						}}
+						value={selectedScore}
+						onChange={handleSelectChange}
 					>
 						<option value='' disabled>
 							Select IELTS result

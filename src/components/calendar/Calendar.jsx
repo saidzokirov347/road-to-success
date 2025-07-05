@@ -17,15 +17,13 @@ export default function Calendar({
 	const todayKey = getTodayKey()
 
 	const { currentUser } = useAuth()
-	const [showIELTSSelect, setShowIELTSSelect] = useState(false)
-	const [forceIELTSSelect, setForceIELTSSelect] = useState(false)
 	const [modalData, setModalData] = useState(null)
 
+	const [forceIELTSSelect, setForceIELTSSelect] = useState(false)
 	useEffect(() => {
 		if (!currentUser?.uid) return
-
 		const todayMark = marks[todayKey]
-		if (todayMark?.emoji === '✅' && !todayMark?.ielts) {
+		if (todayMark?.emoji && !todayMark?.ielts) {
 			setForceIELTSSelect(true)
 		} else {
 			setForceIELTSSelect(false)
@@ -34,12 +32,10 @@ export default function Calendar({
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		onMark({ emoji }, dayKey)
-		if (emoji === '✅') setShowIELTSSelect(true)
 	}
 
 	const handleIELTSChange = async (e, dayKey) => {
 		const score = parseFloat(e.target.value)
-
 		const getExpFromIELTS = score => {
 			if (score < 5.5) return 0
 			if (score === 5.5) return 25
@@ -54,12 +50,11 @@ export default function Calendar({
 		}
 
 		onMark({ ielts: score }, dayKey)
-		setShowIELTSSelect(false)
 
 		if (currentUser?.uid) {
 			const exp = getExpFromIELTS(score)
 			if (exp > 0) {
-				// Optional: call addExpToUser here if needed
+				// Optional: addExpToUser(currentUser.uid, exp)
 			}
 		}
 	}
@@ -112,7 +107,7 @@ export default function Calendar({
 									} else if (isToday && onMark) {
 										const confirm = window.confirm('✅ for Yes, ❌ for No?')
 										onMark({ emoji: confirm ? '✅' : '❌' }, dayKey)
-										if (confirm) setShowIELTSSelect(true)
+										setShowIELTSSelect(true)
 									}
 								}
 
@@ -153,28 +148,6 @@ export default function Calendar({
 												</button>
 											</div>
 										)}
-
-										{isToday &&
-											mark?.emoji === '✅' &&
-											!mark?.ielts &&
-											(showIELTSSelect || forceIELTSSelect) && (
-												<select
-													className='ielts-select'
-													onChange={e => handleIELTSChange(e, dayKey)}
-													defaultValue=''
-												>
-													<option value='' disabled>
-														Select IELTS result
-													</option>
-													{Array.from({ length: 11 }, (_, i) =>
-														(4 + i * 0.5).toFixed(1)
-													).map(score => (
-														<option key={score} value={score}>
-															{score}
-														</option>
-													))}
-												</select>
-											)}
 									</td>
 								)
 							})}

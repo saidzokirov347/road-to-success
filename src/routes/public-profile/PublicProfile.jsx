@@ -49,6 +49,7 @@ export default function PublicProfile() {
 	const listeningMarks = user.listeningMarks || {}
 	const readingMarks = user.readingMarks || {}
 	const speakingMarks = user.speakingMarks || {}
+	const writingMarks = user.writingMarks || {}
 
 	return (
 		<div className='public-profile-wrapper'>
@@ -93,6 +94,9 @@ export default function PublicProfile() {
 			</div>
 			<div className='public-profile-calendar-container'>
 				<Calendar title='📅 Speaking Practice History' marks={speakingMarks} />
+			</div>
+			<div className='public-profile-calendar-container'>
+				<Calendar title='📅 Writing Practice History' marks={writingMarks} />
 			</div>
 		</div>
 	)
