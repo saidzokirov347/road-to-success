@@ -9,6 +9,7 @@ export default function Calendar({
 	marks = {},
 	title = '📅 Calendar',
 	onMark,
+	isEditable = true,
 }) {
 	const today = new Date()
 	const year = today.getFullYear()
@@ -19,19 +20,27 @@ export default function Calendar({
 	const { currentUser } = useAuth()
 	const [modalData, setModalData] = useState(null)
 
-	const [forceIELTSSelect, setForceIELTSSelect] = useState(false)
 	useEffect(() => {
-		if (!currentUser?.uid) return
-		const todayMark = marks[todayKey]
-		if (todayMark?.emoji && !todayMark?.ielts) {
-			setForceIELTSSelect(true)
-		} else {
-			setForceIELTSSelect(false)
+		if (!currentUser?.uid || !isEditable) return
+
+		const yesterday = new Date()
+		yesterday.setDate(yesterday.getDate() - 1)
+		const yesterdayKey = yesterday.toLocaleDateString('en-CA')
+		const mark = marks[yesterdayKey]
+
+		const penaltyKey = `exp-penalty-${currentUser.uid}-${yesterdayKey}`
+		const alreadyPenalized = localStorage.getItem(penaltyKey)
+
+		if (!alreadyPenalized && (!mark || mark.emoji !== '✅')) {
+			removeExpFromUser(currentUser.uid, 50)
+			localStorage.setItem(penaltyKey, '1')
 		}
-	}, [marks, currentUser])
+	}, [marks, currentUser, isEditable])
 
 	const handleEmojiClick = (emoji, dayKey) => {
+		if (!isEditable) return
 		onMark({ emoji }, dayKey)
+		setModalData({ dayKey, mark: { emoji } })
 	}
 
 	const handleIELTSChange = async (e, dayKey) => {
@@ -51,30 +60,13 @@ export default function Calendar({
 
 		onMark({ ielts: score }, dayKey)
 
-		if (currentUser?.uid) {
+		if (currentUser?.uid && isEditable) {
 			const exp = getExpFromIELTS(score)
 			if (exp > 0) {
 				// Optional: addExpToUser(currentUser.uid, exp)
 			}
 		}
 	}
-
-	useEffect(() => {
-		if (!currentUser?.uid) return
-
-		const yesterday = new Date()
-		yesterday.setDate(yesterday.getDate() - 1)
-		const yesterdayKey = yesterday.toLocaleDateString('en-CA')
-		const mark = marks[yesterdayKey]
-
-		const penaltyKey = `exp-penalty-${currentUser.uid}-${yesterdayKey}`
-		const alreadyPenalized = localStorage.getItem(penaltyKey)
-
-		if (!alreadyPenalized && (!mark || mark.emoji !== '✅')) {
-			removeExpFromUser(currentUser.uid, 50)
-			localStorage.setItem(penaltyKey, '1')
-		}
-	}, [marks, currentUser])
 
 	return (
 		<div className='calendar-section'>
@@ -102,12 +94,9 @@ export default function Calendar({
 								const isToday = dayKey === todayKey
 
 								const handleCellClick = () => {
+									if (!isEditable) return
 									if (mark) {
 										setModalData({ dayKey, mark })
-									} else if (isToday && onMark) {
-										const confirm = window.confirm('✅ for Yes, ❌ for No?')
-										onMark({ emoji: confirm ? '✅' : '❌' }, dayKey)
-										setShowIELTSSelect(true)
 									}
 								}
 
@@ -126,7 +115,7 @@ export default function Calendar({
 											<div className='ielts-result'>🎯 {mark.ielts}</div>
 										)}
 
-										{isToday && !mark && (
+										{isToday && !mark && isEditable && (
 											<div className='mark-buttons'>
 												<button
 													onClick={e => {
@@ -156,7 +145,7 @@ export default function Calendar({
 				</tbody>
 			</table>
 
-			{modalData && (
+			{isEditable && modalData && (
 				<CalendarEditModal
 					dayKey={modalData.dayKey}
 					mark={modalData.mark}

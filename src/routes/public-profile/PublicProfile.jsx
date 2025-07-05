@@ -87,16 +87,29 @@ export default function PublicProfile() {
 				<Calendar
 					title='📅 Listening Practice History'
 					marks={listeningMarks}
+					isEditable={false}
 				/>
 			</div>
 			<div className='public-profile-calendar-container'>
-				<Calendar title='📅 Reading Practice History' marks={readingMarks} />
+				<Calendar
+					title='📅 Reading Practice History'
+					marks={readingMarks}
+					isEditable={false}
+				/>
 			</div>
 			<div className='public-profile-calendar-container'>
-				<Calendar title='📅 Speaking Practice History' marks={speakingMarks} />
+				<Calendar
+					title='📅 Speaking Practice History'
+					marks={speakingMarks}
+					isEditable={false}
+				/>
 			</div>
 			<div className='public-profile-calendar-container'>
-				<Calendar title='📅 Writing Practice History' marks={writingMarks} />
+				<Calendar
+					title='📅 Writing Practice History'
+					marks={writingMarks}
+					isEditable={false}
+				/>
 			</div>
 		</div>
 	)
