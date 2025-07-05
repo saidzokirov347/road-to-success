@@ -105,7 +105,7 @@ export default function Calendar({
 								const isToday = dayKey === todayKey
 
 								const handleCellClick = () => {
-									if (isToday && !mark && onMark) {
+									if (isToday && onMark) {
 										const confirm = window.confirm('✅ for Yes, ❌ for No?')
 										onMark({ emoji: confirm ? '✅' : '❌' }, dayKey)
 										if (confirm) setShowIELTSSelect(true)

@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import QuizListSkeleton from '../../components/skeleton/quiz-list-skeleton/QuizListSkeleton'
 import { useGetQuizzesQuery } from '../../store/api/api'
@@ -6,13 +7,13 @@ import './Quizzes.css'
 export default function Quizzes() {
 	const { data: quizzes = [], isLoading, isError } = useGetQuizzesQuery()
 
-	if (isLoading) return <QuizListSkeleton />
-	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
-	if (!quizzes.length) return <p className='error'>To Be Updated</p>
-
 	useEffect(() => {
 		window.scrollTo(0, 0)
 	}, [])
+
+	if (isLoading) return <QuizListSkeleton />
+	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
+	if (!quizzes.length) return <p className='error'>To Be Updated</p>
 
 	return (
 		<div className='quiz-page container'>
