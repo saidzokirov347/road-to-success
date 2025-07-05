@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/authContext'
-import { addExpToUser, removeExpFromUser } from '../../firebase/exp'
+import { removeExpFromUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
+import CalendarEditModal from '../calendar-edit-modal/CalendarEditModal'
 import './Calendar.css'
 
 export default function Calendar({
@@ -18,11 +19,11 @@ export default function Calendar({
 	const { currentUser } = useAuth()
 	const [showIELTSSelect, setShowIELTSSelect] = useState(false)
 	const [forceIELTSSelect, setForceIELTSSelect] = useState(false)
+	const [modalData, setModalData] = useState(null)
 
 	useEffect(() => {
 		if (!currentUser?.uid) return
 
-		const todayKey = getTodayKey()
 		const todayMark = marks[todayKey]
 		if (todayMark?.emoji === '✅' && !todayMark?.ielts) {
 			setForceIELTSSelect(true)
@@ -57,11 +58,12 @@ export default function Calendar({
 
 		if (currentUser?.uid) {
 			const exp = getExpFromIELTS(score)
-			if (exp > 0) await addExpToUser(currentUser.uid, exp)
+			if (exp > 0) {
+				// Optional: call addExpToUser here if needed
+			}
 		}
 	}
 
-	// Penalty for not marking yesterday with '✅'
 	useEffect(() => {
 		if (!currentUser?.uid) return
 
@@ -105,7 +107,9 @@ export default function Calendar({
 								const isToday = dayKey === todayKey
 
 								const handleCellClick = () => {
-									if (isToday && onMark) {
+									if (mark) {
+										setModalData({ dayKey, mark })
+									} else if (isToday && onMark) {
 										const confirm = window.confirm('✅ for Yes, ❌ for No?')
 										onMark({ emoji: confirm ? '✅' : '❌' }, dayKey)
 										if (confirm) setShowIELTSSelect(true)
@@ -123,12 +127,11 @@ export default function Calendar({
 										<span className='date-num'>{day.getDate()}</span>
 
 										{mark?.emoji && <div className='mark'>{mark.emoji}</div>}
-
 										{mark?.ielts && (
 											<div className='ielts-result'>🎯 {mark.ielts}</div>
 										)}
 
-										{isToday && !mark && onMark && (
+										{isToday && !mark && (
 											<div className='mark-buttons'>
 												<button
 													onClick={e => {
@@ -179,6 +182,16 @@ export default function Calendar({
 					))}
 				</tbody>
 			</table>
+
+			{modalData && (
+				<CalendarEditModal
+					dayKey={modalData.dayKey}
+					mark={modalData.mark}
+					onClose={() => setModalData(null)}
+					onMark={onMark}
+					handleIELTSChange={handleIELTSChange}
+				/>
+			)}
 		</div>
 	)
 }

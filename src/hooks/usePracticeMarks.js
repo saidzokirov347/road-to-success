@@ -32,8 +32,6 @@ export function usePracticeMarks(category = 'listening') {
 		if (!currentUser) return
 
 		const existing = marks[dayKey]
-		if (existing && (existing.emoji === '❌' || existing.ielts)) return
-
 		const newMark = existing ? { ...existing, ...mark } : mark
 
 		const updatedMarks = { ...marks, [dayKey]: newMark }
@@ -43,6 +41,7 @@ export function usePracticeMarks(category = 'listening') {
 			[`${category}Marks`]: updatedMarks,
 		})
 
+		// Only add EXP the first time user checks '✅'
 		if (!existing && mark.emoji === '✅') {
 			await addExpToUser(currentUser.uid, 25)
 		}
