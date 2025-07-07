@@ -14,7 +14,7 @@ export default function MaintenancePage() {
 					Sorry for the inconvenience. We're performing some maintenance at the
 					moment. We'll be back online shortly!
 				</p>
-				<p>— The Team</p>
+				<p>— ظ Team</p>
 			</div>
 		</div>
 	)
