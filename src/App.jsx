@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Footer } from './components/footer/Footer'
@@ -85,7 +84,6 @@ function App() {
 				pauseOnHover
 				theme='light'
 			/>
-			<Analytics />
 		</div>
 	)
 }
