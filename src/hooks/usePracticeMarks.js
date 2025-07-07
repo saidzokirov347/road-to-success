@@ -43,7 +43,7 @@ export function usePracticeMarks(category = 'listening') {
 
 		// Only add EXP the first time user checks '✅'
 		if (!existing && mark.emoji === '✅') {
-			await addExpToUser(currentUser.uid, 25)
+			await addExpToUser(currentUser.uid, 0)
 		}
 	}
 
