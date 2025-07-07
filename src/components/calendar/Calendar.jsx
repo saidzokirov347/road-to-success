@@ -39,12 +39,13 @@ export default function Calendar({
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		if (!isEditable) return
-		onMark({ emoji }, dayKey)
+		onMark({ emoji: marks[dayKey]?.emoji || '✅', ielts: score }, dayKey)
 		setModalData({ dayKey, mark: { emoji } })
 	}
 
 	const handleIELTSChange = async (e, dayKey) => {
 		const score = parseFloat(e.target.value)
+
 		const getExpFromIELTS = score => {
 			if (score < 5.5) return 0
 			if (score === 5.5) return 25
@@ -58,12 +59,13 @@ export default function Calendar({
 			return 0
 		}
 
-		onMark({ ielts: score }, dayKey)
+		// Use selectedEmoji stored in state
+		onMark({ emoji: selectedEmoji || '✅', ielts: score }, dayKey)
 
 		if (currentUser?.uid && isEditable) {
 			const exp = getExpFromIELTS(score)
 			if (exp > 0) {
-				// Optional: addExpToUser(currentUser.uid, exp)
+				await addExpToUser(currentUser.uid, exp)
 			}
 		}
 	}
