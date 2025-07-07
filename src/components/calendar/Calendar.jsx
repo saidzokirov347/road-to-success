@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../../context/authContext'
-import { removeExpFromUser } from '../../firebase/exp'
+import { addExpToUser, removeExpFromUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
 import CalendarEditModal from '../calendar-edit-modal/CalendarEditModal'
 import './Calendar.css'
@@ -19,6 +19,7 @@ export default function Calendar({
 
 	const { currentUser } = useAuth()
 	const [modalData, setModalData] = useState(null)
+	const [selectedEmoji, setSelectedEmoji] = useState('✅') // ✅ added
 
 	useEffect(() => {
 		if (!currentUser?.uid || !isEditable) return
@@ -39,7 +40,8 @@ export default function Calendar({
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		if (!isEditable) return
-		onMark({ emoji: marks[dayKey]?.emoji || '✅', ielts: score }, dayKey)
+		setSelectedEmoji(emoji) // ✅ store selected emoji
+		onMark({ emoji }, dayKey)
 		setModalData({ dayKey, mark: { emoji } })
 	}
 
@@ -59,8 +61,7 @@ export default function Calendar({
 			return 0
 		}
 
-		// Use selectedEmoji stored in state
-		onMark({ emoji: selectedEmoji || '✅', ielts: score }, dayKey)
+		onMark({ emoji: selectedEmoji, ielts: score }, dayKey) // ✅ use stored emoji
 
 		if (currentUser?.uid && isEditable) {
 			const exp = getExpFromIELTS(score)
