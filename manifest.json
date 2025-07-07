@@ -9,12 +9,12 @@
 	"orientation": "portrait",
 	"icons": [
 		{
-			"src": "/favicon-dark-192.png",
+			"src": "/favicon-dark-canva.png",
 			"type": "image/png",
 			"sizes": "192x192"
 		},
 		{
-			"src": "/favicon-dark-512.png",
+			"src": "/favicon-dark-canva.png",
 			"type": "image/png",
 			"sizes": "512x512"
 		}
