@@ -1,0 +1,42 @@
+.maintenance-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background-color: #f8f9fa;
+	padding: 20px;
+	text-align: center;
+}
+
+.maintenance-content {
+	max-width: 600px;
+}
+
+.maintenance-image {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 30px;
+}
+
+h1 {
+	font-size: 2rem;
+	color: #333;
+	margin-bottom: 15px;
+}
+
+p {
+	font-size: 1rem;
+	color: #555;
+	line-height: 1.5;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 480px) {
+	h1 {
+		font-size: 1.5rem;
+	}
+
+	p {
+		font-size: 0.95rem;
+	}
+}

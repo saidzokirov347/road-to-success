@@ -1,31 +1,33 @@
-import { Route, Routes, useLocation } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
-import { Footer } from './components/footer/Footer'
-import { Navbar } from './components/navbar/Navbar'
-import Login from './routes/auth/login/Login'
-import ProtectedRoute from './routes/auth/ProtectedRoute'
-import Register from './routes/auth/register/Register'
-import { Home } from './routes/home/Home'
-import { Listening } from './routes/listening/Listening'
-import { Profile } from './routes/profile/Profile'
-import PublicProfile from './routes/public-profile/PublicProfile'
-import QuizPage from './routes/quiz-page/QuizPage'
-import Quizzes from './routes/quizzes/Quizzes'
-import { Reading } from './routes/reading/Reading'
-import { Speaking } from './routes/speaking/Speaking'
-import Writing from './routes/writing/Writing'
+// import { Route, Routes, useLocation } from 'react-router-dom'
+// import { ToastContainer } from 'react-toastify'
+// import { Footer } from './components/footer/Footer'
+// import { Navbar } from './components/navbar/Navbar'
+// import Login from './routes/auth/login/Login'
+// import ProtectedRoute from './routes/auth/ProtectedRoute'
+// import Register from './routes/auth/register/Register'
+// import { Home } from './routes/home/Home'
+// import { Listening } from './routes/listening/Listening'
+// import { Profile } from './routes/profile/Profile'
+// import PublicProfile from './routes/public-profile/PublicProfile'
+// import QuizPage from './routes/quiz-page/QuizPage'
+// import Quizzes from './routes/quizzes/Quizzes'
+// import { Reading } from './routes/reading/Reading'
+// import { Speaking } from './routes/speaking/Speaking'
+// import Writing from './routes/writing/Writing'
+
+import MaintenancePage from './routes/maintenance/Maintenance'
 
 function App() {
-	const location = useLocation()
+	// const location = useLocation()
 
-	const hideNavbarPaths = ['/login', '/register']
-	const isQuizPage = location.pathname.startsWith('/quiz/')
-	const shouldHideNavbar =
-		hideNavbarPaths.includes(location.pathname) || isQuizPage
+	// const hideNavbarPaths = ['/login', '/register']
+	// const isQuizPage = location.pathname.startsWith('/quiz/')
+	// const shouldHideNavbar =
+	// 	hideNavbarPaths.includes(location.pathname) || isQuizPage
 
 	return (
 		<div>
-			{!shouldHideNavbar && <Navbar />}
+			{/* {!shouldHideNavbar && <Navbar />}
 			<Routes>
 				<Route path='/' element={<ProtectedRoute element={<Home />} />} />
 				<Route
@@ -83,7 +85,8 @@ function App() {
 				draggable
 				pauseOnHover
 				theme='light'
-			/>
+			/> */}
+			<MaintenancePage />
 		</div>
 	)
 }
