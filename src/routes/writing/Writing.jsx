@@ -129,13 +129,22 @@ export default function Writing() {
 				/>
 			)}
 
-			<a
-				href='/writing-books/task-1.pdf'
-				download
-				className='button reading-link'
-			>
-				💾 Download Writing Task 1 Book
-			</a>
+			<div className='writing-links'>
+				<a
+					href='/writing-books/task-1.pdf'
+					download
+					className='button reading-link'
+				>
+					💾 Download Writing Task 1 Book
+				</a>
+				<a
+					href='/writing-books/task-2.pdf'
+					download
+					className='button reading-link'
+				>
+					💾 Download Writing Task 2 Book
+				</a>
+			</div>
 		</div>
 	)
 }
