@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../../context/authContext'
-import { addExpToUser, removeExpFromUser } from '../../firebase/exp'
+import { addExpToUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
 import CalendarEditModal from '../calendar-edit-modal/CalendarEditModal'
 import './Calendar.css'
@@ -20,23 +20,15 @@ export default function Calendar({
 	const { currentUser } = useAuth()
 	const [modalData, setModalData] = useState(null)
 	const [selectedEmoji, setSelectedEmoji] = useState('✅') // ✅ added
+	const marksSnapshotRef = useRef(null)
 
 	useEffect(() => {
 		if (!currentUser?.uid || !isEditable) return
 
-		const yesterday = new Date()
-		yesterday.setDate(yesterday.getDate() - 1)
-		const yesterdayKey = yesterday.toLocaleDateString('en-CA')
-		const mark = marks[yesterdayKey]
-
-		const penaltyKey = `exp-penalty-${currentUser.uid}-${yesterdayKey}`
-		const alreadyPenalized = localStorage.getItem(penaltyKey)
-
-		if (!alreadyPenalized && (!mark || mark.emoji !== '✅')) {
-			removeExpFromUser(currentUser.uid, 50)
-			localStorage.setItem(penaltyKey, '1')
+		if (!marksSnapshotRef.current) {
+			marksSnapshotRef.current = marks
 		}
-	}, [marks, currentUser, isEditable])
+	}, [currentUser, isEditable, marks])
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		if (!isEditable) return
