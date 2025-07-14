@@ -154,7 +154,9 @@ export function Navbar() {
 			</div>
 
 			{!isUserProfile && (
-				<nav className='navbar-nav desktop-only'>{navLinks}</nav>
+				<nav className='navbar-nav desktop-only'>
+					<div className='navbar-nav-list'>{navLinks}</div>
+				</nav>
 			)}
 
 			<div

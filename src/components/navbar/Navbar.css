@@ -73,12 +73,15 @@
 
 /* === Desktop Nav Links === */
 .navbar-nav {
-	max-width: 800px;
-	margin: 0 auto;
+	width: 100%;
 	padding: 12px 0 20px 0;
+}
+
+.navbar-nav-list {
+	width: 100%;
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
-	gap: 12px;
 }
 
 .navbar-nav a {
@@ -353,7 +356,13 @@
 }
 
 .mobile-icon {
-	display: none;
+	font-size: 1px;
+}
+
+.navbar-nav a {
+	display: flex;
+	align-items: center;
+	gap: 7px;
 }
 
 @media (max-width: 768px) {
