@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { Footer } from './components/footer/Footer'
 import { Navbar } from './components/navbar/Navbar'
+import { generateToken } from './firebase/notification'
 import Login from './routes/auth/login/Login'
 import ProtectedRoute from './routes/auth/ProtectedRoute'
 import Register from './routes/auth/register/Register'
@@ -22,6 +24,10 @@ function App() {
 	const isQuizPage = location.pathname.startsWith('/quiz/')
 	const shouldHideNavbar =
 		hideNavbarPaths.includes(location.pathname) || isQuizPage
+
+	useEffect(() => {
+		generateToken()
+	}, [])
 
 	return (
 		<div>
