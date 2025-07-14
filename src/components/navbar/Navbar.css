@@ -351,3 +351,15 @@
 		display: none !important;
 	}
 }
+
+.mobile-icon {
+	display: none;
+}
+
+@media (max-width: 768px) {
+	.mobile-icon {
+		display: inline-flex;
+		align-items: center;
+		margin-right: 6px;
+	}
+}

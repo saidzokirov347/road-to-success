@@ -40,43 +40,64 @@ export function Navbar() {
 	const navLinks = (
 		<>
 			<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
-				<House /> Home
+				<span className='mobile-icon'>
+					<House />
+				</span>{' '}
+				Home
 			</Link>
 			<Link
 				to='/quizzes'
 				className={location.pathname === '/quizzes' ? 'active' : ''}
 			>
-				<BadgeQuestionMark /> Quizzes
+				<span className='mobile-icon'>
+					<BadgeQuestionMark />
+				</span>{' '}
+				Quizzes
 			</Link>
 			<Link
 				to='/events'
 				className={location.pathname === '/events' ? 'active' : ''}
 			>
-				<CalendarFold /> Events
+				<span className='mobile-icon'>
+					<CalendarFold />
+				</span>{' '}
+				Events
 			</Link>
 			<Link
 				to='/reading'
 				className={location.pathname === '/reading' ? 'active' : ''}
 			>
-				<BookOpen /> Reading
+				<span className='mobile-icon'>
+					<BookOpen />
+				</span>{' '}
+				Reading
 			</Link>
 			<Link
 				to='/listening'
 				className={location.pathname === '/listening' ? 'active' : ''}
 			>
-				<Headphones /> Listening
+				<span className='mobile-icon'>
+					<Headphones />
+				</span>{' '}
+				Listening
 			</Link>
 			<Link
 				to='/speaking'
 				className={location.pathname === '/speaking' ? 'active' : ''}
 			>
-				<Mic2 /> Speaking
+				<span className='mobile-icon'>
+					<Mic2 />
+				</span>{' '}
+				Speaking
 			</Link>
 			<Link
 				to='/writing'
 				className={location.pathname === '/writing' ? 'active' : ''}
 			>
-				<PenTool /> Writing
+				<span className='mobile-icon'>
+					<PenTool />
+				</span>{' '}
+				Writing
 			</Link>
 		</>
 	)
