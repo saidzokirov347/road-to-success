@@ -24,27 +24,10 @@ export default function Calendar({
 
 	useEffect(() => {
 		if (!currentUser?.uid || !isEditable) return
-
 		if (!marksSnapshotRef.current) {
 			marksSnapshotRef.current = marks
 		}
 	}, [currentUser, isEditable, marks])
-
-	useEffect(() => {
-		if (!isEditable || Notification.permission !== 'granted') return
-
-		const alreadyMarked = marks && marks[todayKey]
-		const alreadyNotified =
-			localStorage.getItem('calendarNotifiedDate') === todayKey
-
-		if (!alreadyMarked && !alreadyNotified) {
-			new Notification('📅 Reminder', {
-				body: 'Don’t forget to tick your calendar today!',
-				icon: '/logo192.png',
-			})
-			localStorage.setItem('calendarNotifiedDate', todayKey)
-		}
-	}, [marks, todayKey, isEditable])
 
 	const handleEmojiClick = (emoji, dayKey) => {
 		if (!isEditable) return
