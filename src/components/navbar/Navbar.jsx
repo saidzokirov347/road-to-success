@@ -19,7 +19,7 @@ export function Navbar() {
 	const isUserProfile =
 		location.pathname.startsWith('/user/') ||
 		location.pathname === '/profile' ||
-		location.pathname.includes('/vocabulary/')
+		location.pathname.includes('/quizzes/')
 
 	const isQuizPage = location.pathname.includes('/quiz/')
 	if (isQuizPage) return null
@@ -34,10 +34,10 @@ export function Navbar() {
 				Home
 			</Link>
 			<Link
-				to='/vocabulary'
-				className={location.pathname === '/vocabulary' ? 'active' : ''}
+				to='/quizzes'
+				className={location.pathname === '/quizzes' ? 'active' : ''}
 			>
-				Vocabulary
+				Quizzes
 			</Link>
 			<Link
 				to='/reading'

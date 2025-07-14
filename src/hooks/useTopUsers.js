@@ -5,31 +5,22 @@ import {
 	orderBy,
 	query,
 	startAfter,
-	where,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/firebase'
 
-export function useTopUsers(teacher) {
+export function useTopUsers() {
 	const [users, setUsers] = useState([])
 	const [lastDoc, setLastDoc] = useState(null)
 	const [hasMore, setHasMore] = useState(true)
 	const [initialLoaded, setInitialLoaded] = useState(false)
 
 	const fetchUsers = async (count = 15, isInitial = false) => {
-		if (!teacher) return
-
-		let q = query(
-			collection(db, 'users'),
-			where('teacher', '==', teacher),
-			orderBy('exp', 'desc'),
-			limit(count)
-		)
+		let q = query(collection(db, 'users'), orderBy('exp', 'desc'), limit(count))
 
 		if (!isInitial && lastDoc) {
 			q = query(
 				collection(db, 'users'),
-				where('teacher', '==', teacher),
 				orderBy('exp', 'desc'),
 				startAfter(lastDoc),
 				limit(count)
@@ -61,10 +52,10 @@ export function useTopUsers(teacher) {
 	}
 
 	useEffect(() => {
-		if (!initialLoaded && teacher) {
+		if (!initialLoaded) {
 			fetchUsers(5, true)
 		}
-	}, [initialLoaded, teacher])
+	}, [initialLoaded])
 
 	return { users, hasMore, fetchUsers }
 }

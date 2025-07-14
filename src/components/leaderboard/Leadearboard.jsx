@@ -9,20 +9,6 @@ export function Leaderboard() {
 	const { teacher: teacher } = useUserProfile()
 	const { users, hasMore, fetchUsers } = useTopUsers(teacher)
 
-	if (!teacher) {
-		return (
-			<section className='leaderboard-section'>
-				<h2>🏆 Top Learners</h2>
-				<div className='leaderboard-card'>
-					<p className='warning-text'>
-						Please ask your teacher to assign you a group before you can view
-						the leaderboard.
-					</p>
-				</div>
-			</section>
-		)
-	}
-
 	return (
 		<section className='leaderboard-section'>
 			<h2>🏆 Top Learners</h2>
