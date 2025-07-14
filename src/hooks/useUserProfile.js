@@ -20,6 +20,7 @@ export function useUserProfile() {
 	const [email, setEmail] = useState('')
 	const [exp, setExp] = useState(0)
 	const [level, setLevel] = useState(1)
+	const [teacher, setTeacher] = useState('')
 
 	const [loading, setLoading] = useState(true)
 	const [isEditing, setIsEditing] = useState(false)
@@ -45,6 +46,7 @@ export function useUserProfile() {
 				setEmail(data.email || '')
 				setExp(data.exp || 0)
 				setLevel(data.level || 1)
+				setTeacher(data.teacher || '')
 
 				if (!data.username) setUsernameIsNew(true)
 
@@ -70,6 +72,7 @@ export function useUserProfile() {
 				setEmail(defaultData.email)
 				setExp(defaultData.exp)
 				setLevel(defaultData.level)
+				setTeacher(defaultData.teacher || '')
 				setUsernameIsNew(true)
 			}
 
@@ -93,6 +96,11 @@ export function useUserProfile() {
 			return
 		}
 
+		if (!teacher.trim()) {
+			showToast.error('Please select your teacher.')
+			return
+		}
+
 		setIsSaving(true)
 		try {
 			const userRef = doc(db, 'users', currentUser.uid)
@@ -102,11 +110,11 @@ export function useUserProfile() {
 				email,
 				bio,
 				profileImage,
+				teacher,
 			})
 			setUsernameIsNew(false)
 
-			triggerUsernameUpdate() // ✅ <-- Added here
-
+			triggerUsernameUpdate()
 			showToast.successProfileUpdate()
 		} catch (err) {
 			console.error('Error saving profile:', err)
@@ -146,10 +154,12 @@ export function useUserProfile() {
 		usernameRef,
 		progress,
 		levelClass,
+		teacher,
 		setBio,
 		setName,
 		setUsername,
 		setEmail,
+		setTeacher,
 		toggleEdit,
 	}
 }

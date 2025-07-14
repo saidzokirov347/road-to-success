@@ -11,6 +11,7 @@ export function ProfileContent() {
 		email,
 		exp,
 		level,
+		teacher,
 		loading,
 		isEditing,
 		isSaving,
@@ -23,6 +24,7 @@ export function ProfileContent() {
 		setName,
 		setUsername,
 		setEmail,
+		setTeacher,
 		toggleEdit,
 	} = useUserProfile()
 
@@ -85,6 +87,21 @@ export function ProfileContent() {
 					/>
 					{usernameError && (
 						<span className='error-text'>Username must not be empty</span>
+					)}
+
+					<label>Teacher</label>
+					<select
+						className={`profile-input ${!teacher ? 'input-warning' : ''}`}
+						value={teacher}
+						onChange={e => setTeacher(e.target.value)}
+						disabled={!isEditing}
+					>
+						<option value=''>Select your teacher</option>
+						<option value='Hilola teacher'>Hilola teacher</option>
+						<option value='Madina teacher'>Madina teacher</option>
+					</select>
+					{!teacher && isEditing && (
+						<span className='error-text'>Please select a teacher</span>
 					)}
 
 					<label>Bio</label>

@@ -5,22 +5,31 @@ import {
 	orderBy,
 	query,
 	startAfter,
+	where,
 } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/firebase'
 
-export function useTopUsers() {
+export function useTopUsers(teacher) {
 	const [users, setUsers] = useState([])
 	const [lastDoc, setLastDoc] = useState(null)
 	const [hasMore, setHasMore] = useState(true)
 	const [initialLoaded, setInitialLoaded] = useState(false)
 
 	const fetchUsers = async (count = 15, isInitial = false) => {
-		let q = query(collection(db, 'users'), orderBy('exp', 'desc'), limit(count))
+		if (!teacher) return
+
+		let q = query(
+			collection(db, 'users'),
+			where('teacher', '==', teacher),
+			orderBy('exp', 'desc'),
+			limit(count)
+		)
 
 		if (!isInitial && lastDoc) {
 			q = query(
 				collection(db, 'users'),
+				where('teacher', '==', teacher),
 				orderBy('exp', 'desc'),
 				startAfter(lastDoc),
 				limit(count)
@@ -28,6 +37,7 @@ export function useTopUsers() {
 		}
 
 		const snapshot = await getDocs(q)
+
 		const newUsers = snapshot.docs
 			.map(doc => ({
 				id: doc.id,
@@ -51,8 +61,10 @@ export function useTopUsers() {
 	}
 
 	useEffect(() => {
-		if (!initialLoaded) fetchUsers(5, true)
-	}, [initialLoaded])
+		if (!initialLoaded && teacher) {
+			fetchUsers(5, true)
+		}
+	}, [initialLoaded, teacher])
 
 	return { users, hasMore, fetchUsers }
 }

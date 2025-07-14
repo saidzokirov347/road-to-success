@@ -37,6 +37,7 @@ export const doSignUpWithGoogle = async (bio = '') => {
 			readingMarks: {},
 			speakingMarks: {},
 			writingMarks: {},
+			teacher: '',
 		})
 	}
 
@@ -92,6 +93,7 @@ export const doCreateUserWithEmailAndPassword = async (
 		readingMarks: {},
 		speakingMarks: {},
 		writingMarks: {},
+		teacher: '',
 	})
 
 	return result
