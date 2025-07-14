@@ -8,6 +8,7 @@ import { Navbar } from './components/navbar/Navbar'
 import Login from './routes/auth/login/Login'
 import ProtectedRoute from './routes/auth/ProtectedRoute'
 import Register from './routes/auth/register/Register'
+import { Events } from './routes/events/Events'
 import { Home } from './routes/home/Home'
 import { Listening } from './routes/listening/Listening'
 import { Profile } from './routes/profile/Profile'
@@ -56,7 +57,11 @@ function App() {
 					element={<ProtectedRoute element={<PublicProfile />} />}
 				/>
 				<Route
-					path='/Quizzes'
+					path='/events'
+					element={<ProtectedRoute element={<Events />} />}
+				/>
+				<Route
+					path='/quizzes'
 					element={<ProtectedRoute element={<Quizzes />} />}
 				/>
 				<Route

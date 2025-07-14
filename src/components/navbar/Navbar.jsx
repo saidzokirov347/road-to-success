@@ -40,6 +40,12 @@ export function Navbar() {
 				Quizzes
 			</Link>
 			<Link
+				to='/events'
+				className={location.pathname === '/events' ? 'active' : ''}
+			>
+				Events
+			</Link>
+			<Link
 				to='/reading'
 				className={location.pathname === '/reading' ? 'active' : ''}
 			>
