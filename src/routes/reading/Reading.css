@@ -7,6 +7,17 @@
 	background-color: #fffefc;
 }
 
+.reading-message {
+	background-color: #e8f4fd;
+	border-left: 6px solid #0b5394;
+	padding: 20px;
+	border-radius: 6px;
+	margin-bottom: 30px;
+	font-size: 16px;
+	color: #1a1a1a;
+	line-height: 1.6;
+}
+
 .reading-drill h1 {
 	font-size: 32px;
 	margin-bottom: 10px;

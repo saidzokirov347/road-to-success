@@ -9,15 +9,15 @@ export function Speaking() {
 	useEffect(() => {
 		window.scrollTo(0, 0)
 	}, [])
+
 	return (
 		<div className='speaking-drill container'>
 			<h1>🗣️ IELTS Speaking – The Dual-Voice Approach</h1>
-			<h2>One voice builds the structure. The other brings it alive.</h2>
 
-			<p className='drill-note'>
-				⏱ <strong>Daily Time:</strong> 30–40 minutes
-				<br />
-				Balance solo fluency and partner pressure.
+			<p className='speaking-message'>
+				🗣️ Speak with confidence at your natural level. Fluency shines when
+				you’re relaxed and expressive — not when you chase fancy phrases. Let
+				your tone be natural and your words be real.
 			</p>
 
 			<div className='pillar'>

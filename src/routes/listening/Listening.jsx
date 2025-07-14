@@ -13,12 +13,12 @@ export function Listening() {
 	return (
 		<div className='listening-drill container'>
 			<h1>🎧 The Fourfold Path to Mastering IELTS Listening</h1>
-			<h2>A journey from chaos to clarity — one playback at a time.</h2>
 
-			<p className='drill-note'>
-				⏱ <strong>Total Time:</strong> 30–40 minutes
-				<br />
-				Repeat stages until accuracy becomes instinct.
+			<p className='listening-message'>
+				🎧 Listen to understand — not just to respond. Don’t rush to catch the
+				answer; absorb the context, tone, and logic of the speakers. The answers
+				will reveal themselves when your mind is focused on meaning, not just
+				words.
 			</p>
 
 			<div className='pillar'>
@@ -98,9 +98,10 @@ export function Listening() {
 					title='📅 Listening Practice History'
 				/>
 			)}
+
 			<a
 				href='https://mini-ielts.com/listening'
-				className='button reading-link'
+				className='button listening-link'
 				target='_blank'
 				rel='noopener noreferrer'
 			>

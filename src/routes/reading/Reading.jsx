@@ -14,14 +14,11 @@ export function Reading() {
 	return (
 		<div className='reading-drill container'>
 			<h1>📘 The Fourfold Path to IELTS Reading Mastery</h1>
-			<h2>
-				Your daily system to decode, reflect, and dominate the Reading section.
-			</h2>
 
-			<p className='drill-note'>
-				⏱ <strong>Total Time:</strong> 30–45 minutes
-				<br />
-				Split it across your day or do it in one go—consistency is the key.
+			<p className='reading-message'>
+				📖 Read to understand — not just to find answers. Train your brain to
+				follow the flow of ideas, not just scan for keywords. The better you
+				grasp the structure, the easier the answers become.
 			</p>
 
 			{stages.map((stage, index) => (

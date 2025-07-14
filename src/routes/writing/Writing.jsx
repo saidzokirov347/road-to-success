@@ -9,17 +9,15 @@ export default function Writing() {
 	useEffect(() => {
 		window.scrollTo(0, 0)
 	}, [])
+
 	return (
 		<div className='writing-drill container'>
 			<h1>🧱 The 4-Pillar Daily Drill</h1>
-			<h2>
-				Your 45-minute, every-day routine to write like a Band 9 candidate.
-			</h2>
 
-			<p className='drill-note'>
-				⏱ <strong>Total Time:</strong> 45 minutes
-				<br />
-				You can split this into two sessions (e.g., 25 min + 20 min).
+			<p className='writing-message'>
+				✍️ Write at the level you truly master. IELTS rewards clarity, not
+				complexity. Use grammar and vocabulary you control — not what you hope
+				might impress.
 			</p>
 
 			<div className='pillar'>
