@@ -1,9 +1,12 @@
 import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { Footer } from './components/footer/Footer'
 import { Navbar } from './components/navbar/Navbar'
 import { generateToken } from './firebase/notification'
+
 import Login from './routes/auth/login/Login'
 import ProtectedRoute from './routes/auth/ProtectedRoute'
 import Register from './routes/auth/register/Register'
@@ -25,13 +28,22 @@ function App() {
 	const shouldHideNavbar =
 		hideNavbarPaths.includes(location.pathname) || isQuizPage
 
+	// Get FCM token
 	useEffect(() => {
 		generateToken()
+	}, [])
+
+	// Ask for notification permission if not granted
+	useEffect(() => {
+		if (Notification.permission !== 'granted') {
+			Notification.requestPermission()
+		}
 	}, [])
 
 	return (
 		<div>
 			{!shouldHideNavbar && <Navbar />}
+
 			<Routes>
 				<Route path='/' element={<ProtectedRoute element={<Home />} />} />
 				<Route
@@ -79,6 +91,7 @@ function App() {
 			</Routes>
 
 			{!shouldHideNavbar && <Footer />}
+
 			<ToastContainer
 				position='top-right'
 				autoClose={2500}

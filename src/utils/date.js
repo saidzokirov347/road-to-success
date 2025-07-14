@@ -10,12 +10,14 @@ export function getDaysInMonth(year, month) {
 
 export function getCalendarRows(year, month) {
 	const days = getDaysInMonth(year, month)
+
 	const firstDay = new Date(year, month, 1).getDay()
+	const adjustedFirstDay = (firstDay + 6) % 7 // Shift Sunday(0) to 6, Monday(1) to 0, etc.
 
 	const rows = []
 	let row = []
 
-	for (let i = 0; i < firstDay; i++) row.push(null)
+	for (let i = 0; i < adjustedFirstDay; i++) row.push(null)
 
 	days.forEach(day => {
 		row.push(day)

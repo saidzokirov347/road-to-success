@@ -19,7 +19,7 @@ export default function Calendar({
 
 	const { currentUser } = useAuth()
 	const [modalData, setModalData] = useState(null)
-	const [selectedEmoji, setSelectedEmoji] = useState('✅') // ✅ added
+	const [selectedEmoji, setSelectedEmoji] = useState('✅')
 	const marksSnapshotRef = useRef(null)
 
 	useEffect(() => {
@@ -30,9 +30,25 @@ export default function Calendar({
 		}
 	}, [currentUser, isEditable, marks])
 
+	useEffect(() => {
+		if (!isEditable || Notification.permission !== 'granted') return
+
+		const alreadyMarked = marks && marks[todayKey]
+		const alreadyNotified =
+			localStorage.getItem('calendarNotifiedDate') === todayKey
+
+		if (!alreadyMarked && !alreadyNotified) {
+			new Notification('📅 Reminder', {
+				body: 'Don’t forget to tick your calendar today!',
+				icon: '/logo192.png',
+			})
+			localStorage.setItem('calendarNotifiedDate', todayKey)
+		}
+	}, [marks, todayKey, isEditable])
+
 	const handleEmojiClick = (emoji, dayKey) => {
 		if (!isEditable) return
-		setSelectedEmoji(emoji) // ✅ store selected emoji
+		setSelectedEmoji(emoji)
 		onMark({ emoji }, dayKey)
 		setModalData({ dayKey, mark: { emoji } })
 	}
@@ -53,7 +69,7 @@ export default function Calendar({
 			return 0
 		}
 
-		onMark({ emoji: selectedEmoji, ielts: score }, dayKey) // ✅ use stored emoji
+		onMark({ emoji: selectedEmoji, ielts: score }, dayKey)
 
 		if (currentUser?.uid && isEditable) {
 			const exp = getExpFromIELTS(score)
@@ -69,13 +85,13 @@ export default function Calendar({
 			<table className='calendar-table'>
 				<thead>
 					<tr>
-						<th>Sun</th>
 						<th>Mon</th>
 						<th>Tue</th>
 						<th>Wed</th>
 						<th>Thu</th>
 						<th>Fri</th>
 						<th>Sat</th>
+						<th>Sun</th>
 					</tr>
 				</thead>
 				<tbody>
