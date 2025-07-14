@@ -1,3 +1,12 @@
+import {
+	BadgeQuestionMark,
+	BookOpen,
+	CalendarFold,
+	Headphones,
+	House,
+	Mic2,
+	PenTool,
+} from 'lucide-react'
 import { useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
@@ -31,43 +40,43 @@ export function Navbar() {
 	const navLinks = (
 		<>
 			<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
-				Home
+				<House /> Home
 			</Link>
 			<Link
 				to='/quizzes'
 				className={location.pathname === '/quizzes' ? 'active' : ''}
 			>
-				Quizzes
+				<BadgeQuestionMark /> Quizzes
 			</Link>
 			<Link
 				to='/events'
 				className={location.pathname === '/events' ? 'active' : ''}
 			>
-				Events
+				<CalendarFold /> Events
 			</Link>
 			<Link
 				to='/reading'
 				className={location.pathname === '/reading' ? 'active' : ''}
 			>
-				Reading
+				<BookOpen /> Reading
 			</Link>
 			<Link
 				to='/listening'
 				className={location.pathname === '/listening' ? 'active' : ''}
 			>
-				Listening
+				<Headphones /> Listening
 			</Link>
 			<Link
 				to='/speaking'
 				className={location.pathname === '/speaking' ? 'active' : ''}
 			>
-				Speaking
+				<Mic2 /> Speaking
 			</Link>
 			<Link
 				to='/writing'
 				className={location.pathname === '/writing' ? 'active' : ''}
 			>
-				Writing
+				<PenTool /> Writing
 			</Link>
 		</>
 	)
@@ -135,17 +144,22 @@ export function Navbar() {
 			<div className={`navbar-drawer ${navOpen ? 'open' : ''}`}>
 				<div className='navbar-drawer-header' onClick={() => setNavOpen(false)}>
 					<Link to='/profile' className='navbar-drawer-profile'>
-						<img
-							src={currentUser.photoURL || '/men-avatar.jpg'}
-							alt='Profile'
-							className='navbar-drawer-avatar'
-						/>
+						<div className='navbar-drawer-avatar-wrapper'>
+							<div className='navbar-drawer-avatar'>
+								<img
+									src={currentUser.photoURL || '/men-avatar.jpg'}
+									alt='Profile'
+									className=''
+								/>
+							</div>
+						</div>
 						<p className='navbar-drawer-name'>
 							{currentUser.displayName || currentUser.email}
 						</p>
+						<span className='navbar-drawer-email'>{currentUser.email}</span>
 					</Link>
 				</div>
-
+				<hr />
 				<div className='navbar-drawer-nav'>{navLinks}</div>
 
 				<button className='navbar-drawer-logout' onClick={handleLogout}>

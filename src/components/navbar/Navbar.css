@@ -215,28 +215,56 @@
 .navbar-drawer.open {
 	transform: translateX(0%);
 }
+.navbar-drawer hr {
+	margin-bottom: 20px;
+	background-color: #eaeaea;
+	height: 1px; /* 👈 thinner line */
+	border: none; /* 👈 remove default border */
+}
 
 .navbar-drawer-header {
+	width: 100%;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
 	margin-bottom: 24px;
 }
 
+.navbar-drawer-avatar-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
 .navbar-drawer-avatar {
-	width: 64px;
-	height: 64px;
+	width: 74px;
+	height: 74px;
 	border-radius: 50%;
 	object-fit: cover;
 	margin-bottom: 8px;
+	overflow: hidden;
+}
+
+.navbar-drawer-avatar img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 .navbar-drawer-name {
-	font-size: 16px;
+	font-size: 22px;
 	font-weight: 600;
 	color: #222;
 	text-align: center;
 	word-break: break-word;
+	margin-bottom: 10px;
+}
+
+.navbar-drawer-email {
+	width: 100%;
+	color: #b3b3b3;
+	font-size: 14px;
 }
 
 .navbar-drawer-nav {
@@ -247,12 +275,15 @@
 }
 
 .navbar-drawer-nav a {
-	color: #0057a0;
+	color: #202020;
 	font-weight: bold;
 	text-decoration: none;
 	padding: 10px;
 	border-radius: 4px;
 	transition: background 0.2s, color 0.2s;
+	display: flex;
+	align-items: center;
+	gap: 7px;
 }
 
 .navbar-drawer-nav a.active,
