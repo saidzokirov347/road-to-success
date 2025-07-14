@@ -322,13 +322,12 @@
 }
 
 .navbar-drawer-logout {
-	background: #c8102e;
-	color: #fff;
+	background: #f1f0f5;
+	color: #202020;
 	border: none;
-	padding: 10px 0;
-	border-radius: 4px;
+	padding: 15px 0;
+	border-radius: 25px;
 	font-size: 16px;
-	font-weight: bold;
 	cursor: pointer;
 	transition: background 0.2s;
 	width: 100%;
