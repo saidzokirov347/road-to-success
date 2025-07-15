@@ -26,7 +26,13 @@ export function ProfileContent() {
 		setEmail,
 		setTeacher,
 		toggleEdit,
+		listeningExp,
+		readingExp,
+		writingExp,
+		speakingExp,
 	} = useUserProfile()
+
+	console.log(listeningExp)
 
 	if (loading) return <ProfileSkeleton />
 

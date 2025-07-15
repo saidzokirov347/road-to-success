@@ -21,6 +21,10 @@ export function useUserProfile() {
 	const [exp, setExp] = useState(0)
 	const [level, setLevel] = useState(1)
 	const [teacher, setTeacher] = useState('')
+	const [listeningExp, setListeningExp] = useState(0)
+	const [readingExp, setReadingExp] = useState(0)
+	const [writingExp, setWritingExp] = useState(0)
+	const [speakingExp, setSpeakingExp] = useState(0)
 
 	const [loading, setLoading] = useState(true)
 	const [isEditing, setIsEditing] = useState(false)
@@ -44,24 +48,36 @@ export function useUserProfile() {
 				setUsername(data.username || '')
 				setProfileImage(data.profileImage || '')
 				setEmail(data.email || '')
-				setExp(data.exp || 0)
-				setLevel(data.level || 1)
 				setTeacher(data.teacher || '')
+				setListeningExp(data.listeningExp || 0)
+				setReadingExp(data.readingExp || 0)
+				setWritingExp(data.writingExp || 0)
+				setSpeakingExp(data.speakingExp || 0)
 
-				if (!data.username) setUsernameIsNew(true)
+				const totalExp =
+					(data.listeningExp || 0) +
+					(data.readingExp || 0) +
+					(data.writingExp || 0) +
+					(data.speakingExp || 0)
 
+				setExp(totalExp)
+
+				// Level update
 				let correctLevel = 1
 				for (let i = 1; i < LEVEL_THRESHOLDS.length; i++) {
-					if ((data.exp || 0) >= LEVEL_THRESHOLDS[i]) {
+					if (totalExp >= LEVEL_THRESHOLDS[i]) {
 						correctLevel = i + 1
 					}
 				}
 				correctLevel = Math.min(correctLevel, MAX_LEVEL)
 
+				setLevel(correctLevel)
+
 				if (data.level !== correctLevel) {
 					await updateDoc(userRef, { level: correctLevel })
-					setLevel(correctLevel)
 				}
+
+				if (!data.username) setUsernameIsNew(true)
 			} else {
 				const defaultData = getDefaultProfileData(currentUser)
 				await setDoc(userRef, defaultData)
@@ -73,6 +89,10 @@ export function useUserProfile() {
 				setExp(defaultData.exp)
 				setLevel(defaultData.level)
 				setTeacher(defaultData.teacher || '')
+				setListeningExp(defaultData.listeningExp)
+				setReadingExp(defaultData.readingExp)
+				setWritingExp(defaultData.writingExp)
+				setSpeakingExp(defaultData.speakingExp)
 				setUsernameIsNew(true)
 			}
 
@@ -144,7 +164,6 @@ export function useUserProfile() {
 		username,
 		profileImage,
 		email,
-		exp,
 		level,
 		loading,
 		isEditing,
@@ -161,5 +180,10 @@ export function useUserProfile() {
 		setEmail,
 		setTeacher,
 		toggleEdit,
+		listeningExp,
+		readingExp,
+		writingExp,
+		speakingExp,
+		exp,
 	}
 }

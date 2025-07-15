@@ -6,8 +6,10 @@ import './Leaderboard.css'
 
 export function Leaderboard() {
 	const { currentUser } = useAuth()
-	const { teacher: teacher } = useUserProfile()
-	const { users, hasMore, fetchUsers } = useTopUsers(teacher)
+	const { teacher } = useUserProfile()
+	const { users, hasMore, loadMore, loading } = useTopUsers(teacher)
+
+	if (loading) return <div className='loader'></div>
 
 	return (
 		<section className='leaderboard-section'>
@@ -44,7 +46,7 @@ export function Leaderboard() {
 												: 'gray'
 										}`}
 									>
-										{user.exp || 0} EXP
+										{user.exp} EXP
 									</div>
 								</div>
 							</div>
@@ -53,7 +55,7 @@ export function Leaderboard() {
 				})}
 
 				{hasMore && (
-					<button className='see-more-btn' onClick={() => fetchUsers(15)}>
+					<button className='see-more-btn' onClick={loadMore}>
 						See Others
 					</button>
 				)}

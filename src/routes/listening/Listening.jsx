@@ -21,72 +21,92 @@ export function Listening() {
 				words.
 			</p>
 
+			<a
+				href='https://vocalremover.org/pitch'
+				target='_blank'
+				rel='noopener noreferrer'
+				className='button listening-link'
+			>
+				🧭 Open Speed Changer Tool
+			</a>
+			<br />
+			<br />
+
 			<div className='pillar'>
 				<h3>
-					➊ Stage One – <em>Straight Solve</em>
+					➊ Stage One – <em>Solving (1.0× Speed)</em>
 				</h3>
 				<ul>
-					<li>Listen and answer all questions in order.</li>
-					<li>Skip only what’s absolutely unclear—keep moving.</li>
+					<li>Play the recording at normal speed, once.</li>
+					<li>Attempt all questions in order, without pausing or rewinding.</li>
+					<li>Focus on maintaining pace — don’t get stuck on a single item.</li>
 				</ul>
 				<blockquote>
-					Why: Builds flow and prevents freezing on tricky sections.
+					Why: You simulate the real exam and test your natural comprehension
+					under pressure. It sets your baseline.
 				</blockquote>
 			</div>
 
 			<div className='pillar'>
 				<h3>
-					➋ Stage Two – <em>Spot Patterns</em>
+					➋ Stage Two – <em>Resolving (1.2× Speed)</em>
 				</h3>
 				<ul>
-					<li>Label each question: gap fill, multiple choice, map, etc.</li>
-					<li>Note the trap type: paraphrase, distractor, sequence swap...</li>
+					<li>Replay the same audio slightly faster.</li>
+					<li>Focus only on missed or doubtful questions.</li>
+					<li>
+						Ask: “What tricked me?” — Was it a paraphrase? A pause? A sequence?
+					</li>
 				</ul>
 				<blockquote>
-					Why: You train your brain to *predict* IELTS tricks before they
-					strike.
+					Why: Speed exposes gaps. This phase sharpens your reaction to IELTS
+					traps and improves time awareness.
 				</blockquote>
 			</div>
 
 			<div className='pillar'>
 				<h3>
-					➌ Stage Three – <em>Transcript Replay</em>
+					➌ Stage Three – <em>Proving (1.2×–1.5× Speed)</em>
 				</h3>
 				<ul>
-					<li>Play the recording again with transcript.</li>
-					<li>Underline exact words you missed.</li>
+					<li>Replay again, this time with the transcript open.</li>
+					<li>Transcribe missed parts exactly — no rewording.</li>
+					<li>Underline key transitions, phrases, and reference words.</li>
 				</ul>
 				<blockquote>
-					Why: Every mistake becomes a teacher when analyzed properly.
+					Why: You’re training your ear to catch the structure and wording of
+					real IELTS passages with precision.
 				</blockquote>
 			</div>
 
 			<div className='pillar'>
 				<h3>
-					➍ Stage Four – <em>Targeted Practice</em>
+					➍ Stage Four – <em>Listening Without Booklet (1.5× Speed)</em>
 				</h3>
 				<ul>
-					<li>Identify weak question types (e.g., maps, table completion).</li>
-					<li>Do 3–5 extra mini-tasks of that type only.</li>
+					<li>Put away all questions and materials.</li>
+					<li>Listen purely for understanding — no pressure to answer.</li>
+					<li>Try to follow 100% of what’s said, even at a fast pace.</li>
 				</ul>
 				<blockquote>
-					Why: 80/20 strategy—fix the few that hurt the most.
+					Why: This builds real-world listening fluency. No pauses, no guesses —
+					just pure comprehension.
 				</blockquote>
 			</div>
 
 			<div className='checklist'>
 				<h4>✔️ Daily Quick-Check</h4>
 				<ul>
-					<li>[ ] Did I stay calm and finish the full test?</li>
-					<li>[ ] Did I analyze 3+ traps that tricked me?</li>
-					<li>[ ] Did I read transcripts and highlight misses?</li>
-					<li>[ ] Did I do targeted drills on weak spots?</li>
+					<li>[ ] Did I complete one full test at regular speed?</li>
+					<li>[ ] Did I revisit and understand at least 3 unclear parts?</li>
+					<li>[ ] Did I write out missed lines exactly from the audio?</li>
+					<li>[ ] Did I end with a full-speed listen-through, no booklet?</li>
 				</ul>
 			</div>
 
 			<p className='final-note'>
-				🔁 Repeat these four stages daily. In 30 sessions, your listening brain
-				will be rewired for precision and performance.
+				🔁 Repeat this routine consistently. In 30 days, you’ll find your
+				listening sharper, faster, and more automatic.
 			</p>
 
 			{loading ? (

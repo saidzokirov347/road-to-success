@@ -1,61 +1,57 @@
-import {
-	collection,
-	getDocs,
-	limit,
-	orderBy,
-	query,
-	startAfter,
-} from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../firebase/firebase'
 
-export function useTopUsers() {
-	const [users, setUsers] = useState([])
-	const [lastDoc, setLastDoc] = useState(null)
+export function useTopUsers(teacher) {
+	const [allUsers, setAllUsers] = useState([])
+	const [visibleUsers, setVisibleUsers] = useState([])
 	const [hasMore, setHasMore] = useState(true)
-	const [initialLoaded, setInitialLoaded] = useState(false)
-
-	const fetchUsers = async (count = 15, isInitial = false) => {
-		let q = query(collection(db, 'users'), orderBy('exp', 'desc'), limit(count))
-
-		if (!isInitial && lastDoc) {
-			q = query(
-				collection(db, 'users'),
-				orderBy('exp', 'desc'),
-				startAfter(lastDoc),
-				limit(count)
-			)
-		}
-
-		const snapshot = await getDocs(q)
-
-		const newUsers = snapshot.docs
-			.map(doc => ({
-				id: doc.id,
-				...doc.data(),
-			}))
-			.filter(user => user.username !== 'ظ')
-
-		setUsers(prev => {
-			const existingIds = new Set(prev.map(u => u.id))
-			const filtered = newUsers.filter(u => !existingIds.has(u.id))
-			return [...prev, ...filtered]
-		})
-
-		if (snapshot.docs.length < count) {
-			setHasMore(false)
-		} else {
-			setLastDoc(snapshot.docs[snapshot.docs.length - 1])
-		}
-
-		if (isInitial) setInitialLoaded(true)
-	}
+	const [loading, setLoading] = useState(true)
+	const [batchSize, setBatchSize] = useState(5)
 
 	useEffect(() => {
-		if (!initialLoaded) {
-			fetchUsers(5, true)
-		}
-	}, [initialLoaded])
+		const fetchUsers = async () => {
+			if (!teacher) return
 
-	return { users, hasMore, fetchUsers }
+			const q = query(collection(db, 'users'), where('teacher', '==', teacher))
+			const snapshot = await getDocs(q)
+
+			const users = snapshot.docs
+				.map(doc => {
+					const data = doc.data()
+					const exp =
+						(data.listeningExp || 0) +
+						(data.readingExp || 0) +
+						(data.writingExp || 0) +
+						(data.speakingExp || 0)
+
+					return {
+						id: doc.id,
+						...data,
+						exp,
+					}
+				})
+				.filter(user => user.username !== 'ظ')
+				.sort((a, b) => b.exp - a.exp)
+
+			setAllUsers(users)
+			setVisibleUsers(users.slice(0, 5))
+			setHasMore(users.length > 5)
+			setLoading(false)
+		}
+
+		fetchUsers()
+	}, [teacher])
+
+	const loadMore = () => {
+		const nextBatch = allUsers.slice(
+			visibleUsers.length,
+			visibleUsers.length + 10
+		)
+		const updatedVisible = [...visibleUsers, ...nextBatch]
+		setVisibleUsers(updatedVisible)
+		setHasMore(updatedVisible.length < allUsers.length)
+	}
+
+	return { users: visibleUsers, hasMore, loadMore, loading }
 }
