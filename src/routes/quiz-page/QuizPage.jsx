@@ -3,7 +3,7 @@ import { FaArrowLeft } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import SkeletonQuizPage from '../../components/skeleton/quiz-page-skeleton/QuizPageSkeleton'
 import { useAuth } from '../../context/authContext'
-import { updateUserExpByAmount } from '../../firebase/exp'
+import { updateUserCategoryExpByAmount } from '../../firebase/exp'
 import { useGetQuizByIdQuery } from '../../store/api/quiz-api/quiz.api'
 import './QuizPage.css'
 
@@ -54,7 +54,8 @@ export default function QuizPage() {
 		else if (percent >= 50) earnedExp = Math.floor(fullExp * 0.5)
 		else earnedExp = -Math.floor(fullExp * 0.5)
 
-		await updateUserExpByAmount(currentUser.uid, earnedExp)
+		const expField = quiz.category ? `${quiz.category}Exp` : 'vocabularyExp'
+		await updateUserCategoryExpByAmount(currentUser.uid, earnedExp, expField)
 	}
 
 	useEffect(() => {

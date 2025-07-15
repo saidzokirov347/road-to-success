@@ -10,6 +10,7 @@ export default function Calendar({
 	title = '📅 Calendar',
 	onMark,
 	isEditable = true,
+	category = 'listening',
 }) {
 	const today = new Date()
 	const year = today.getFullYear()
@@ -52,13 +53,12 @@ export default function Calendar({
 			return 0
 		}
 
+		const exp = getExpFromIELTS(score)
+
 		onMark({ emoji: selectedEmoji, ielts: score }, dayKey)
 
-		if (currentUser?.uid && isEditable) {
-			const exp = getExpFromIELTS(score)
-			if (exp > 0) {
-				await addExpToUser(currentUser.uid, exp)
-			}
+		if (currentUser?.uid && isEditable && exp > 0) {
+			await addExpToUser(currentUser.uid, exp, `${category}Exp`)
 		}
 	}
 

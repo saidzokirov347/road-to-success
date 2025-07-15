@@ -1,4 +1,3 @@
-// hooks/usePracticeMarks.js
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext'
@@ -41,9 +40,8 @@ export function usePracticeMarks(category = 'listening') {
 			[`${category}Marks`]: updatedMarks,
 		})
 
-		// Only add EXP the first time user checks '✅'
 		if (!existing && mark.emoji === '✅') {
-			await addExpToUser(currentUser.uid, 0)
+			await addExpToUser(currentUser.uid, 10, `${category}Exp`)
 		}
 	}
 

@@ -1,0 +1,52 @@
+.coming-soon-card {
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	padding: 24px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+	max-width: 600px;
+	margin: 0 auto;
+	font-family: 'Segoe UI', Tahoma, sans-serif;
+	animation: fadeInUp 0.4s ease;
+}
+
+.coming-soon-status {
+	color: #10b981;
+	font-weight: 600;
+	font-size: 14px;
+	margin-bottom: 12px;
+}
+
+.coming-soon-card h2 {
+	font-size: 22px;
+	margin-bottom: 8px;
+	color: #1f2937;
+}
+
+.coming-soon-subtext {
+	font-size: 15px;
+	color: #4b5563;
+	margin-bottom: 20px;
+}
+
+.coming-soon-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	font-size: 15px;
+	color: #374151;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
