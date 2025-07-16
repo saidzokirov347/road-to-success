@@ -1,28 +1,27 @@
 import './Events.css'
+
 export function Events() {
 	return (
 		<div className='container'>
-			<div class='coming-soon-card'>
-				<h2>🚀 What’s Coming Soon</h2>
+			<h2 className='coming-soon-title'>🚀 What’s Coming Soon</h2>
 
-				<p class='coming-soon-subtext'>
-					We will keep you informed about your daily management
-				</p>
+			<p className='coming-soon-subtext'>
+				We will keep you informed about your daily management
+			</p>
 
-				<ul class='coming-soon-list'>
-					<li>
-						📈 A clean, visual graph showing how well you're staying on track
-					</li>
-					<li>
-						🧩 Option to keep your profile private when you want space to focus
-					</li>
-					<li>
-						✍️ A shared essay gallery to publish and explore strong writing
-					</li>
-					<li>
-						🗓️ Simple tools to update your event progress directly on the site
-					</li>
-				</ul>
+			<div className='coming-soon-cards'>
+				<div className='coming-soon-card'>
+					📈 A clean, visual graph showing how well you're staying on track
+				</div>
+				<div className='coming-soon-card'>
+					🧩 Option to keep your profile private when you want space to focus
+				</div>
+				<div className='coming-soon-card'>
+					✍️ A shared essay gallery to publish and explore strong writing
+				</div>
+				<div className='coming-soon-card'>
+					🗓️ Simple tools to update your event progress directly on the site
+				</div>
 			</div>
 		</div>
 	)
