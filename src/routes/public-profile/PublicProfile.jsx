@@ -39,7 +39,9 @@ export default function PublicProfile() {
 	}
 	if (notFound) return <Navigate to='/not-found' replace />
 
-	const exp = user.exp || 0
+	const exp =
+		user.listeningExp + user.readingExp + user.writingExp + user.speakingExp ||
+		0
 	const level = getCorrectLevel(exp)
 	const { minExp, maxExp } = getExpRangeForLevel(level)
 	const expInLevel = exp - minExp
