@@ -1,10 +1,9 @@
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/authContext'
-import { addExpToUser } from '../firebase/exp'
 import { db } from '../firebase/firebase'
 
-export function usePracticeMarks(category = 'listening') {
+export function usePracticeMarks(category) {
 	const { currentUser } = useAuth()
 	const [marks, setMarks] = useState({})
 	const [loading, setLoading] = useState(true)
@@ -14,13 +13,13 @@ export function usePracticeMarks(category = 'listening') {
 			if (!currentUser) return
 
 			const userRef = doc(db, 'users', currentUser.uid)
-			const snap = await getDoc(userRef)
+			const userSnap = await getDoc(userRef)
+			if (!userSnap.exists()) return
 
-			if (snap.exists()) {
-				const data = snap.data()
-				setMarks(data[`${category}Marks`] || {})
-			}
+			const data = userSnap.data()
+			const sectionMarks = data[`${category}Marks`] || {}
 
+			setMarks({ [category]: sectionMarks })
 			setLoading(false)
 		}
 
@@ -30,20 +29,16 @@ export function usePracticeMarks(category = 'listening') {
 	const handleMark = async (mark, dayKey) => {
 		if (!currentUser) return
 
-		const existing = marks[dayKey]
-		const newMark = existing ? { ...existing, ...mark } : mark
-
-		const updatedMarks = { ...marks, [dayKey]: newMark }
-		setMarks(updatedMarks)
-
-		await updateDoc(doc(db, 'users', currentUser.uid), {
-			[`${category}Marks`]: updatedMarks,
+		const userRef = doc(db, 'users', currentUser.uid)
+		await updateDoc(userRef, {
+			[`${category}Marks.${dayKey}`]: mark,
 		})
 
-		if (!existing && mark.emoji === '✅') {
-			await addExpToUser(currentUser.uid, 10, `${category}Exp`)
-		}
+		setMarks(prev => {
+			const updated = { ...(prev[category] || {}), [dayKey]: mark }
+			return { ...prev, [category]: updated }
+		})
 	}
 
-	return { marks, loading, handleMark }
+	return { marks, handleMark, loading }
 }

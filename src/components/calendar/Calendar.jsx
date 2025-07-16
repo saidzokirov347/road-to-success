@@ -84,7 +84,7 @@ export default function Calendar({
 								if (!day) return <td key={idx} className='empty'></td>
 
 								const dayKey = day.toLocaleDateString('en-CA')
-								const mark = marks[dayKey]
+								const mark = marks?.[category]?.[dayKey]
 								const isToday = dayKey === todayKey
 
 								const handleCellClick = () => {

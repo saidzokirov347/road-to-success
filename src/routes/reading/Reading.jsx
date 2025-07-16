@@ -58,6 +58,7 @@ export function Reading() {
 						marks={marks}
 						onMark={handleMark}
 						title='📅 Reading Practice History'
+						category='reading'
 					/>
 				)}
 			</div>
