@@ -19,7 +19,7 @@ ChartJS.register(
 )
 
 function getRadarStats(userEXP) {
-	const MAX = 1000 // max possible EXP per skill
+	const MAX = 1000
 
 	const scale = val => Math.min(Math.round((val / MAX) * 100), 100)
 

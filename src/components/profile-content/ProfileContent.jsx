@@ -1,5 +1,6 @@
 import { ProfileSkeleton } from '../../components/skeleton/profile-skeleton/ProfileSkeleton'
 import { useUserProfile } from '../../hooks/useUserProfile'
+import IELTSRadarChart from '../radar-chart/RadarChart'
 import './ProfileContent.css'
 
 export function ProfileContent() {
@@ -32,9 +33,15 @@ export function ProfileContent() {
 		speakingExp,
 	} = useUserProfile()
 
-	console.log(listeningExp)
-
 	if (loading) return <ProfileSkeleton />
+
+	const userEXP = {
+		reading: readingExp,
+		listening: listeningExp,
+		writing: writingExp,
+		speaking: speakingExp,
+		management: 0,
+	}
 
 	return (
 		<div className='profile'>
@@ -136,6 +143,7 @@ export function ProfileContent() {
 						)}
 					</button>
 				</div>
+				<IELTSRadarChart userEXP={userEXP} />
 			</div>
 		</div>
 	)
