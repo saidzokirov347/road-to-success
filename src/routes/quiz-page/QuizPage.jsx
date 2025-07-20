@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
-import SkeletonQuizPage from '../../components/skeleton/quiz-page-skeleton/QuizPageSkeleton'
+import { QuizPageSkeleton } from '../../components/index'
 import { useAuth } from '../../context/authContext'
 import { updateUserCategoryExpByAmount } from '../../firebase/exp'
-import { useGetQuizByIdQuery } from '../../store/api/quiz-api/quiz.api'
+import { useGetQuizByIdQuery } from '../../store/api/quizzes-api/quizzes.api'
 import './QuizPage.css'
 
 export function QuizPage() {
@@ -72,7 +72,7 @@ export function QuizPage() {
 		return () => window.removeEventListener('keydown', handleKeyDown)
 	}, [currentQuestionIndex, selectedAnswers, submitted])
 
-	if (isLoading) return <SkeletonQuizPage />
+	if (isLoading) return <QuizPageSkeleton />
 	if (!quiz) return <p>Quiz not found.</p>
 
 	const currentQuestion = quiz.questions[currentQuestionIndex]

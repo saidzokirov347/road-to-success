@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../../context/authContext'
 import { addExpToUser } from '../../firebase/exp'
 import { getCalendarRows, getTodayKey } from '../../utils/date'
-import CalendarEditModal from '../calendar-edit-modal/CalendarEditModal'
+import { CalendarEditModal } from '../index'
 import './Calendar.css'
 
-export default function Calendar({
+export function Calendar({
 	marks = {},
 	title = '📅 Calendar',
 	onMark,

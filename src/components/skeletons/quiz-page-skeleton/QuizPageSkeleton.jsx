@@ -1,6 +1,6 @@
 import './SkeletonQuizPage.css'
 
-export default function SkeletonQuizPage() {
+export function QuizPageSkeleton() {
 	return (
 		<div className='quiz-page'>
 			<div className='quiz-header'>

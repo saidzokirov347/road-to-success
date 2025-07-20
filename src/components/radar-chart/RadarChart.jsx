@@ -32,7 +32,7 @@ function getRadarStats(userEXP) {
 	}
 }
 
-export default function IELTSRadarChart({ userEXP }) {
+export function IELTSRadarChart({ userEXP }) {
 	if (!userEXP) return null
 
 	const stats = getRadarStats(userEXP)

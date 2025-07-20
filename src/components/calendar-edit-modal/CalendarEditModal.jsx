@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './CalendarEditModal.css'
 
-export default function CalendarEditModal({
+export function CalendarEditModal({
 	dayKey,
 	mark,
 	onClose,

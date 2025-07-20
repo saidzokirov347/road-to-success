@@ -1,6 +1,6 @@
 import './QuizListSkeleton.css'
 
-export default function QuizListSkeleton() {
+export function QuizListSkeleton() {
 	return (
 		<div className='quiz-page container'>
 			<h2 className='quiz-page-title'>📚 Available Quizzes</h2>

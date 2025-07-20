@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
-import IELTSRadarChart from '../../components/radar-chart/RadarChart'
-import { useGetUserByUsernameQuery } from '../../store/api/user-api/user.api'
+import { IELTSRadarChart } from '../../components/index'
+import { useGetUserByUsernameQuery } from '../../store/api/users-api/users.api'
 import { getCorrectLevel, getExpRangeForLevel } from '../../utils/exp'
 
 import './PublicProfile.css'

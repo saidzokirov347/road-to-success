@@ -1,6 +1,6 @@
 import './AllUsersSkeleton.css'
 
-export default function UserSkeleton() {
+export function AllUsersSkeleton() {
 	return (
 		<li className='skeleton-user'>
 			<div className='skeleton-img'></div>

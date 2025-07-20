@@ -1,6 +1,5 @@
-import { ProfileSkeleton } from '../../components/skeleton/profile-skeleton/ProfileSkeleton'
 import { useUserProfile } from '../../hooks/useUserProfile'
-import IELTSRadarChart from '../radar-chart/RadarChart'
+import { IELTSRadarChart, ProfileSkeleton } from '../index'
 import './ProfileContent.css'
 
 export function ProfileContent() {

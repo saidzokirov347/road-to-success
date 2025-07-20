@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import QuizListSkeleton from '../../components/skeleton/quiz-list-skeleton/QuizListSkeleton'
+import { QuizListSkeleton } from '../../components/index'
 import { useGetQuizzesQuery } from '../../store/api/api'
 import './Quizzes.css'
 

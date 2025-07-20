@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import Calendar from '../../components/calendar/Calendar'
+import { Calendar } from '../../components/index'
 import { stages } from '../../constants/reading-stages.constants'
 import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Reading.css'

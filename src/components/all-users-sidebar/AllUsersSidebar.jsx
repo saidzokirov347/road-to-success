@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
-import { useGetUsersQuery } from '../../store/api/user-api/user.api'
-import AllUsersSkeleton from '../skeleton/all-users-skeleton/AllUsersSkeleton'
+import { useGetUsersQuery } from '../../store/api/users-api/users.api'
+import { AllUsersSkeleton } from '../index'
 import './AllUsersSidebar.css'
 
-export default function AllUsersSidebar() {
+export function AllUsersSidebar() {
 	const [searchTerm, setSearchTerm] = useState('')
 	const { currentUser } = useAuth()
 	const { data: users = [], isLoading } = useGetUsersQuery()

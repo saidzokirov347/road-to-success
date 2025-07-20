@@ -1,5 +1,4 @@
-import AllUsersSidebar from '../../components/all-users-sidebar/AllUsersSidebar'
-import { Leaderboard } from '../../components/leaderboard/Leadearboard'
+import { AllUsersSidebar, Leaderboard } from '../../components/index'
 import './Home.css'
 
 export function Home() {
