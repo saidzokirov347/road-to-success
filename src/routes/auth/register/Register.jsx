@@ -9,7 +9,7 @@ import {
 import { showToast } from '../../../utils/toastHelper'
 import './Register.css'
 
-export default function Register() {
+export function Register() {
 	const navigate = useNavigate()
 	const { userLoggedIn } = useAuth()
 

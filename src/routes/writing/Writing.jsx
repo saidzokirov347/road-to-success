@@ -3,7 +3,7 @@ import Calendar from '../../components/calendar/Calendar'
 import { usePracticeMarks } from '../../hooks/usePracticeMarks'
 import './Writing.css'
 
-export default function Writing() {
+export function Writing() {
 	const { marks, loading, handleMark } = usePracticeMarks('writing')
 
 	useEffect(() => {

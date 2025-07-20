@@ -36,11 +36,17 @@ export function ProfileContent() {
 	if (loading) return <ProfileSkeleton />
 
 	const userEXP = {
-		reading: readingExp,
-		listening: listeningExp,
-		writing: writingExp,
-		speaking: speakingExp,
-		management: 0,
+		// reading: readingExp || 0,
+		// listening: listeningExp || 0,
+		// writing: writingExp || 0,
+		// speaking: speakingExp || 0,
+		// management: 900,
+
+		reading: 790,
+		listening: 850,
+		writing: 650,
+		speaking: 600,
+		management: 900,
 	}
 
 	return (
@@ -143,7 +149,11 @@ export function ProfileContent() {
 						)}
 					</button>
 				</div>
-				<IELTSRadarChart userEXP={userEXP} />
+
+				{/* Radar Chart Section */}
+				<div className='profile-graph'>
+					<IELTSRadarChart userEXP={userEXP} />
+				</div>
 			</div>
 		</div>
 	)

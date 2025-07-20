@@ -1,0 +1,12 @@
+.radar-wrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	padding: 0 8px;
+	box-sizing: border-box;
+}
+
+.radar-wrapper canvas {
+	width: 100%;
+}

@@ -1,4 +1,4 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../../../firebase/firebase'
 import { api } from '../api'
 
@@ -25,7 +25,24 @@ export const userApi = api.injectEndpoints({
 				}
 			},
 		}),
+		getUserByUsername: builder.query({
+			async queryFn(username) {
+				try {
+					const q = query(
+						collection(db, 'users'),
+						where('username', '==', username)
+					)
+					const snapshot = await getDocs(q)
+					if (!snapshot.empty) {
+						return { data: snapshot.docs[0].data() }
+					}
+					return { data: null }
+				} catch (error) {
+					return { error }
+				}
+			},
+		}),
 	}),
 })
 
-export const { useGetUsersQuery } = userApi
+export const { useGetUsersQuery, useGetUserByUsernameQuery } = userApi

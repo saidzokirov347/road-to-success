@@ -1,6 +1,6 @@
 import './MaintenancePage.css'
 
-export default function MaintenancePage() {
+export function MaintenancePage() {
 	return (
 		<div className='maintenance-container'>
 			<div className='maintenance-content'>

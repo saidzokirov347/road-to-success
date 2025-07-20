@@ -1,17 +1,9 @@
-import {
-	BadgeQuestionMark,
-	BookOpen,
-	CalendarFold,
-	Headphones,
-	House,
-	Mic2,
-	PenTool,
-} from 'lucide-react'
 import { useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
 import { GiPineTree } from 'react-icons/gi'
 import { Link, useLocation } from 'react-router-dom'
+import { navbarLinks } from '../../constants/navbar-links.constants'
 import { useAuth } from '../../context/authContext'
 import { doSignOut } from '../../firebase/auth'
 import useRedirectToLogin from '../../hooks/useRedirectToLogin'
@@ -39,66 +31,18 @@ export function Navbar() {
 
 	const navLinks = (
 		<>
-			<Link to='/' className={location.pathname === '/' ? 'active' : ''}>
-				<span className='mobile-icon'>
-					<House />
-				</span>{' '}
-				Home
-			</Link>
-			<Link
-				to='/quizzes'
-				className={location.pathname === '/quizzes' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<BadgeQuestionMark />
-				</span>{' '}
-				Quizzes
-			</Link>
-			<Link
-				to='/events'
-				className={location.pathname === '/events' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<CalendarFold />
-				</span>{' '}
-				Events
-			</Link>
-			<Link
-				to='/reading'
-				className={location.pathname === '/reading' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<BookOpen />
-				</span>{' '}
-				Reading
-			</Link>
-			<Link
-				to='/listening'
-				className={location.pathname === '/listening' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<Headphones />
-				</span>{' '}
-				Listening
-			</Link>
-			<Link
-				to='/speaking'
-				className={location.pathname === '/speaking' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<Mic2 />
-				</span>{' '}
-				Speaking
-			</Link>
-			<Link
-				to='/writing'
-				className={location.pathname === '/writing' ? 'active' : ''}
-			>
-				<span className='mobile-icon'>
-					<PenTool />
-				</span>{' '}
-				Writing
-			</Link>
+			{navbarLinks.map(({ to, label, icon: Icon }) => (
+				<Link
+					key={to}
+					to={to}
+					className={location.pathname === to ? 'active' : ''}
+				>
+					<span className='mobile-icon'>
+						<Icon />
+					</span>{' '}
+					{label}
+				</Link>
+			))}
 		</>
 	)
 

@@ -7,7 +7,7 @@ import { updateUserCategoryExpByAmount } from '../../firebase/exp'
 import { useGetQuizByIdQuery } from '../../store/api/quiz-api/quiz.api'
 import './QuizPage.css'
 
-export default function QuizPage() {
+export function QuizPage() {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const { currentUser } = useAuth()

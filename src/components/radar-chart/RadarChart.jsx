@@ -8,6 +8,7 @@ import {
 	Tooltip,
 } from 'chart.js'
 import { Radar } from 'react-chartjs-2'
+import './RadarChart.css'
 
 ChartJS.register(
 	RadialLinearScale,
@@ -20,7 +21,6 @@ ChartJS.register(
 
 function getRadarStats(userEXP) {
 	const MAX = 1000
-
 	const scale = val => Math.min(Math.round((val / MAX) * 100), 100)
 
 	return {
@@ -33,6 +33,8 @@ function getRadarStats(userEXP) {
 }
 
 export default function IELTSRadarChart({ userEXP }) {
+	if (!userEXP) return null
+
 	const stats = getRadarStats(userEXP)
 
 	const data = {
@@ -41,11 +43,11 @@ export default function IELTSRadarChart({ userEXP }) {
 			{
 				label: 'Skill %',
 				data: Object.values(stats),
-				backgroundColor: 'rgba(0, 200, 255, 0.2)', // light blue fill
-				borderColor: '#00c8ff', // neon cyan line
+				backgroundColor: 'rgba(0, 0, 0, 0.05)',
+				borderColor: '#000',
 				borderWidth: 2,
-				pointBackgroundColor: '#00c8ff', // cyan dots
-				pointBorderColor: '#00c8ff', // black border around dots
+				pointBackgroundColor: '#000',
+				pointBorderColor: '#fff',
 				pointRadius: 4,
 			},
 		],
@@ -56,76 +58,34 @@ export default function IELTSRadarChart({ userEXP }) {
 			r: {
 				min: 0,
 				max: 100,
-				grid: {
-					circular: false,
-					color: '#000',
-				},
-				angleLines: {
-					color: '#000',
-				},
-				ticks: {
-					display: false,
-				},
+				grid: { circular: false, color: '#ccc' },
+				angleLines: { color: '#ccc' },
+				ticks: { display: false },
 				pointLabels: {
-					font: {
-						size: 14,
-						weight: 'bold',
-					},
-					color: ctx => {
-						const label = ctx.label
-						switch (label) {
-							case 'Listening':
-								return '#333'
-							case 'Reading':
-								return '#333'
-							case 'Speaking':
-								return '#333'
-							case 'Writing':
-								return '#333'
-							case 'Management':
-								return '#333'
-							default:
-								return '#fff'
-						}
-					},
+					color: '#222',
+					font: { size: 13, weight: 'bold' },
 				},
 			},
 		},
 		plugins: {
-			legend: {
-				display: false,
-			},
+			legend: { display: false },
 			tooltip: {
 				enabled: true,
+				callbacks: {
+					label: function (context) {
+						const label = context.chart.data.labels[context.dataIndex]
+						const value = context.formattedValue
+						return `${label}: ${value}%`
+					},
+				},
 			},
 		},
-		responsive: true,
-		maintainAspectRatio: false,
+		responsive: false,
+		maintainAspectRatio: true,
 	}
 
 	return (
-		<div
-			style={{
-				width: '100%',
-				height: 400,
-				color: '#fff',
-				borderRadius: '16px',
-				position: 'relative',
-				padding: '20px',
-			}}
-		>
-			<div
-				style={{
-					position: 'absolute',
-					top: '50%',
-					left: '50%',
-					transform: 'translate(-50%, -50%)',
-					fontSize: '48px',
-					fontWeight: 'bold',
-					color: '#ccc',
-					pointerEvents: 'none',
-				}}
-			></div>
+		<div className='radar-wrapper'>
 			<Radar data={data} options={options} />
 		</div>
 	)

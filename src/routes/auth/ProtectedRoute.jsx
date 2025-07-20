@@ -4,7 +4,7 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../../context/authContext'
 import { db } from '../../firebase/firebase'
 
-function ProtectedRoute({
+export function ProtectedRoute({
 	element,
 	redirectTo = '/login',
 	requireAuth = true,
@@ -52,5 +52,3 @@ function ProtectedRoute({
 
 	return element
 }
-
-export default ProtectedRoute

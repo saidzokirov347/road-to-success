@@ -4,7 +4,7 @@ import QuizListSkeleton from '../../components/skeleton/quiz-list-skeleton/QuizL
 import { useGetQuizzesQuery } from '../../store/api/api'
 import './Quizzes.css'
 
-export default function Quizzes() {
+export function Quizzes() {
 	const { data: quizzes = [], isLoading, isError } = useGetQuizzesQuery()
 
 	useEffect(() => {

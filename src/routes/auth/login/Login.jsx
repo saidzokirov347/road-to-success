@@ -9,7 +9,7 @@ import {
 import { showToast } from '../../../utils/toastHelper' // Update this path
 import './Login.css'
 
-export default function Login() {
+export function Login() {
 	const { userLoggedIn } = useAuth()
 
 	const [email, setEmail] = useState('')
