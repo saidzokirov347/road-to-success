@@ -117,6 +117,10 @@ export function Writing() {
 				at a time.
 			</p>
 
+			<a href='/profile/write-essay' className='button-link reading-link'>
+				Practice Writing 🖋️
+			</a>
+
 			{loading ? (
 				<div className='loader'></div>
 			) : (

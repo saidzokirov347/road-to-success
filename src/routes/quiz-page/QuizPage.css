@@ -1,12 +1,12 @@
-.quiz-page {
+/* .quiz-page {
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #fff;
+
 	font-family: 'Inter', sans-serif;
 	padding: 0;
-}
+} */
 
 .quiz-header {
 	display: flex;

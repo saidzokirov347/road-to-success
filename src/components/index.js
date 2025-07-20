@@ -7,6 +7,7 @@ export { Navbar } from './navbar/Navbar'
 export { ProfileContent } from './profile-content/ProfileContent'
 export { IELTSRadarChart } from './radar-chart/RadarChart'
 // Skeletons
+export { PublishedEssayItem } from './published-essay/PublishedEssayItem.jsx'
 export { AllUsersSkeleton } from './skeletons/all-users-skeleton/AllUsersSkeleton'
 export { ProfileSkeleton } from './skeletons/profile-skeleton/ProfileSkeleton'
 export { PublicProfileSkeleton } from './skeletons/public-profile-sketelon/PublicProfileSkeleton'

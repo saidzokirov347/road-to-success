@@ -23,13 +23,16 @@ function getRadarStats(userEXP) {
 	const MAX = 1000
 	const scale = val => Math.min(Math.round((val / MAX) * 100), 100)
 
-	return {
+	const stats = {
 		Listening: scale(userEXP.listening),
 		Reading: scale(userEXP.reading),
 		Speaking: scale(userEXP.speaking),
 		Writing: scale(userEXP.writing),
 		Management: scale(userEXP.management),
 	}
+
+	console.log('Radar stats:', stats.Listening)
+	return stats
 }
 
 export function IELTSRadarChart({ userEXP }) {

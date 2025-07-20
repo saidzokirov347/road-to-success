@@ -7,6 +7,10 @@ import { navbarLinks } from '../../constants/navbar-links.constants'
 import { useAuth } from '../../context/authContext'
 import { doSignOut } from '../../firebase/auth'
 import useRedirectToLogin from '../../hooks/useRedirectToLogin'
+import {
+	isSidebarHiddenPage,
+	shouldHideNavbarOnPage,
+} from '../../utils/routeFlags.utils'
 import './Navbar.css'
 
 export function Navbar() {
@@ -17,13 +21,7 @@ export function Navbar() {
 	useRedirectToLogin(!currentUser)
 	if (!currentUser) return null
 
-	const isUserProfile =
-		location.pathname.startsWith('/user/') ||
-		location.pathname === '/profile' ||
-		location.pathname.includes('/quizzes/')
-
-	const isQuizPage = location.pathname.includes('/quiz/')
-	if (isQuizPage) return null
+	if (shouldHideNavbarOnPage(location.pathname)) return null
 
 	const handleLogout = async () => {
 		await doSignOut()
@@ -97,7 +95,7 @@ export function Navbar() {
 				</div>
 			</div>
 
-			{!isUserProfile && (
+			{!isSidebarHiddenPage(location.pathname) && (
 				<nav className='navbar-nav desktop-only'>
 					<div className='navbar-nav-list'>{navLinks}</div>
 				</nav>
@@ -116,7 +114,6 @@ export function Navbar() {
 								<img
 									src={currentUser.photoURL || '/men-avatar.jpg'}
 									alt='Profile'
-									className=''
 								/>
 							</div>
 						</div>

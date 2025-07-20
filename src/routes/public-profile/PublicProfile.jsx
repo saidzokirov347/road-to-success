@@ -25,8 +25,11 @@ export function PublicProfile() {
 	if (isError || !user) return <Navigate to='/not-found' replace />
 
 	const exp =
-		user.listeningExp + user.readingExp + user.writingExp + user.speakingExp ||
-		0
+		Number(user?.listeningExp) +
+			Number(user?.readingExp) +
+			Number(user?.writingExp) +
+			Number(user?.speakingExp) || 0
+
 	const level = getCorrectLevel(exp)
 	const { minExp, maxExp } = getExpRangeForLevel(level)
 	const expInLevel = exp - minExp
@@ -34,12 +37,14 @@ export function PublicProfile() {
 	const progress = Math.min((expInLevel / expRange) * 100, 100)
 
 	const userEXP = {
-		listening: user.listeningExp || 0,
-		reading: user.readingExp || 0,
-		speaking: user.speakingExp || 0,
-		writing: user.writingExp || 0,
-		management: user.managementExp || 0,
+		listening: Number(user?.listeningExp) || 0,
+		reading: Number(user?.readingExp) || 0,
+		speaking: Number(user?.speakingExp) || 0,
+		writing: Number(user?.writingExp) || 0,
+		management: Number(user?.managementExp) || 0,
 	}
+
+	console.log('userEXP:', userEXP)
 
 	return (
 		<div className='public-profile-wrapper'>
@@ -74,7 +79,6 @@ export function PublicProfile() {
 				</div>
 			</div>
 
-			{/* 📊 IELTS Radar Chart */}
 			<div
 				className='public-profile-calendar-container'
 				style={{

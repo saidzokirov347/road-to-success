@@ -20,11 +20,8 @@
 	margin-bottom: 32px;
 }
 
-.avatar-bg {
+.avatar {
 	width: 100%;
-	height: 150px;
-	border-radius: 12px;
-	background: linear-gradient(to right, #c8102e, #0057a0);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -38,6 +35,12 @@
 	border: 4px solid white;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 	background-color: #fff;
+}
+
+.profile-image img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
 }
 
 .upload-section {

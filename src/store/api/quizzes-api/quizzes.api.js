@@ -1,6 +1,6 @@
 import { api } from '../api'
 
-export const quizApi = api.injectEndpoints({
+export const quizzesApi = api.injectEndpoints({
 	endpoints: builder => ({
 		getQuizById: builder.query({
 			query: id => `get-quiz/${id}`,
@@ -8,4 +8,4 @@ export const quizApi = api.injectEndpoints({
 		}),
 	}),
 })
-export const { useGetQuizByIdQuery } = quizApi
+export const { useGetQuizByIdQuery } = quizzesApi

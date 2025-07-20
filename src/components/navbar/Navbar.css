@@ -1,7 +1,12 @@
 /* === Base Navbar Styles === */
 .navbar {
 	width: 100%;
-	background: linear-gradient(to right, #c8102e, #0057a0);
+	/* background: linear-gradient(to right, #c8102e, #0057a0); */
+	background: linear-gradient(
+		135deg,
+		rgba(42, 123, 155, 1) 0%,
+		rgba(44, 169, 176, 1) 100%
+	);
 }
 
 .navbar-container {
@@ -54,7 +59,7 @@
 	height: 40px;
 	border-radius: 50%;
 	object-fit: cover;
-	border: 2px solid #4f46e5;
+	border: 1px solid #fff;
 	transition: transform 0.2s ease;
 }
 

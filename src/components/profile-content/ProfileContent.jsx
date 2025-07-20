@@ -35,24 +35,18 @@ export function ProfileContent() {
 	if (loading) return <ProfileSkeleton />
 
 	const userEXP = {
-		// reading: readingExp || 0,
-		// listening: listeningExp || 0,
-		// writing: writingExp || 0,
-		// speaking: speakingExp || 0,
-		// management: 900,
-
-		reading: 790,
-		listening: 850,
-		writing: 650,
-		speaking: 600,
-		management: 900,
+		reading: readingExp || 0,
+		listening: listeningExp || 0,
+		writing: writingExp || 0,
+		speaking: speakingExp || 0,
+		management: 350,
 	}
 
 	return (
 		<div className='profile'>
 			<div className='profile-wrapper'>
 				<div className='profile-header'>
-					<div className='avatar-bg'>
+					<div className='avatar'>
 						<img
 							src={profileImage || '/men-avatar.jpg'}
 							alt='Profile'

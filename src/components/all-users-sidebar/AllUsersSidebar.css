@@ -1,5 +1,4 @@
 .all-users-sidebar {
-	background-color: #ffffff;
 	border-radius: 16px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 	padding: 24px;
@@ -31,11 +30,7 @@
 	color: #111827;
 	padding: 8px 12px;
 	border-radius: 10px;
-	transition: background-color 0.2s ease;
-}
-
-.all-users-sidebar li a:hover {
-	background-color: #f3f4f6;
+	background-color: #f9fafb;
 }
 
 .all-users-sidebar li img {

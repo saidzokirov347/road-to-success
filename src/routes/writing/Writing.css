@@ -4,7 +4,6 @@
 	margin: auto;
 	font-family: 'Georgia', serif;
 	color: #2a2a2a;
-	background-color: #fffefc;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -87,4 +86,13 @@
 	display: flex;
 	align-items: flex-start;
 	flex-direction: column;
+}
+
+.button-link {
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 180px;
 }

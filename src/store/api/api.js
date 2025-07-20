@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const api = createApi({
-	reducerPath: 'quizApi',
-	tagTypes: ['Quiz', 'User'],
+	reducerPath: 'api',
+	tagTypes: ['Quizzes', 'Users', 'Essays'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: 'https://road-to-success-backend.onrender.com/',
 	}),
