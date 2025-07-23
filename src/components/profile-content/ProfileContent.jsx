@@ -102,17 +102,24 @@ export function ProfileContent() {
 					)}
 
 					<label>Teacher</label>
-					<select
-						className={`profile-input ${!teacher ? 'input-warning' : ''}`}
-						value={teacher}
-						onChange={e => setTeacher(e.target.value)}
-						disabled={!isEditing}
-					>
-						<option value=''>Select your teacher</option>
-						<option value='Hilola teacher'>Hilola teacher</option>
-						<option value='Madina teacher'>Madina teacher</option>
-					</select>
-					{!teacher && isEditing && (
+					{!teacher ? (
+						isEditing ? (
+							<select
+								className={`profile-input input-warning`}
+								value={teacher}
+								onChange={e => setTeacher(e.target.value)}
+							>
+								<option value=''>Select your teacher</option>
+								<option value='Hilola teacher'>Hilola teacher</option>
+								<option value='Madina teacher'>Madina teacher</option>
+							</select>
+						) : (
+							<input className='profile-input' value='' disabled />
+						)
+					) : (
+						<input className='profile-input' value={teacher} disabled />
+					)}
+					{isEditing && teacher.trim() === '' && (
 						<span className='error-text'>Please select a teacher</span>
 					)}
 

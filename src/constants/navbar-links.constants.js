@@ -2,10 +2,10 @@ import {
 	BadgeQuestionMark,
 	BookOpen,
 	CalendarFold,
-	FileText,
 	Headphones,
 	House,
 	Mic2,
+	NotebookPen,
 	PenTool,
 } from 'lucide-react'
 
@@ -17,5 +17,5 @@ export const navbarLinks = [
 	{ to: '/listening', label: 'Listening', icon: Headphones },
 	{ to: '/speaking', label: 'Speaking', icon: Mic2 },
 	{ to: '/writing', label: 'Writing', icon: PenTool },
-	{ to: '/essays', label: 'Essays', icon: FileText },
+	{ to: '/writing-tasks', label: 'Pratice', icon: NotebookPen },
 ]

@@ -6,6 +6,7 @@ export { Leaderboard } from './leaderboard/Leadearboard'
 export { Navbar } from './navbar/Navbar'
 export { ProfileContent } from './profile-content/ProfileContent'
 export { IELTSRadarChart } from './radar-chart/RadarChart'
+export { WritingTaskCard } from './writing-task-cart/WritingTaskCard'
 // Skeletons
 export { PublishedEssayItem } from './published-essay/PublishedEssayItem.jsx'
 export { AllUsersSkeleton } from './skeletons/all-users-skeleton/AllUsersSkeleton'

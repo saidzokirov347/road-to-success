@@ -1,0 +1,48 @@
+import { addDoc, collection, getDocs, Timestamp } from 'firebase/firestore'
+import { db } from '../../../firebase/firebase'
+import { api } from '../api'
+
+export const writingApi = api.injectEndpoints({
+	endpoints: builder => ({
+		getWritingTasks: builder.query({
+			async queryFn() {
+				try {
+					const snapshot = await getDocs(collection(db, 'writingTasks'))
+					const tasks = snapshot.docs.map(doc => {
+						const data = doc.data()
+
+						return {
+							id: doc.id,
+							...data,
+							createdAt: data.createdAt?.toDate().toISOString() || null,
+							updatedAt: data.updatedAt?.toDate().toISOString() || null,
+						}
+					})
+					return { data: tasks }
+				} catch (error) {
+					return { error: { message: error.message } }
+				}
+			},
+		}),
+
+		createWritingTask: builder.mutation({
+			async queryFn(newTask) {
+				try {
+					const docRef = await addDoc(collection(db, 'writingTasks'), {
+						imageUrl: newTask.imageUrl || '',
+						question: newTask.question || '',
+						createdAt: Timestamp.now(),
+						updatedAt: Timestamp.now(),
+					})
+					return { data: { id: docRef.id, ...newTask } }
+				} catch (error) {
+					return { error: { message: error.message } }
+				}
+			},
+		}),
+	}),
+	overrideExisting: false,
+})
+
+export const { useGetWritingTasksQuery, useCreateWritingTaskMutation } =
+	writingApi
