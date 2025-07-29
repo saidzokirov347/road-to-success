@@ -4,7 +4,7 @@
 	"description": "An app to guide your Road To Success.",
 	"start_url": "/",
 	"display": "standalone",
-	"background_color": "#0a0a23",
+	"background_color": "#012B36",
 	"theme_color": "#000000",
 	"orientation": "portrait",
 	"icons": [
