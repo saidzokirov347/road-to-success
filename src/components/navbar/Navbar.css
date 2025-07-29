@@ -226,7 +226,9 @@
 	transform: translateX(0%);
 }
 .navbar-drawer hr {
-	display: none;
+	background-color: #eaeaea;
+	height: 1px;
+	border: none;
 }
 
 .navbar-drawer-header {
@@ -286,7 +288,7 @@
 	font-weight: bold;
 	text-decoration: none;
 	padding: 10px 20px;
-	border-radius: 20px;
+	border-radius: 10px;
 	transition: background 0.2s, color 0.2s;
 	display: flex;
 	align-items: center;

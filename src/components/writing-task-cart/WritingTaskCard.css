@@ -100,6 +100,6 @@
 
 @media screen and (max-width: 600px) {
 	.writing-task-card-type-2 {
-		height: 310px;
+		height: auto;
 	}
 }
