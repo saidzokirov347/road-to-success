@@ -1,12 +1,12 @@
 {
-	"name": "Mastery Path",
+	"name": "The Mastery Path",
 	"short_name": "MasteryApp",
 	"description": "An app to guide your Road To Success.",
 	"start_url": "/",
 	"display": "standalone",
-	"background_color": "#012B36",
-	"theme_color": "#000000",
 	"orientation": "portrait",
+	"theme_color": "#000000",
+	"background_color": "#012B36",
 	"icons": [
 		{
 			"src": "/favicon/android-chrome-192x192.png",
@@ -17,6 +17,12 @@
 			"src": "/favicon/android-chrome-512x512.png",
 			"type": "image/png",
 			"sizes": "512x512"
+		},
+		{
+			"src": "/favicon/apple-touch-icon.png",
+			"type": "image/png",
+			"sizes": "180x180",
+			"purpose": "any"
 		}
 	]
 }
