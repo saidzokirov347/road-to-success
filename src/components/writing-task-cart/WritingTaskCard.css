@@ -8,6 +8,7 @@
 	transition: box-shadow 0.3s ease;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	padding: 5px 10px;
 	color: #000;
 	animation: fadeIn 0.4s ease-in-out;
@@ -19,14 +20,8 @@
 }
 
 .writing-task-card-type-2 {
-	height: 320px;
+	height: 330px;
 	padding-bottom: 12px;
-}
-
-@media screen and (max-width: 400px) {
-	.writing-task-card-type-2 {
-		height: 360px;
-	}
 }
 
 .writing-task-card-img {
@@ -76,6 +71,8 @@
 
 .writing-task-link {
 	display: inline-block;
+	width: 100%;
+	text-align: center;
 	margin-top: 10px;
 	padding: 10px 20px;
 	background-color: #2a819d;
@@ -103,11 +100,6 @@
 
 @media screen and (max-width: 600px) {
 	.writing-task-card-type-2 {
-		height: 300px;
-	}
-
-	.writing-task-link {
-		width: 100%;
-		text-align: center;
+		height: 310px;
 	}
 }

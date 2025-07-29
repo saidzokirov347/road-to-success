@@ -24,7 +24,7 @@ export function WritingTaskCard({ task }) {
 				</span>
 				<h2 className='task-question'>{task.question}</h2>
 				<a href={`/writing/${task.id}`} className='writing-task-link'>
-					View Task
+					Practice
 				</a>
 			</div>
 		</div>

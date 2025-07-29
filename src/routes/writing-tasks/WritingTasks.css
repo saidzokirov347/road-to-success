@@ -1,6 +1,48 @@
+.writing-tasks-wrapper {
+	width: 100%;
+	padding: 24px;
+}
+
+.writing-task-filter {
+	margin-bottom: 24px;
+}
+
+.select-wrapper {
+	position: relative;
+	display: inline-block;
+	width: 200px;
+}
+
+.select-wrapper select {
+	width: 100%;
+	padding: 10px 40px 10px 16px;
+	font-size: 16px;
+	color: #333;
+	background-color: white;
+	border: 2px solid rgba(42, 123, 155, 1);
+	border-radius: 8px;
+	appearance: none;
+	cursor: pointer;
+}
+
+.select-wrapper .select-icon {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+	color: rgba(42, 123, 155, 1);
+}
+
 .writing-tasks-grid {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	gap: 24px;
-	padding: 24px;
+}
+
+@media screen and (max-width: 600px) {
+	.select-wrapper,
+	.select-wrapper {
+		width: 100%;
+	}
 }
