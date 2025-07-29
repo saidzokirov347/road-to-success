@@ -96,3 +96,10 @@
 .listening-link:hover {
 	background-color: #073a6b;
 }
+
+@media screen and (max-width: 600px) {
+	.listening-link {
+		width: 100%;
+		text-align: center;
+	}
+}

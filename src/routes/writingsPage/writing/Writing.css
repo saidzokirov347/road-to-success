@@ -96,3 +96,12 @@
 	gap: 10px;
 	width: 180px;
 }
+
+@media screen and (max-width: 600px) {
+	.writing-links {
+		width: 100%;
+	}
+	.button-link {
+		width: 100%;
+	}
+}

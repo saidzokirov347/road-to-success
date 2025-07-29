@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaRegUser } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
 import { GiPineTree } from 'react-icons/gi'
@@ -19,6 +19,9 @@ export function Navbar() {
 	const [navOpen, setNavOpen] = useState(false)
 
 	useRedirectToLogin(!currentUser)
+	useEffect(() => {
+		setNavOpen(false)
+	}, [location.pathname])
 	if (!currentUser) return null
 
 	if (shouldHideNavbarOnPage(location.pathname)) return null
