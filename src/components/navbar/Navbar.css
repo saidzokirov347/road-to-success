@@ -226,10 +226,7 @@
 	transform: translateX(0%);
 }
 .navbar-drawer hr {
-	margin-bottom: 20px;
-	background-color: #eaeaea;
-	height: 1px; /* 👈 thinner line */
-	border: none; /* 👈 remove default border */
+	display: none;
 }
 
 .navbar-drawer-header {
@@ -288,8 +285,8 @@
 	color: #202020;
 	font-weight: bold;
 	text-decoration: none;
-	padding: 10px;
-	border-radius: 4px;
+	padding: 10px 20px;
+	border-radius: 20px;
 	transition: background 0.2s, color 0.2s;
 	display: flex;
 	align-items: center;
