@@ -59,6 +59,7 @@ export function Reading() {
 						onMark={handleMark}
 						title='📅 Reading Practice History'
 						category='reading'
+						isEditable={true}
 					/>
 				)}
 			</div>

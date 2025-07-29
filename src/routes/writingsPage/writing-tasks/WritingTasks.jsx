@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
-import { WritingTaskCard } from '../../components'
-import { useGetWritingTasksQuery } from '../../store/api/writing-api/writing.api'
+import { WritingTaskCard } from '../../../components'
+import { useGetWritingTasksQuery } from '../../../store/api/writing-api/writing.api'
 import './WritingTasks.css'
 
 export function WritingTasks() {

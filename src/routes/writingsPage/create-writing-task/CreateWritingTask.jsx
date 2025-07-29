@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useCreateWritingTaskMutation } from '../../store/api/writing-api/writing.api'
+import { useCreateWritingTaskMutation } from '../../../store/api/writing-api/writing.api'
 import './CreateWritingTaskForm.css'
 export function CreateWritingTaskForm() {
 	const [imageUrl, setImageUrl] = useState('')

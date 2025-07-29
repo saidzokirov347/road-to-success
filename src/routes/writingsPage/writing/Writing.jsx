@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { Calendar } from '../../components/index'
-import { usePracticeMarks } from '../../hooks/usePracticeMarks'
+import { Calendar } from '../../../components/index'
+import { usePracticeMarks } from '../../../hooks/usePracticeMarks'
 import './Writing.css'
 
 export function Writing() {
@@ -128,6 +128,8 @@ export function Writing() {
 					marks={marks}
 					onMark={handleMark}
 					title='📅 Writing Practice History'
+					category='writing'
+					isEditable={true}
 				/>
 			)}
 

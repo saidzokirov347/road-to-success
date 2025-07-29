@@ -115,6 +115,8 @@ export function Speaking() {
 					marks={marks}
 					onMark={handleMark}
 					title='📅 Speaking Practice History'
+					category='speaking'
+					isEditable={true}
 				/>
 			)}
 		</div>
