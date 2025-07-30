@@ -377,3 +377,8 @@
 		margin-right: 6px;
 	}
 }
+
+@media screen and (display-mode: standalone) {
+	.navbar {
+	}
+}

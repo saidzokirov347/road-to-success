@@ -11,6 +11,16 @@ body {
 	background-color: #f1f5f9;
 }
 
+/* === iOS status bar background color fix === */
+html,
+body {
+	background-color: #012b36; /* <-- Цвет status bar и фона при standalone PWA */
+}
+
+body {
+	background-color: #f1f5f9;
+}
+
 /* body::before {
 	content: '';
 	position: fixed;
@@ -39,6 +49,7 @@ a {
 	padding: 0 1rem;
 }
 
+/* === Responsive adjustments === */
 @media (max-width: 768px) {
 	.container {
 		padding: 0 0.75rem;
@@ -116,6 +127,8 @@ textarea {
 		font-size: 1rem;
 	} */
 }
+
+/* === Device-Specific Styling === */
 
 /* Mobile (up to 600px) */
 @media screen and (max-width: 600px) {

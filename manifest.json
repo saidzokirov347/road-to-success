@@ -3,10 +3,12 @@
 	"short_name": "MasteryApp",
 	"description": "An app to guide your Road To Success.",
 	"start_url": "/",
+	"scope": "/",
 	"display": "standalone",
 	"orientation": "portrait",
-	"theme_color": "#000000",
+	"theme_color": "#012B36",
 	"background_color": "#012B36",
+	"prefer_related_applications": false,
 	"icons": [
 		{
 			"src": "/favicon/android-chrome-192x192.png",
@@ -23,6 +25,12 @@
 			"type": "image/png",
 			"sizes": "180x180",
 			"purpose": "any"
+		},
+		{
+			"src": "/favicon/maskable-icon.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
 		}
 	]
 }

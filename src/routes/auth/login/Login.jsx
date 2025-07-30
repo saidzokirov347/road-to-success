@@ -73,12 +73,12 @@ export function Login() {
 
 				<form className='login-form' onSubmit={handleLogin}>
 					<div className='form-group'>
-						<label htmlFor='username'>Username or Email</label>
+						<label htmlFor='username'>Email</label>
 						<input
 							type='email'
 							id='username'
 							name='username'
-							placeholder='Enter Username or Email'
+							placeholder='Enter Email'
 							value={email}
 							onChange={e => setEmail(e.target.value)}
 							required
