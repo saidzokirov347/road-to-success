@@ -8,7 +8,7 @@ export function WritingTasks() {
 	const { data: tasks = [], isLoading } = useGetWritingTasksQuery()
 	const [filter, setFilter] = useState('all')
 
-	if (isLoading) return <p>Loading...</p>
+	if (isLoading) return <p className='container'>Loading...</p>
 
 	const filteredTasks =
 		filter === 'all' ? tasks : tasks.filter(task => task.type === filter)

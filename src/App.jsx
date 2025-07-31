@@ -14,13 +14,15 @@ function App() {
 		hideNavbarPaths.includes(location.pathname) || isQuizPage
 
 	return (
-		<div>
+		<div className='app-wrapper'>
 			{!shouldHideNavbar && <Navbar />}
-			<Routes>
-				{routes.map(({ path, element }) => (
-					<Route key={path} path={path} element={element} />
-				))}
-			</Routes>
+			<main className='app-main'>
+				<Routes>
+					{routes.map(({ path, element }) => (
+						<Route key={path} path={path} element={element} />
+					))}
+				</Routes>
+			</main>
 			{!shouldHideNavbar && <Footer />}
 			<ToastContainer
 				position='top-right'
@@ -33,8 +35,6 @@ function App() {
 				pauseOnHover
 				theme='light'
 			/>
-
-			{/* <MaintenancePage /> */}
 		</div>
 	)
 }

@@ -27,17 +27,3 @@ root.render(
 		<Root />
 	</StrictMode>
 )
-
-const removeLoader = () => {
-	const loader = document.getElementById('custom-loader')
-	if (loader) {
-		loader.classList.add('fade-out')
-		setTimeout(() => loader.remove(), 300)
-	}
-}
-
-if ('requestIdleCallback' in window) {
-	requestIdleCallback(removeLoader)
-} else {
-	setTimeout(removeLoader, 500)
-}

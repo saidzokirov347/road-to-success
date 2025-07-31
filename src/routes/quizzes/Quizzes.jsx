@@ -13,7 +13,12 @@ export function Quizzes() {
 
 	if (isLoading) return <QuizListSkeleton />
 	if (isError) return <p className='error'>❌ Failed to load quizzes.</p>
-	if (!quizzes.length) return <p className='error'>No quizzes yet</p>
+	if (!quizzes.length)
+		return (
+			<p className='quizzes-error'>
+				🗒️ No quizzes are available at the moment.
+			</p>
+		)
 
 	return (
 		<div className='quiz-page container'>
