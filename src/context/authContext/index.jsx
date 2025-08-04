@@ -37,8 +37,8 @@ export function AuthProvider({ children }) {
 		currentUser,
 		userLoggedIn,
 		loading,
-		usernameUpdatedAt, // 👈 expose this
-		triggerUsernameUpdate, // 👈 expose this
+		usernameUpdatedAt,
+		triggerUsernameUpdate,
 	}
 
 	return (

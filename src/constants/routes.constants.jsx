@@ -4,6 +4,7 @@ import {
 	Home,
 	Listening,
 	Login,
+	PracticeWriting,
 	Profile,
 	ProtectedRoute,
 	PublicProfile,
@@ -17,10 +18,13 @@ import {
 } from '../routes'
 
 export const routes = [
+	// Home and main routes
 	{ path: '/', element: <ProtectedRoute element={<Home />} /> },
 	{ path: '/reading', element: <ProtectedRoute element={<Reading />} /> },
 	{ path: '/listening', element: <ProtectedRoute element={<Listening />} /> },
 	{ path: '/speaking', element: <ProtectedRoute element={<Speaking />} /> },
+
+	// Writing routes
 	{ path: '/writing', element: <ProtectedRoute element={<Writing />} /> },
 	{
 		path: '/writing-tasks',
@@ -30,16 +34,17 @@ export const routes = [
 		path: '/create-writing-task',
 		element: <ProtectedRoute element={<CreateWritingTaskForm />} />,
 	},
+	{
+		path: '/writing-task/:id',
+		element: <ProtectedRoute element={<PracticeWriting />} />,
+	},
 
+	// Profile
 	{ path: '/profile', element: <ProtectedRoute element={<Profile />} /> },
 	{
 		path: '/user/:username',
 		element: <ProtectedRoute element={<PublicProfile />} />,
 	},
-	{ path: '/events', element: <ProtectedRoute element={<Events />} /> },
-	{ path: '/quizzes', element: <ProtectedRoute element={<Quizzes />} /> },
-	{ path: '/quiz/:id', element: <ProtectedRoute element={<QuizPage />} /> },
-
 	{
 		path: '/login',
 		element: <ProtectedRoute element={<Login />} requireAuth={false} />,
@@ -48,4 +53,9 @@ export const routes = [
 		path: '/register',
 		element: <ProtectedRoute element={<Register />} requireAuth={false} />,
 	},
+
+	// Events and Quizzes
+	{ path: '/events', element: <ProtectedRoute element={<Events />} /> },
+	{ path: '/quizzes', element: <ProtectedRoute element={<Quizzes />} /> },
+	{ path: '/quiz/:id', element: <ProtectedRoute element={<QuizPage />} /> },
 ]

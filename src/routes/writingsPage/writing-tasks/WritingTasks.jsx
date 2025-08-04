@@ -19,8 +19,8 @@ export function WritingTasks() {
 				<div className='select-wrapper'>
 					<select value={filter} onChange={e => setFilter(e.target.value)}>
 						<option value='all'>All Types</option>
-						<option value='task-1'>Type 1</option>
-						<option value='task-2'>Type 2</option>
+						<option value='task-1'>Task 1</option>
+						<option value='task-2'>Task 2</option>
 					</select>
 					<ChevronDown className='select-icon' size={20} />
 				</div>

@@ -8,10 +8,11 @@ import { routes } from './constants/routes.constants'
 function App() {
 	const location = useLocation()
 
-	const hideNavbarPaths = ['/login', '/register']
-	const isQuizPage = location.pathname.startsWith('/quiz/')
+	const hideNavbarPaths = ['/login', '/register', '/writing-task/:id']
+	const isQuizPage = location.pathname.startsWith('/quiz/', '/writing-task/:id')
+	const isWritingPage = location.pathname.startsWith('/writing-task/')
 	const shouldHideNavbar =
-		hideNavbarPaths.includes(location.pathname) || isQuizPage
+		hideNavbarPaths.includes(location.pathname) || isQuizPage || isWritingPage
 
 	return (
 		<div className='app-wrapper'>
