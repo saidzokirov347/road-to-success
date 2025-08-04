@@ -75,7 +75,7 @@
 }
 
 .practise-writing-textarea {
-	min-height: 650px;
+	min-height: 300px;
 	resize: vertical;
 	padding: 1rem;
 	font-size: 1rem;
