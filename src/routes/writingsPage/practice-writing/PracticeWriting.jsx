@@ -1,13 +1,20 @@
 import { Send } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGetWritingTaskByIdQuery } from '../../../store/api/writing-api/writing.api'
+import { useAuth } from '../../../context/AuthContext'
+import {
+	useGetWritingTaskByIdQuery,
+	useSubmitWritingTaskEssayMutation,
+} from '../../../store/api/writing-api/writing.api'
 import './PracticeWriting.css'
 
 export function PracticeWriting() {
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const { currentUser } = useAuth()
 	const { data, error, isLoading } = useGetWritingTaskByIdQuery(id)
+	const [submitEssay, { isLoading: isSubmitting }] =
+		useSubmitWritingTaskEssayMutation()
 	const [answer, setAnswer] = useState('')
 	const [seconds, setSeconds] = useState(20 * 60)
 
@@ -29,6 +36,21 @@ export function PracticeWriting() {
 	const wordCount = answer.trim().split(/\s+/).filter(Boolean).length
 	const minutes = Math.floor(seconds / 60)
 	const secs = String(seconds % 60).padStart(2, '0')
+
+	const handleSubmit = async () => {
+		if (!answer.trim() || !currentUser?.uid) return
+		try {
+			await submitEssay({
+				taskId: id,
+				essay: answer.trim(),
+				userId: currentUser.uid,
+			})
+			alert('Essay submitted successfully!')
+			navigate(-1)
+		} catch (err) {
+			alert('Failed to submit. Try again.')
+		}
+	}
 
 	return (
 		<div className='practise-writing-wrapper'>
@@ -57,6 +79,7 @@ export function PracticeWriting() {
 						)}
 					</div>
 				</div>
+
 				<div className='practise-writing-right-scroll'>
 					<textarea
 						className='practise-writing-textarea'
@@ -67,8 +90,13 @@ export function PracticeWriting() {
 					<div className='practise-writing-wordlimit'>
 						Words: {wordCount} / {wordLimit}
 					</div>
-					<button className='practise-writing-submit-button'>
-						<span>Submit</span> <Send size={20} />
+					<button
+						className='practise-writing-submit-button'
+						onClick={handleSubmit}
+						disabled={isSubmitting}
+					>
+						<span>{isSubmitting ? 'Submitting...' : 'Submit'}</span>
+						<Send size={20} />
 					</button>
 				</div>
 			</div>

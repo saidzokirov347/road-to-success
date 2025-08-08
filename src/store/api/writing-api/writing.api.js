@@ -1,5 +1,6 @@
 import {
 	addDoc,
+	arrayUnion,
 	collection,
 	doc,
 	getDoc,
@@ -7,6 +8,7 @@ import {
 	Timestamp,
 } from 'firebase/firestore'
 import { db } from '../../../firebase/firebase'
+
 import { api } from '../api'
 
 export const writingApi = api.injectEndpoints({
@@ -67,6 +69,29 @@ export const writingApi = api.injectEndpoints({
 				}
 			},
 		}),
+
+		submitWritingTaskEssay: builder.mutation({
+			async queryFn({ taskId, essay, userId }) {
+				try {
+					const taskRef = doc(db, 'writingTasks', taskId)
+					const entry = {
+						writtenBy: userId,
+						essay,
+						score: null,
+						checked: false,
+						isAllowToPublish: false,
+						submittedAt: Timestamp.now(),
+					}
+					await updateDoc(taskRef, {
+						written: arrayUnion(entry),
+						updatedAt: Timestamp.now(),
+					})
+					return { data: entry }
+				} catch (error) {
+					return { error: { message: error.message } }
+				}
+			},
+		}),
 	}),
 	overrideExisting: false,
 })
@@ -75,4 +100,5 @@ export const {
 	useGetWritingTasksQuery,
 	useGetWritingTaskByIdQuery,
 	useCreateWritingTaskMutation,
+	useSubmitWritingTaskEssayMutation,
 } = writingApi
