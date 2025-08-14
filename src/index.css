@@ -1,3 +1,45 @@
+:root {
+	--color-bg-light: #f9fafb;
+	--color-bg-lighter: #f1f5f9;
+	--color-bg-white: #ffffff;
+	--color-bg-gray: #e5e7eb;
+	--color-bg-purple-light: #f1eaff;
+	--color-bg-blue-light: #eff6ff;
+	--color-bg-gray-dark: #e0e0e0;
+	--color-bg-page: #f7f8fa;
+	--color-bg-yellow: #fbbf24;
+	--color-bg-yellow-dark: #f59e0b;
+	--color-bg-orange: #f97316;
+	--color-bg-orange-dark: #ea580c;
+	--color-bg-red-light: #fee2e2;
+	--color-bg-red-border: #fca5a5;
+
+	--color-text-dark: #1f2937;
+	--color-text-blue: #0b5394;
+	--color-text-gray: #374151;
+	--color-text-gray-light: #777;
+	--color-text-black: #1f1f1f;
+	--color-text-purple: #9c4dff;
+	--color-text-purple-dark: #6b21a8;
+	--color-text-green: #38a169;
+	--color-text-red: #b91c1c;
+	--color-text-main: #222;
+	--color-text-title: #333;
+	--color-text-gray-dark: #9ca3af;
+
+	--color-gradient-purple: linear-gradient(to right, #6a11cb, #2575fc);
+	--color-gradient-yellow: linear-gradient(135deg, #fbbf24, #f59e0b);
+	--color-gradient-gray: linear-gradient(135deg, #9ca3af, #6b7280);
+	--color-gradient-orange: linear-gradient(135deg, #f97316, #ea580c);
+
+	--shadow-main: 0 4px 16px rgba(0, 0, 0, 0.06);
+	--shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
+	--shadow-btn: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+	--color-accent-btn: #2563eb;
+	--color-accent-btn-hover: #1746a2;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -8,7 +50,7 @@
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #f1f5f9;
+	background-color: var(--color-bg-lighter);
 }
 
 html,

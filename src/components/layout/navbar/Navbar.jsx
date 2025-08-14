@@ -3,14 +3,14 @@ import { FaRegUser } from 'react-icons/fa'
 import { FiMenu } from 'react-icons/fi'
 import { GiPineTree } from 'react-icons/gi'
 import { Link, useLocation } from 'react-router-dom'
-import { navbarLinks } from '../../constants/navbar-links.constants'
-import { useAuth } from '../../context/authContext'
-import { doSignOut } from '../../firebase/auth'
-import useRedirectToLogin from '../../hooks/useRedirectToLogin'
+import { navbarLinks } from '../../../constants/navbar-links.constants'
+import { useAuth } from '../../../context/authContext'
+import { doSignOut } from '../../../firebase/auth'
+import useRedirectToLogin from '../../../hooks/useRedirectToLogin'
 import {
 	isSidebarHiddenPage,
 	shouldHideNavbarOnPage,
-} from '../../utils/routeFlags.utils'
+} from '../../../utils/routeFlags.utils'
 import './Navbar.css'
 
 export function Navbar() {

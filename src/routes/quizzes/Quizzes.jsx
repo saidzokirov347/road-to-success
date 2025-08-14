@@ -49,6 +49,7 @@ export function Quizzes() {
 							<div className='quiz-meta'>
 								<span>🧩 {quiz.questions?.length || 0} Questions</span>
 								<span>⭐ {quiz.expOfQuiz || 0} EXP</span>
+								<span>{quiz.quizTime} min</span>
 							</div>
 						</Link>
 					)

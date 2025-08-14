@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/authContext'
-import { useTopUsers } from '../../hooks/useTopUsers'
-import { useUserProfile } from '../../hooks/useUserProfile'
+import { useAuth } from '../../../context/authContext'
+import { useTopUsers } from '../../../hooks/useTopUsers'
+import { useUserProfile } from '../../../hooks/useUserProfile'
 import './Leaderboard.css'
 
 export function Leaderboard() {

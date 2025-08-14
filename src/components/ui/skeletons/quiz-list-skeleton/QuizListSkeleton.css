@@ -28,12 +28,6 @@
 	box-sizing: border-box;
 }
 
-.quiz-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
 .skeleton-title {
 	width: 60%;
 	height: 18px;

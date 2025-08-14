@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { FaGoogle } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../../../context/authContext'
 import {
 	doCreateUserWithEmailAndPassword,
 	doSignUpWithGoogle,
@@ -11,17 +10,19 @@ import './Register.css'
 
 export function Register() {
 	const navigate = useNavigate()
-	const { userLoggedIn } = useAuth()
 
+	// Email
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [showPassword, setShowPassword] = useState(false)
 
+	// Personal states
 	const [username, setUsername] = useState('')
 	const [name, setName] = useState('')
 	const [bio, setBio] = useState('')
 	const [profileImage, setProfileImage] = useState('')
 
+	// Register
 	const [isSigningUp, setIsSigningUp] = useState(false)
 	const [error, setError] = useState(null)
 

@@ -5,7 +5,7 @@
 	max-width: 900px;
 	margin: auto;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #2a2a2a;
+	color: var(--color-text-main);
 }
 
 .home-content {
@@ -13,9 +13,10 @@
 }
 
 .intro {
-	background-color: #f8faff;
+	background-color: var(--color-bg-light);
 	padding: 24px;
 	margin-bottom: 40px;
+	border-radius: 12px;
 }
 
 .intro h1 {
@@ -26,7 +27,7 @@
 
 .intro h2 {
 	font-size: 20px;
-	color: #444;
+	color: var(--color-text-title);
 	font-weight: 400;
 	margin-bottom: 20px;
 }
@@ -37,7 +38,7 @@
 }
 
 .intro li {
-	background-color: #eef4ff;
+	background-color: var(--color-bg-blue-light);
 	border-left: 4px solid #0b5394;
 	padding: 12px 16px;
 	margin-bottom: 10px;
@@ -52,7 +53,7 @@
 
 .intro li a {
 	width: 100%;
-	color: #000;
+	color: var(--color-text-black);
 }
 
 .home-bottom {

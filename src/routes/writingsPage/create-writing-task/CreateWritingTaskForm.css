@@ -43,19 +43,19 @@
 }
 
 .create-writing-task-form button {
-	padding: 14px;
-	font-size: 16px;
-	font-weight: 500;
+	background: var(--color-accent-btn);
 	color: #fff;
-	background-color: #6366f1;
 	border: none;
-	border-radius: 12px;
+	border-radius: 8px;
+	padding: 8px 16px;
+	font-size: 1rem;
 	cursor: pointer;
-	transition: background-color 0.2s ease;
+	transition: background 0.2s, color 0.2s;
 }
 
 .create-writing-task-form button:hover {
-	background-color: #4f46e5;
+	background: var(--color-accent-btn-hover);
+	color: #fff;
 }
 
 .create-writing-task-form button:disabled {

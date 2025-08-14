@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { ProfileContent } from '../../components/profile-content/ProfileContent'
+import { ProfileContent } from '../../components/'
 import './Profile.css'
 
 export function Profile() {

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 
-import { IELTSRadarChart } from '../../components/index'
+import { IELTSRadarChart } from '../../components'
 import { useGetUserByUsernameQuery } from '../../store/api/users-api/users.api'
 import { getCorrectLevel, getExpRangeForLevel } from '../../utils/exp'
 

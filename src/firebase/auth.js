@@ -25,19 +25,28 @@ export const doSignUpWithGoogle = async (bio = '') => {
 
 	if (!userSnap.exists()) {
 		await setDoc(doc(db, 'users', result.user.uid), {
+			// Personal details
 			uid: result.user.uid,
 			name: additionalData.name,
 			username: additionalData.username.toLowerCase(),
 			email: result.user.email,
 			bio: additionalData.bio || '',
 			createdAt: new Date().toISOString(),
+			// Exp
 			exp: 0,
 			level: 1,
 			listeningMarks: {},
 			readingMarks: {},
 			speakingMarks: {},
 			writingMarks: {},
+			listeningExp: {},
+			readingExp: {},
+			writingExp: {},
+			speakingExp: {},
+
+			// Class
 			teacher: '',
+			userType: 'student',
 		})
 	}
 
@@ -87,13 +96,21 @@ export const doCreateUserWithEmailAndPassword = async (
 		email: result.user.email,
 		bio: additionalData.bio || '',
 		createdAt: new Date().toISOString(),
+		// Exp
 		exp: 0,
 		level: 1,
 		listeningMarks: {},
 		readingMarks: {},
 		speakingMarks: {},
 		writingMarks: {},
+		listeningExp: {},
+		readingExp: {},
+		writingExp: {},
+		speakingExp: {},
+
+		// Class
 		teacher: '',
+		userType: 'student',
 	})
 
 	return result

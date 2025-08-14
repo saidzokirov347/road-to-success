@@ -45,6 +45,8 @@ export const routes = [
 		path: '/user/:username',
 		element: <ProtectedRoute element={<PublicProfile />} />,
 	},
+
+	// Login and Register
 	{
 		path: '/login',
 		element: <ProtectedRoute element={<Login />} requireAuth={false} />,

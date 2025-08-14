@@ -1,6 +1,6 @@
 .quiz-page {
 	font-family: 'Inter', sans-serif;
-	color: #1a1a1a;
+	color: var(--color-text-main);
 	margin-bottom: 30px;
 	width: 100%;
 }
@@ -10,7 +10,7 @@
 	font-weight: 700;
 	margin-bottom: 2rem;
 	text-align: center;
-	color: #111827;
+	color: var(--color-text-dark);
 }
 
 .quiz-grid {
@@ -22,18 +22,18 @@
 
 .quiz-card {
 	width: 260px;
-	background-color: #ffffff;
+	background-color: var(--color-bg-white);
 	border-radius: 20px;
 	padding: 1.5rem;
 	text-decoration: none;
-	color: #1a1a1a;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+	color: var(--color-text-main);
+	box-shadow: var(--shadow-card);
 	transition: transform 0.2s ease, box-shadow 0.3s ease;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
-	border: 1px solid #e5e7eb;
+	border: 1px solid var(--color-bg-gray);
 }
 
 .quiz-card:hover {
@@ -51,13 +51,13 @@
 .quiz-card h3 {
 	font-size: 1rem;
 	font-weight: 600;
-	color: #111827;
+	color: var(--color-text-dark);
 	margin: 0;
 }
 
 .quiz-desc {
 	font-size: 0.85rem;
-	color: #4b5563;
+	color: var(--color-text-gray);
 	margin-bottom: 1rem;
 	line-height: 1.4;
 	min-height: 42px;
@@ -77,12 +77,12 @@
 }
 
 .badge.completed {
-	background: #6366f1;
+	background: var(--color-text-blue);
 	color: #fff;
 }
 
 .badge.new {
-	background: #f97316;
+	background: var(--color-bg-orange);
 	color: #fff;
 }
 
@@ -90,17 +90,17 @@
 	display: flex;
 	justify-content: space-between;
 	font-size: 0.85rem;
-	color: #6b7280;
+	color: var(--color-text-gray);
 	margin-top: auto;
 	padding-top: 0.75rem;
-	border-top: 1px solid #e5e7eb;
+	border-top: 1px solid var(--color-bg-gray);
 }
 
 .loader {
 	width: 60px;
 	height: 60px;
-	border: 6px solid #e5e7eb;
-	border-top: 6px solid #6366f1;
+	border: 6px solid var(--color-bg-gray);
+	border-top: 6px solid var(--color-text-blue);
 	border-radius: 50%;
 	animation: spin 1s linear infinite;
 	margin: 120px auto;
@@ -117,7 +117,7 @@
 
 .error {
 	text-align: center;
-	color: #6366f1;
+	color: var(--color-text-blue);
 	font-weight: 600;
 	margin: 4rem 0;
 	font-size: 1.2rem;
@@ -164,15 +164,15 @@
 
 .quizzes-error {
 	text-align: center;
-	color: #9ca3af;
+	color: var(--color-text-gray-dark);
 	font-weight: 500;
 	font-size: 1.1rem;
 	margin-top: 3rem;
 	margin-bottom: 4rem;
 	padding: 1.5rem;
 	border-radius: 0.75rem;
-	background-color: #f9fafb;
-	border: 1px solid #e5e7eb;
+	background-color: var(--color-bg-light);
+	border: 1px solid var(--color-bg-gray);
 	max-width: 480px;
 	margin-left: auto;
 	margin-right: auto;

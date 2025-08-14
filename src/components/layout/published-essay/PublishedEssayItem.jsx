@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { useGetUserByUidQuery } from '../../store/api/users-api/users.api'
+import { useGetUserByUidQuery } from '../../../store/api/users-api/users.api'
 
 function AuthorLink({ uid }) {
 	const { data, isLoading } = useGetUserByUidQuery(uid, { skip: !uid })

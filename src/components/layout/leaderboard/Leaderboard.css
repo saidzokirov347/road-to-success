@@ -1,11 +1,14 @@
 /* Leaderboard Section */
 .leaderboard-section {
 	margin-bottom: 40px;
+	border-radius: 12px;
+	width: 100%;
 }
 
 .leaderboard-card {
 	border-radius: 16px;
-	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+	box-shadow: var(--shadow-main);
+	background-color: var(--color-bg-light);
 	padding: 24px;
 	display: flex;
 	flex-direction: column;
@@ -19,7 +22,8 @@
 	align-items: center;
 	padding: 12px 16px;
 	border-radius: 12px;
-	background-color: #f9fafb;
+	background-color: var(--color-bg-light);
+	box-shadow: var(--shadow-card);
 	width: 100%;
 	cursor: pointer;
 }
@@ -54,13 +58,13 @@
 
 .leaderboard-name {
 	font-weight: 600;
-	color: #1f2937;
+	color: var(--color-text-dark);
 }
 
 .you-label {
 	font-size: 12px;
-	color: #2563eb;
-	background-color: #eff6ff;
+	color: var(--color-text-blue);
+	background-color: var(--color-bg-blue-light);
 	padding: 2px 6px;
 	border-radius: 4px;
 	font-weight: 600;
@@ -72,26 +76,26 @@
 	border-radius: 20px;
 	font-weight: 600;
 	font-size: 14px;
-	color: white;
+	color: var(--color-bg-white);
 	min-width: 70px;
 	text-align: center;
 }
 
 .gold {
-	background: linear-gradient(135deg, #fbbf24, #f59e0b);
+	background: var(--color-gradient-yellow);
 }
 
 .silver {
-	background: linear-gradient(135deg, #9ca3af, #6b7280);
+	background: var(--color-gradient-gray);
 }
 
 .bronze {
-	background: linear-gradient(135deg, #f97316, #ea580c);
+	background: var(--color-gradient-orange);
 }
 
 .gray {
-	background-color: #e5e7eb;
-	color: #374151;
+	background-color: var(--color-by-gray);
+	color: var(--color-text-gray);
 }
 
 /* See More Button */
@@ -100,8 +104,8 @@
 	align-self: center;
 	padding: 8px 14px;
 	border-radius: 6px;
-	background-color: #2563eb;
-	color: white;
+	background-color: var(--color-text-blue);
+	color: var(--color-bg-white);
 	font-weight: 600;
 	cursor: pointer;
 	border: none;
@@ -168,4 +172,53 @@
 	font-size: 15px;
 	font-weight: 500;
 	text-align: center;
+}
+
+/* Additional Styles */
+.box-shadow {
+	box-shadow: var(--shadow-main);
+}
+
+.leaderboard-bg {
+	background-color: var(--color-bg-light);
+}
+
+.leaderboard-title {
+	color: var(--color-text-dark);
+}
+
+.leaderboard-rank {
+	color: var(--color-text-blue);
+	background-color: var(--color-bg-blue-light);
+}
+
+.leaderboard-gold {
+	background: var(--color-gradient-yellow);
+}
+
+.leaderboard-silver {
+	background: var(--color-gradient-gray);
+}
+
+.leaderboard-bronze {
+	background: var(--color-gradient-orange);
+}
+
+.leaderboard-row {
+	background-color: var(--color-bg-gray);
+	color: var(--color-text-gray);
+}
+
+.leaderboard-row-active {
+	background-color: var(--color-text-blue);
+}
+
+.leaderboard-row-active .leaderboard-name {
+	color: var(--color-bg-white);
+}
+
+.leaderboard-error {
+	color: var(--color-text-red);
+	background-color: var(--color-bg-red-light);
+	border: 1px solid var(--color-bg-red-border);
 }

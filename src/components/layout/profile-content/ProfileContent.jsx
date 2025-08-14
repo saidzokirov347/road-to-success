@@ -1,5 +1,5 @@
-import { useUserProfile } from '../../hooks/useUserProfile'
-import { IELTSRadarChart, ProfileSkeleton } from '../index'
+import { useUserProfile } from '../../../hooks/useUserProfile'
+import { IELTSRadarChart, ProfileSkeleton } from '../../index'
 import './ProfileContent.css'
 
 export function ProfileContent() {

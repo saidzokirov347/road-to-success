@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../context/authContext'
-import { useGetUsersQuery } from '../../store/api/users-api/users.api'
-import { AllUsersSkeleton } from '../index'
+import { useAuth } from '../../../context/authContext'
+import { useGetUsersQuery } from '../../../store/api/users-api/users.api'
+import { AllUsersSkeleton } from '../../index'
 import './AllUsersSidebar.css'
 
 export function AllUsersSidebar() {

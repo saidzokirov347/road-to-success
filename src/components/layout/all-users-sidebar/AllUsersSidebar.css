@@ -1,4 +1,48 @@
 .all-users-sidebar {
+	background-color: var(--color-bg-white);
+	color: var(--color-text-main);
+	box-shadow: var(--shadow-main);
+	border-radius: 12px;
+	padding: 1rem;
+}
+
+.all-users-title {
+	color: var(--color-text-title);
+}
+
+.all-users-list {
+	background-color: var(--color-bg-light);
+}
+
+.all-user-item {
+	border-bottom: 1px solid var(--color-bg-gray);
+	color: var(--color-text-dark);
+	transition: background 0.2s;
+}
+
+.all-user-item:hover {
+	background-color: var(--color-bg-purple-light);
+	color: var(--color-text-purple-dark);
+}
+
+.all-user-avatar {
+	border: 2px solid var(--color-bg-gray);
+	background-color: var(--color-bg-white);
+}
+
+.all-user-exp {
+	color: var(--color-text-green);
+}
+
+.all-user-status.online {
+	color: var(--color-text-green);
+}
+
+.all-user-status.offline {
+	color: var(--color-text-gray-light);
+}
+
+.all-users-sidebar {
 	border-radius: 16px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 	padding: 24px;
